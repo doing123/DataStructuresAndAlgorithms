@@ -23,17 +23,22 @@ var canConstruct = function(ransomNote, magazine) {
 
     // return result
 
-    let result = true
+    let index
     for(let i = 0; i < ransomNote.length; i++) {
-      for(let j = 0; j < magazine.length; j++) {
-        if(ransomNote.charAt(i) === magazine.charAt(j)) {
-          magazine = magazine.substring(0, j) + magazine.substring(j + 1, magazine.length)
-        } else {
-          result = false
-        }
+      // for(let j = 0; j < magazine.length; j++) {
+      //   if(ransomNote.charAt(i) === magazine.charAt(j)) {
+      //     magazine = magazine.substring(0, j) + magazine.substring(j + 1, magazine.length)
+      //   } else {
+      //     result = false
+      //   }
+      // }
+      if( (index = magazine.indexOf(ransomNote[i])) > -1) {
+        magazine = magazine.substring(0, index) + magazine.substring(index + 1, magazine.length)
+      } else {
+        return false
       }
     }
 
-    return result
+    return true
 };
 
