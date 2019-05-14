@@ -34,6 +34,6 @@ var dominantIndex = function(nums) {
         }
     }
 
-    return sencondMax * 2 > max ? index : -1
+    return sencondMax * 2 > max ? -1 : index
 };
 
