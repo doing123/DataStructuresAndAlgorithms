@@ -22,7 +22,7 @@ var dominantIndex = function(nums) {
     return flag ? -1 : index */
 
     for(let i = 0; i < nums.length; i++) {
-        if(index != i && item * 2 > largest) return -1
+        if(index != i && nums[i] * 2 > largest) return -1
     }
     return index
 
