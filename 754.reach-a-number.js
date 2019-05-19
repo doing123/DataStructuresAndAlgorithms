@@ -8,6 +8,6 @@
  * @return {number}
  */
 var reachNumber = function(target) {
-    
+    // TODO:
 };
 
