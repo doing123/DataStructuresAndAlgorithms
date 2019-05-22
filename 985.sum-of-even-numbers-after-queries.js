@@ -8,6 +8,9 @@
  * @param {number[][]} queries
  * @return {number[]}
  */
+
+ // https://blog.csdn.net/fuxuemingzhu/article/details/87714171
+ 
 var sumEvenAfterQueries = function(A, queries) {
     /* const result = []
     for(let i = 0; i < queries.length; i++) {
