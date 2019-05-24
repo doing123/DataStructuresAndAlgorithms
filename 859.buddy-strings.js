@@ -8,6 +8,8 @@
  * @param {string} B
  * @return {boolean}
  */
+
+ // https://blog.csdn.net/Mix2411238068/article/details/86690570
 var buddyStrings = function(A, B) {
     // 判断长度是否都大于1且相等
     if (A.length <= 1 || B.length <=1 || A.length !== B.length){
