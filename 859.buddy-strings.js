@@ -11,6 +11,7 @@
 
 // https://blog.csdn.net/Mix2411238068/article/details/86690570
 var buddyStrings = function (A, B) {
+/* 
 	// 判断长度是否都大于1且相等
 	if (A.length <= 1 || B.length <= 1 || A.length !== B.length) {
 		return false;
@@ -34,5 +35,24 @@ var buddyStrings = function (A, B) {
 	}
 	// 数组中插入的是不同的项，判断是否长度为4（即2对），且不同项是否对应相等
 	return (arr.length === 4 && arr[0] === arr[3] && arr[1] === arr[2]);
+ */
+
+	if(A.length < 2 || B.length < 2 || A.length !== B.length) return false
+
+	// A === B
+	if(A === B) {
+		let C = [...new Set(A)]
+		return C.length !== A.length
+	}
+
+	const arr = []
+	for (let i = 0; i < A.length; i++) {
+		if(A[i] !== B[i]) {
+			arr.push(A[i])
+			arr.push(B[i])
+		}
+	}
+
+	return arr.length === 4 && arr[0] === arr[3] && arr[1] === arr[2]
 };
 
