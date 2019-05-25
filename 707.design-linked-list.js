@@ -93,15 +93,12 @@ MyLinkedList.prototype.addAtIndex = function (index, val) {
 MyLinkedList.prototype.deleteAtIndex = function (index) {
   let i = 0
   let node = this.head
-  if (index < 0) return
+  if (index < 0 || !node) return
   if (index == 0) {
-    this.head = this.head.next
+    this.head = node.next
+    return
   }
   while (node && node.next) {
-    if (index == 0) {
-      this.head = node.next
-      break
-    }
     if (i === index - 1) {
       node.next = node.next.next
       break
