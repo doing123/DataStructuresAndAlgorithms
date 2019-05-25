@@ -6,12 +6,12 @@
 /**
  * Initialize your data structure here.
  */
-var Node = function(val = 0) {
+var Node = function (val = 0) {
   this.val = val
   this.next = null
 }
 
-var MyLinkedList = function() {
+var MyLinkedList = function () {
   // TODO:
   this.head = null
 };
@@ -21,11 +21,11 @@ var MyLinkedList = function() {
  * @param {number} index
  * @return {number}
  */
-MyLinkedList.prototype.get = function(index) {
+MyLinkedList.prototype.get = function (index) {
   let i = 0
   let node = this.head
-  while(node) {
-    if(i === index) {
+  while (node) {
+    if (i === index) {
       return node.val
     }
     node = node.next
@@ -39,9 +39,9 @@ MyLinkedList.prototype.get = function(index) {
  * @param {number} val
  * @return {void}
  */
-MyLinkedList.prototype.addAtHead = function(val) {
+MyLinkedList.prototype.addAtHead = function (val) {
   const node = new Node(val)
-  if(this.head) {
+  if (this.head) {
     node.next = this.head
   }
   this.head = node
@@ -52,14 +52,14 @@ MyLinkedList.prototype.addAtHead = function(val) {
  * @param {number} val
  * @return {void}
  */
-MyLinkedList.prototype.addAtTail = function(val) {
-    let node = this.head
-    let newNode = new Node(val)
-    while(node) {
-      if(!node.next) break
-      node = node.next
-    }
-    node.next = newNode
+MyLinkedList.prototype.addAtTail = function (val) {
+  let node = this.head
+  let newNode = new Node(val)
+  while (node) {
+    if (!node.next) break
+    node = node.next
+  }
+  node.next = newNode
 };
 
 /**
@@ -68,14 +68,14 @@ MyLinkedList.prototype.addAtTail = function(val) {
  * @param {number} val
  * @return {void}
  */
-MyLinkedList.prototype.addAtIndex = function(index, val) {
+MyLinkedList.prototype.addAtIndex = function (index, val) {
   let i = 0
   let newNode = new Node(val)
   let node = this.head
-  if(index < 0) index = 0 // index < 0 默认添加到 head
-  if(index == 0) this.addAtHead(val)
-  while(node) {
-    if(i === index - 1) {
+  if (index < 0) index = 0 // index < 0 默认添加到 head
+  if (index == 0) this.addAtHead(val)
+  while (node) {
+    if (i === index - 1) {
       newNode.next = node.next
       node.next = newNode
       break
@@ -90,19 +90,19 @@ MyLinkedList.prototype.addAtIndex = function(index, val) {
  * @param {number} index
  * @return {void}
  */
-MyLinkedList.prototype.deleteAtIndex = function(index) {
+MyLinkedList.prototype.deleteAtIndex = function (index) {
   let i = 0
   let node = this.head
-  if(index < 0) return
-  if(index == 0) {
+  if (index < 0) return
+  if (index == 0) {
     this.head = this.head.next
   }
-  while(node && node.next) {
-    if(index == 0) {
+  while (node && node.next) {
+    if (index == 0) {
       this.head = node.next
       break
     }
-    if(i === index - 1) {
+    if (i === index - 1) {
       node.next = node.next.next
       break
     }
@@ -111,7 +111,7 @@ MyLinkedList.prototype.deleteAtIndex = function(index) {
   }
 };
 
-/** 
+/**
  * Your MyLinkedList object will be instantiated and called as such:
  * var obj = new MyLinkedList()
  * var param_1 = obj.get(index)
