@@ -25,7 +25,7 @@ var judgeSquareSum = function (c) {
 
   return false  */
 
-  let a = 0
+  /* let a = 0
   let b = Math.floor(Math.sqrt(c))
   while (a <= b) {
     let tmp = a * a + b * b
@@ -34,6 +34,18 @@ var judgeSquareSum = function (c) {
     else b--
   }
 
-  return false
+  return false */
+
+  for (let i = 2; i <= c; i++) {
+    if (c % i != 0) continue
+    let count = 0
+    while (c % i == 0) {
+      count++
+      c /= i
+    }
+    if (i % 4 == 3 && count % 2 != 0) return false
+  }
+
+  return c % 4 != 3
 };
 
