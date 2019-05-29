@@ -17,12 +17,23 @@ var judgeSquareSum = function (c) {
 
   return false */
 
-  const set = new Set()
+  /* const set = new Set()
   for(let i = 0; i <= Math.floor(Math.sqrt(c)); i++) {
     set.add(i * i)
     if(set.has(c - i * i)) return true
   }  
 
-  return false 
+  return false  */
+
+  let a = 0
+  let b = Math.floor(Math.sqrt(c))
+  while (a <= b) {
+    let tmp = a * a + b * b
+    if (tmp == c) return true
+    else if (tmp < c) a++
+    else b--
+  }
+
+  return false
 };
 
