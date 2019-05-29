@@ -36,7 +36,7 @@ var judgeSquareSum = function (c) {
 
   return false */
 
-  for (let i = 2; i <= c; i++) {
+  for (let i = 2; i * i <= c; i++) {
     if (c % i != 0) continue
     let count = 0
     while (c % i == 0) {
