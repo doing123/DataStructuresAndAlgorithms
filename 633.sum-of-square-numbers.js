@@ -8,13 +8,21 @@
  * @return {boolean}
  */
 var judgeSquareSum = function (c) {
-  for (let i = Math.floor(Math.sqrt(c)); i >= 0; i--) {
+  /* for (let i = Math.floor(Math.sqrt(c)); i >= 0; i--) {
     if (i * i == c) return true
     let d = c - i * i
     let tmp = Math.floor(Math.sqrt(d))
     if (Math.pow(tmp, 2) == d) return true
   }
 
-  return false
+  return false */
+
+  const set = new Set()
+  for(let i = 0; i <= Math.floor(Math.sqrt(c)); i++) {
+    set.add(i * i)
+    if(set.has(c - i * i)) return true
+  }  
+
+  return false 
 };
 
