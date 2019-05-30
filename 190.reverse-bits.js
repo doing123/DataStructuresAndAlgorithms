@@ -7,6 +7,8 @@
  * @param {number} n - a positive integer
  * @return {number} - a positive integer
  */
+
+ // https://www.cnblogs.com/grandyang/p/4321355.html
 var reverseBits = function (n) {
   let res = 0
   let flag = 1 // 00...00001
