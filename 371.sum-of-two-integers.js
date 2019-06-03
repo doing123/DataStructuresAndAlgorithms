@@ -8,6 +8,8 @@
  * @param {number} b
  * @return {number}
  */
+
+// https://www.jianshu.com/p/9235a7980934
 var getSum = function (a, b) {
   if (b === 0) return a
   const sum = a ^ b
