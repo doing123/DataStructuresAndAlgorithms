@@ -14,6 +14,8 @@
  * @param {TreeNode} root
  * @return {number}
  */
+
+ // https://www.cnblogs.com/grandyang/p/5923559.html
 var sumOfLeftLeaves = function (root) {
   /* if (!root || (!root.left && !root.right)) return 0
   let result = 0
@@ -57,7 +59,7 @@ var sumOfLeftLeaves = function (root) {
   return result */
 
   /**
-   * 迭代实现：stack
+   * 迭代实现：stack 是先序遍历的迭代写法 ???
    */
   if (!root || (!root.left && !root.right)) return 0
   let result = 0
