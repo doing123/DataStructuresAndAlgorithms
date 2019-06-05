@@ -1,6 +1,5 @@
 {
   "editor.tabSize": 2,
   "editor.tabCompletion": "on",
-  "workbench.editor.tabSizing": "shrink",
-  "javascript.format.insertSpaceAfterSemicolonInForStatements": false
+  "workbench.editor.tabSizing": "shrink"
 }
