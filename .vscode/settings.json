@@ -2,6 +2,5 @@
   "editor.tabSize": 2,
   "editor.tabCompletion": "on",
   "workbench.editor.tabSizing": "shrink",
-  "eslint.autoFixOnSave": true,
-  "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false
+  "javascript.format.insertSpaceAfterSemicolonInForStatements": false
 }
