@@ -7,6 +7,8 @@
  * @param {string} word
  * @return {boolean}
  */
+
+// https://www.cnblogs.com/grandyang/p/6512921.html
 var detectCapitalUse = function (word) {
   let count = 0
   let len = word.length
