@@ -9,9 +9,19 @@
  */
 var reverseWords = function (s) {
   let arr = s.split(' ')
-  for (let i = 0; i < arr.length; i++) {
-    arr[i] = arr[i].split('').reverse().join('')
-  }
-  return arr.join(' ')
+  // for (let i = 0; i < arr.length; i++) {
+  //   arr[i] = arr[i].split('').reverse().join('')
+  // }
+  // return arr.join(' ')
+
+  // let result = arr.map(item => {
+  //   return item.split('').reverse().join('')
+  // })
+
+  // return result.join(' ')
+
+  return s.split(' ').map(item => {
+    return item.split('').reverse().join('')
+  }).join(' ')
 };
 
