@@ -15,7 +15,7 @@
  * @return {number[][]}
  */
 var levelOrderBottom = function (root) {
-  let res = []
+  /* let res = []
   const queue = []
   if (root) queue.push(root)
   while (queue.length) {
@@ -29,6 +29,18 @@ var levelOrderBottom = function (root) {
     res.unshift(oneLever)
   }
 
-  return res
+  return res */
+
+  const res = []
+  levelOrder(root, 0, res)
+  return res.reverse()
 };
+
+function levelOrder(node, level, res) {
+  if (!node) return
+  if (res.length == level) res.push([])
+  res[level].push(node.val)
+  if (node.left) levelOrder(node.left, level + 1, res)
+  if (node.right) levelOrder(node.right, level + 1, res)
+}
 
