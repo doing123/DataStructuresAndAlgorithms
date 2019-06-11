@@ -15,7 +15,21 @@
  * @return {number}
  */
 var maxDepth = function (root) {
+  /* if (!root) return 0
+  return 1 + Math.max(maxDepth(root.left), maxDepth(root.right)) */
+
   if (!root) return 0
-  return 1 + Math.max(maxDepth(root.left), maxDepth(root.right))
+  let count = 0
+  const queue = [root]
+  while (queue.length) {
+    count++
+    for (let i = queue.length; i > 0; i--) {
+      const node = queue.shift() // 按照 队列：先入先出 顺序取出
+      if (node.left) queue.push(node.left)
+      if (node.right) queue.push(node.right)
+    }
+  }
+
+  return count
 };
 
