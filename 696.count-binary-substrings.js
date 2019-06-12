@@ -52,7 +52,7 @@ var countBinarySubstrings = function (s) {
   }
 
   return res
-};
+}
 
 /* function match(str) {
   const j = str.match(/^(0+|1+)/)[0]
@@ -64,4 +64,3 @@ var countBinarySubstrings = function (s) {
     return ''
   }
 } */
-
