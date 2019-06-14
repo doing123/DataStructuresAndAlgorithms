@@ -24,6 +24,7 @@ function match(str) {
   const j = str.match(/^(0+|1+)/)[0]
   const o = (j[0] ^ 1).toString().repeat(j.length)
   const reg = new RegExp(`^${j}${o}`)
+  
   if (reg.test(str)) {
     return RegExp.$1
   } else {
