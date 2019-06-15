@@ -29,7 +29,7 @@ var inorderTraversal = function (root) {
   // }
 
   // 2. 栈 stack
-  const res = []
+  /* const res = []
   const stack = []
   let p = root
   while (p || stack.length) {
@@ -41,6 +41,23 @@ var inorderTraversal = function (root) {
     p = stack.pop()
     res.push(p.val)
     p = p.right
+  }
+
+  return res */
+
+  // 3.stack
+  const res = []
+  const stack = []
+  let p = root
+  while (p || stack.length) {
+    if (p) {
+      stack.push(p)
+      p = p.left
+    } else {
+      p = stack.pop()
+      res.push(p.val)
+      p = p.right
+    }
   }
 
   return res
