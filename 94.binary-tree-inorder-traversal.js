@@ -15,15 +15,33 @@
  * @return {number[]}
  */
 var inorderTraversal = function (root) {
-  let result = []
-  inOrder(root)
-  return result
+  // 1. 递归
+  // let result = []
+  // inOrder(root)
+  // return result
 
-  function inOrder (node) {
-    if (node) {
-      inOrder(node.left)
-      result.push(node.val)
-      inOrder(node.right)
+  // function inOrder (node) {
+  //   if (node) {
+  //     inOrder(node.left)
+  //     result.push(node.val)
+  //     inOrder(node.right)
+  //   }
+  // }
+
+  // 2. 栈 stack
+  const res = []
+  const stack = []
+  let p = root
+  while (p || stack.length) {
+    while (p) {
+      stack.push(p)
+      p = p.left
     }
+
+    p = stack.pop()
+    res.push(p.val)
+    p = p.right
   }
+
+  return res
 }
