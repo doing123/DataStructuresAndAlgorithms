@@ -12,6 +12,7 @@ function bubbleSort (nums) {
         mark = false
       }
     }
+    
     if (mark) return
   }
 }
