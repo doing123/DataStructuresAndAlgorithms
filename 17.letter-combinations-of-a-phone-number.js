@@ -26,7 +26,7 @@ var letterCombinations = function (digits) {
 
   return combinations(target)
 
-  function combinations (arr) {
+  function combinations (arr) { // 从后往前合并
     let newArr = arr.slice(0)
     if (newArr.length === 0) {
       return []
@@ -49,4 +49,20 @@ var letterCombinations = function (digits) {
   } */
 
   // 2.递归
+  if (digits.length === 0) return []
+  let res = []
+  let dict = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
+  letterCombinationsDFS(digits, dict, 0, '', res)
+  return res
+
+  function letterCombinationsDFS (digits, dict, level, out, res) {
+    if (level === digits.length) {
+      res.push(out)
+      return
+    }
+    let str = dict[digits[level] - 0]
+    for (let i = 0; i < str.length; i++) {
+      letterCombinationsDFS(digits, dict, level + 1, out + str[i], res)
+    }
+  }
 }
