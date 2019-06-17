@@ -49,7 +49,7 @@ var letterCombinations = function (digits) {
   } */
 
   // 2.递归
-  if (digits.length === 0) return []
+  /* if (digits.length === 0) return []
   let res = []
   let dict = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
   letterCombinationsDFS(digits, dict, 0, '', res)
@@ -64,5 +64,22 @@ var letterCombinations = function (digits) {
     for (let i = 0; i < str.length; i++) {
       letterCombinationsDFS(digits, dict, level + 1, out + str[i], res)
     }
+  } */
+
+  // 3.迭代 iterative
+  if (digits.length === 0) return []
+  let res = ['']
+  let dict = ['', '', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
+  for (let i = 0; i < digits.length; i++) {
+    let arr = []
+    let str = dict[digits[i] - 0]
+    for (let j = 0; j < str.length; j++) {
+      for (let k = 0; k < res.length; k++) {
+        arr.push(res[k] + str[j])
+      }
+    }
+    res = arr
   }
+
+  return res
 }
