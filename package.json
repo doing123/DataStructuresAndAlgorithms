@@ -4,7 +4,8 @@
   "description": "",
   "main": "1002.find-common-characters.js",
   "scripts": {
-    "test": "jest --coverage ./test"
+    "test": "jest ./test",
+    "test2": "jest --coverage ./test"
   },
   "repository": {
     "type": "git",

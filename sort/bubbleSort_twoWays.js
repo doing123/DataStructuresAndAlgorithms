@@ -25,6 +25,8 @@ function bubbleSort (nums) {
     }
     low++
 
-    if (mark) return
+    if (mark) return nums
   }
 }
+
+export default bubbleSort
