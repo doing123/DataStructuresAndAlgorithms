@@ -14,6 +14,8 @@ function bubbleSort (nums) {
       }
     }
 
-    if (mark) return
+    if (mark) return nums
   }
 }
+
+export default bubbleSort

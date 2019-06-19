@@ -1,1 +1,4 @@
 node_modules
+
+# jest 测试覆盖率报告
+coverage
