@@ -6,16 +6,13 @@
  */
 function selectSort (nums) {
   for (let i = 0, len = nums.length; i < len; i++) {
-    let tmp = nums[i]
-    let position = i
+    let minIndex = i
     for (let j = i + 1; j < len; j++) {
-      if (nums[j] < tmp) {
-        tmp = nums[j]
-        position = j
+      if (nums[j] < nums[minIndex]) {
+        minIndex = j
       }
     }
-    nums[position] = nums[i]
-    nums[i] = tmp
+    [nums[i], nums[minIndex]] = [nums[minIndex], nums[i]]
   }
 
   return nums
