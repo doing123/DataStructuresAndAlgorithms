@@ -1,4 +1,4 @@
-import quickSort from '../../sort/quickSort2'
+import quickSort from '../../sort/quickSort3'
 
 test('quickSort', () => {
   expect(quickSort([9, 3, 7, 6, 8, 1, 2, 4, 6, 5, 3]))

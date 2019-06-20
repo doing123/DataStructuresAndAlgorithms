@@ -3,7 +3,7 @@
  * @param {number[]} nums
  * @return {number[]}
  */
-function quickSort2 (nums) {
+function quickSort (nums) {
   return recursive(nums, 0, nums.length - 1)
 }
 
@@ -35,4 +35,4 @@ function partition (arr, left, right) {
 
 // quickSort2([9, 3, 7, 6, 8, 1, 2, 4, 6, 5, 3])
 
-export default quickSort2
+export default quickSort
