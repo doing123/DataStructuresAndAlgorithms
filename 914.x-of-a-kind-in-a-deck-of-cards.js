@@ -9,7 +9,7 @@
  */
 var hasGroupsSizeX = function (deck) {
   // 1.判断map中每队数据的最大公约数是不是等于1
-  if (deck.length < 2) return false
+  /* if (deck.length < 2) return false
   const map = new Map()
   deck.forEach(item => {
     map.set(item, (map.get(item) | 0) + 1)
@@ -35,5 +35,58 @@ var hasGroupsSizeX = function (deck) {
     }
   }
 
+  return true */
+
+  // 2.
+  /* if (deck.length < 2) {
+    return false
+  }
+  const map = new Map()
+  deck.forEach(item => {
+    map.set(item, (map.get(item) | 0) + 1)
+  })
+
+  let min = 10001
+  for (let val of map.values()) {
+    min = Math.min(min, val)
+  }
+
+  if (min === 1) return false
+
+  for (let val of map.values()) {
+    if (getGCD(min, val) === 1) return false
+  }
+
+  return true */
+
+  // 3.
+  const count = [] // 空出来的 key 对应的 value 会是 undefined
+  deck.forEach(item => {
+    if (count[item] === undefined) count[item] = 1
+    else count[item]++
+  })
+
+  let tmp = -1
+  for (let i = 0; i < count.length; i++) {
+    if (count[i] === undefined) continue
+    if (count[i] < 2) return false
+    if (tmp === -1) {
+      tmp = count[i]
+    } else {
+      if (getGCD(tmp, count[i]) === 1) return false
+    }
+  }
+
   return true
 }
+
+function getGCD (a, b) {
+  let gcd = 1
+  for (let i = 1; i <= a || i <= b; i++) {
+    if (a % i === 0 && b % i === 0) gcd = i
+  }
+
+  return gcd
+}
+
+hasGroupsSizeX([1, 2, 3, 4, 4, 3, 2, 1])

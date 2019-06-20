@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/sort/quickSort.js"
+      "program": "${workspaceFolder}/914.x-of-a-kind-in-a-deck-of-cards.js"
     }
   ]
 }
