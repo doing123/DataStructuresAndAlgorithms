@@ -60,7 +60,7 @@ var hasGroupsSizeX = function (deck) {
   return true */
 
   // 3.
-  const count = [] // 空出来的 key 对应的 value 会是 undefined
+  /* const count = [] // 空出来的 key 对应的 value 会是 undefined
   deck.forEach(item => {
     if (count[item] === undefined) count[item] = 1
     else count[item]++
@@ -77,7 +77,24 @@ var hasGroupsSizeX = function (deck) {
     }
   }
 
-  return true
+  return true */
+
+  // 4.
+  let obj = {}
+  deck.forEach(item => {
+    if (obj[item] === undefined) obj[item] = 1
+    else obj[item]++
+  })
+
+  let tmp = obj[deck[0]]
+
+  for (let key in obj) {
+    if (obj[key] > 0) {
+      tmp = gcd(tmp, obj[key])
+    }
+  }
+
+  return tmp > 1
 }
 
 function getGCD (a, b) {
@@ -89,4 +106,7 @@ function getGCD (a, b) {
   return gcd
 }
 
-hasGroupsSizeX([1, 2, 3, 4, 4, 3, 2, 1])
+// TODO:利用递归求最大公约数
+function gcd (a, b) {
+  return a === 0 ? b : gcd(b % a, a)
+}
