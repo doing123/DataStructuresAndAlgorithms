@@ -2,3 +2,12 @@ node_modules
 
 # jest 测试覆盖率报告
 coverage
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
