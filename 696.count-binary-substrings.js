@@ -8,7 +8,8 @@
  * @return {number}
  */
 var countBinarySubstrings = function (s) {
-  // TODO: RegExp too big
+  // 1.
+  // TODO: 报错：RegExp too big
   /* const res = []
 
   for (let i = 0; i < s.length - 1; i++) {
@@ -20,6 +21,7 @@ var countBinarySubstrings = function (s) {
 
   return res.length */
 
+  // 2.
   /* let zeros = 0
   let ones = 0
   let res = 0
@@ -39,11 +41,12 @@ var countBinarySubstrings = function (s) {
 
   return res */
 
+  // 3.
   let res = 0
   let pre = 0
   let cur = 1
   for (let i = 1; i < s.length; i++) {
-    if (s[i] == s[i - 1]) cur++
+    if (s[i] === s[i - 1]) cur++
     else {
       pre = cur
       cur = 1
@@ -54,15 +57,14 @@ var countBinarySubstrings = function (s) {
   return res
 }
 
-/* function match(str) {
+/* function match (str) {
   const j = str.match(/^(0+|1+)/)[0]
   const o = (j[0] ^ 1).toString().repeat(j.length)
-<<<<<<< HEAD
-  const reg = new RegExp(`^${j}${o}`)
-  
-=======
+
+  // const reg = new RegExp(`^${j}${o}`)
+
   const reg = new RegExp(`^(${j}${o})`)
->>>>>>> bc5da62b4c347f6caed6d3b421e102652265cd82
+
   if (reg.test(str)) {
     return RegExp.$1
   } else {
