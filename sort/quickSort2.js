@@ -4,6 +4,7 @@
  * @return {number[]}
  */
 function quickSort (nums) {
+  // 划分交换排序，in-palce算法，不占用额外内存
   return recursive(nums, 0, nums.length - 1)
 }
 
