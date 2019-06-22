@@ -3,7 +3,7 @@
  * @param {number[]} nums
  */
 function quickSort (nums) {
-  if (nums.length === 0) return []
+  if (nums.length < 2) return nums
   const lesser = []
   const greater = []
   let pivot = nums[0]
@@ -15,7 +15,10 @@ function quickSort (nums) {
     }
   }
 
+  // 递归
   return quickSort(lesser).concat(pivot, quickSort(greater))
 }
 
-export default quickSort
+export default (arr) => {
+  return quickSort(arr)
+}
