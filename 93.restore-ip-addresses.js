@@ -8,6 +8,7 @@
  * @return {string[]}
  */
 var restoreIpAddresses = function (s) {
+  if (s.length > 12) return []
   let result = []
   let recursive = (arr, str) => {
     if (arr.length === 4 && arr.join('') === s) {
