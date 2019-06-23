@@ -9,7 +9,7 @@
  * @return {number[]}
  */
 var findSubstring = function (s, words) {
-  // TODO:报错 超出最大可用 memory
+  // TODO:报错 javascript heap out of memory
   let result = []
   let len = words.length
   let recursive = (r, _arr) => {
