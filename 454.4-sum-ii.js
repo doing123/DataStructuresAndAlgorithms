@@ -11,7 +11,8 @@
  * @return {number}
  */
 var fourSumCount = function (A, B, C, D) {
-  let res = 0
+  // 1.
+  /* let res = 0
   let map = {}
   for (let i = 0; i < A.length; i++) {
     for (let j = 0; j < B.length; j++) {
@@ -33,11 +34,36 @@ var fourSumCount = function (A, B, C, D) {
     }
   }
 
+  return res */
+
+  // 2.
+  let res = 0
+  let len = A.length
+  let map1 = {}
+  let map2 = {}
+  for (let i = 0; i < len; i++) {
+    for (let j = 0; j < len; j++) {
+      let key1 = A[i] + B[j]
+      if (!map1[key1]) {
+        map1[key1] = 1
+      } else {
+        map1[key1]++
+      }
+
+      let key2 = C[i] + D[j]
+      if (!map2[key2]) {
+        map2[key2] = 1
+      } else {
+        map2[key2]++
+      }
+    }
+  }
+
+  for (let key in map1) {
+    if (map2[-key]) {
+      res += map2[-key] * map1[key]
+    }
+  }
+
   return res
 }
-
-/* let A = [1, 2]
-let B = [-2, -1]
-let C = [-1, 2]
-let D = [0, 2]
-fourSumCount(A, B, C, D) */
