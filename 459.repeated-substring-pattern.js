@@ -8,6 +8,7 @@
  * @return {boolean}
  */
 var repeatedSubstringPattern = function (s) {
-  let reg = /^(\S+)\1+$/g
+  // let reg = /^(\S+)\1+$/g
+  let reg = /^([a-z]+)\1+$/g
   return reg.test(s)
 }
