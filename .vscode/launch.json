@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/454.4-sum-ii.js"
+      "program": "${workspaceFolder}/61.rotate-list.js"
     }
   ]
 }

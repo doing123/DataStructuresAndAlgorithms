@@ -16,7 +16,8 @@
  * @return {ListNode}
  */
 var rotateRight = function (head, k) {
-  let len = 0
+  // 1.从后往前逐一旋转
+  /* let len = 0
   let cur = head
   while (cur) {
     cur = cur.next
@@ -39,5 +40,30 @@ var rotateRight = function (head, k) {
     }
   }
 
-  return head
+  return head */
+
+  // 2.快慢指针
+  if (!head) return null
+  let len = 0
+  let cur = head
+  while (cur) {
+    cur = cur.next
+    len += 1
+  }
+  k %= len
+
+  let fast = head
+  let slow = head
+  for (let i = 0; i < k; i++) {
+    if (fast) fast = fast.next
+  }
+  if (!fast) return head
+  while (fast.next) {
+    fast = fast.next
+    slow = slow.next
+  }
+  fast.next = head
+  fast = slow.next
+  slow.next = null
+  return fast
 }
