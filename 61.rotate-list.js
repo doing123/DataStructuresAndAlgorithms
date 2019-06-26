@@ -43,7 +43,7 @@ var rotateRight = function (head, k) {
   return head */
 
   // 2.快慢指针
-  if (!head) return null
+  /* if (!head) return null
   let len = 0
   let cur = head
   while (cur) {
@@ -65,5 +65,22 @@ var rotateRight = function (head, k) {
   fast.next = head
   fast = slow.next
   slow.next = null
-  return fast
+  return fast */
+
+  // 3. 单指针
+  if (!head) return null
+  let len = 1
+  let cur = head
+  while (cur.next) {
+    len++
+    cur = cur.next
+  }
+  cur.next = head
+  let m = len - k % len
+  for (let i = 0; i < m; i++) {
+    cur = cur.next
+  }
+  let newNode = cur.next
+  cur.next = null
+  return newNode
 }
