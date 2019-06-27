@@ -8,7 +8,8 @@
  * @return {string[]}
  */
 var commonChars = function (A) {
-  let res = []
+  // 1.取出第一个字符，遍历之后所有
+  /* let res = []
   let top = A.shift()
   top = top.split('')
   top.forEach(item => {
@@ -27,8 +28,32 @@ var commonChars = function (A) {
     }
   })
 
+  return res */
+
+  // 2.二维数组实现
+  let len = A.length
+  let cc = []
+  for (let i = 0; i < len; i++) {
+    cc[i] = new Array(26).fill(0)
+    for (let j = 0; j < A[i].length; j++) {
+      let str = A[i][j].charCodeAt() - 97
+      cc[i][str]++
+    }
+  }
+
+  let res = []
+  for (let i = 0; i < 26; i++) {
+    let minCount = 10000
+    for (let j = 0; j < len; j++) {
+      minCount = Math.min(minCount, cc[j][i])
+    }
+
+    for (let j = 0; j < minCount; j++) {
+      res.push(String.fromCharCode(i + 97))
+    }
+  }
+
   return res
-  // TODO: 2.二维数组实现
 }
 
 // commonChars(['bella', 'label', 'roller'])
