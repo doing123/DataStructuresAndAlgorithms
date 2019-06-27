@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/61.rotate-list.js"
+      "program": "${workspaceFolder}/1002.find-common-characters.js"
     }
   ]
 }

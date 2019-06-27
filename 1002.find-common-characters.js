@@ -7,29 +7,28 @@
  * @param {string[]} A
  * @return {string[]}
  */
-var commonChars = function(A) {
-  let arr = []
-  for(let i = 0; i < A.length; i++) {
-    let set = new Set(A[i].split(''))
-    set.forEach((val, key) => {
-      let index = val.charCodeAt() - 97
-      if(arr[index] == undefined) {
-        arr[index] = 0
-      }
-      arr[index]++
-    })
-  }
-
+var commonChars = function (A) {
   let res = []
-  arr.forEach((item, i) => {
-    if(item == A.length) res.push(String.fromCharCode(i + 97))
+  let top = A.shift()
+  top = top.split('')
+  top.forEach(item => {
+    let flag = true
+    for (let i = 0; i < A.length; i++) {
+      let index = A[i].indexOf(item)
+
+      if (index > -1) {
+        A[i] = A[i].substring(0, index) + A[i].substring(index + 1)
+      } else {
+        flag = false
+      }
+    }
+    if (flag) {
+      res.push(item)
+    }
   })
 
-  // todo: 字符串中重复的字符
-  
-
   return res
-
   // TODO: 2.二维数组实现
-};
+}
 
+// commonChars(['bella', 'label', 'roller'])
