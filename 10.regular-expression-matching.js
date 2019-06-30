@@ -13,6 +13,7 @@ var isMatch = function (s, p) {
   if (p.length <= 0) {
     return !s.length
   }
+
   // 判断 p 模式字符串的第一个字符和 s 字符串的第一个字符是不是匹配
   let match = false
   if (s.length > 0 && (p[0] === s[0] || p[0] === '.')) {
