@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/1002.find-common-characters.js"
+      "program": "${workspaceFolder}/30.substring-with-concatenation-of-all-words.js"
     }
   ]
 }

@@ -9,23 +9,37 @@
  * @return {number[]}
  */
 var findSubstring = function (s, words) {
-  // TODO:报错 javascript heap out of memory
-  let result = []
-  let len = words.length
-  let recursive = (r, _arr) => {
-    if (r.length === len) {
-      result.push(r)
+  if (!s.length || !words.length) return []
+
+  let res = []
+  let n = words.length
+  let len = words[0].length
+  let map = new Map()
+  for (let i = 0; i < n; i++) {
+    if (map.get(words[i])) {
+      map.set(words[i], map.get(words[i]) + 1)
     } else {
-      _arr.forEach((item, index) => {
-        let tmp = [].concat(_arr)
-        tmp.splice(index, 1)
-        recursive(r.concat(item), tmp)
-      })
+      map.set(words[i], 1)
     }
   }
-  recursive([], words)
 
-  return result.map(item => {
-    return s.indexOf(item.join(''))
-  }).filter(item => item !== -1).sort()
+  for (let i = 0; i <= s.length - n * len; i++) {
+    let m = new Map()
+    let j = 0
+    for (j = 0; j < n; j++) {
+      let str = s.substr(i + j * len, len)
+      if (!map.get(str)) break
+      if (m.get(str)) {
+        m.set(str, m.get(str) + 1)
+      } else {
+        m.set(str, 1)
+      }
+      if (m.get(str) > map.get(str)) break
+    }
+    if (j === n) res.push(i)
+  }
+
+  return res
 }
+
+// findSubstring('wordgoodgoodgoodbestword', ['word', 'good', 'best', 'good'])
