@@ -26,7 +26,7 @@ var largestRectangleArea = function (heights) {
   return res */
 
   // 2.利用栈
-  let res = 0
+  /* let res = 0
   let stack = []
   heights.push(0)
   for (let i = 0; i < heights.length; i++) {
@@ -39,6 +39,19 @@ var largestRectangleArea = function (heights) {
     }
   }
 
+  return res */
+
+  // 3.栈 优化
+  let res = 0
+  let stack = []
+  heights.push(0)
+  for (let i = 0; i < heights.length; i++) {
+    while (stack.length !== 0 && heights[stack[stack.length - 1]] >= heights[i]) {
+      let cur = stack.pop()
+      res = Math.max(res, heights[cur] * (stack.length === 0 ? i : (i - stack[stack.length - 1] - 1)))
+    }
+    stack.push(i)
+  }
   return res
 }
 
