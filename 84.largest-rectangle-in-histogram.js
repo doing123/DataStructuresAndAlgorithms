@@ -53,6 +53,8 @@ var largestRectangleArea = function (heights) {
     stack.push(i)
   }
   return res
+
+  // TODO:42
 }
 
 // largestRectangleArea([2, 1, 5, 6, 2, 3])

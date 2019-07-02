@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/84.largest-rectangle-in-histogram.js"
+      "program": "${workspaceFolder}/85.maximal-rectangle.js"
     }
   ]
 }
