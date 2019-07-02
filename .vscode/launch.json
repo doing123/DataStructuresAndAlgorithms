@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/30.substring-with-concatenation-of-all-words.js"
+      "program": "${workspaceFolder}/84.largest-rectangle-in-histogram.js"
     }
   ]
 }

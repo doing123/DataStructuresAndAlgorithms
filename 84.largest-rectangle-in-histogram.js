@@ -8,7 +8,8 @@
  * @return {number}
  */
 var largestRectangleArea = function (heights) {
-  let res = 0
+  // 1.
+  /* let res = 0
   let len = heights.length
   for (let i = 0; i < len; i++) {
     if (i + 1 < len && heights[i] <= heights[i + 1]) {
@@ -22,5 +23,23 @@ var largestRectangleArea = function (heights) {
     }
   }
 
+  return res */
+
+  // 2.利用栈
+  let res = 0
+  let stack = []
+  heights.push(0)
+  for (let i = 0; i < heights.length; i++) {
+    if (stack.length === 0 || heights[stack[stack.length - 1]] < heights[i]) {
+      stack.push(i)
+    } else {
+      let cur = stack.pop()
+      res = Math.max(res, heights[cur] * (stack.length === 0 ? i : (i - stack[stack.length - 1] - 1)))
+      i--
+    }
+  }
+
   return res
 }
+
+// largestRectangleArea([2, 1, 5, 6, 2, 3])
