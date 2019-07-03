@@ -7,7 +7,8 @@
  * @param {character[][]} matrix
  * @return {number}
  */
-var maximalRectangle = function (matrix) {
+// 1.
+/* var maximalRectangle = function (matrix) {
   let res = 0
   let height = []
   for (let i = 0; i < matrix.length; i++) {
@@ -17,7 +18,6 @@ var maximalRectangle = function (matrix) {
     res = Math.max(res, largestRectangleArea(height))
   }
   return res
-  // TODO:待进一步优化
 }
 
 function largestRectangleArea (heights) {
@@ -34,6 +34,53 @@ function largestRectangleArea (heights) {
     }
   }
   return res
-}
+} */
 
-maximalRectangle([['1', '0', '1', '0', '0'], ['1', '0', '1', '1', '1'], ['1', '1', '1', '1', '1'], ['1', '0', '0', '1', '0']])
+// 2.
+/* var maximalRectangle = function (matrix) {
+  if (matrix.length === 0 || matrix[0].length === 0) return 0
+  let res = 0
+  let m = matrix.length
+  let n = matrix[0].length
+  let height = Array(n + 1).fill(0)
+  for (let i = 0; i < m; i++) {
+    let stack = []
+    for (let j = 0; j < n + 1; j++) {
+      if (j < n) {
+        height[j] = matrix[i][j] === '1' ? height[j] + 1 : 0
+      }
+      while (stack.length !== 0 && height[stack[stack.length - 1]] > height[j]) {
+        let cur = stack.pop()
+        res = Math.max(res, height[cur] * (stack.length === 0 ? j : (j - stack[stack.length - 1] - 1)))
+      }
+      stack.push(j)
+    }
+  }
+
+  return res
+} */
+
+// 3.
+var maximalRectangle = function (matrix) {
+  if (matrix.length === 0 || matrix[0].length === 0) return 0
+  let res = 0
+  let m = matrix.length
+  let n = matrix[0].length
+  let height = Array(n + 1).fill(0)
+  for (let i = 0; i < m; i++) {
+    let stack = []
+    for (let j = 0; j < n; j++) {
+      height[j] = matrix[i][j] === '1' ? height[j] + 1 : 0
+    }
+    for (let j = 0; j < n + 1; j++) {
+      while (stack.length !== 0 && height[stack[stack.length - 1]] > height[j]) {
+        let cur = stack.pop()
+        res = Math.max(res, height[cur] * (stack.length === 0 ? j : (j - stack[stack.length - 1] - 1)))
+      }
+      stack.push(j)
+    }
+  }
+
+  return res
+}
+// maximalRectangle([['1', '0', '1', '0', '0'], ['1', '0', '1', '1', '1'], ['1', '1', '1', '1', '1'], ['1', '0', '0', '1', '0']])
