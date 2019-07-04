@@ -83,4 +83,6 @@ var maximalRectangle = function (matrix) {
 
   return res
 }
+
+// TODO: 尝试其他
 // maximalRectangle([['1', '0', '1', '0', '0'], ['1', '0', '1', '1', '1'], ['1', '1', '1', '1', '1'], ['1', '0', '0', '1', '0']])
