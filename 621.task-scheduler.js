@@ -40,6 +40,7 @@ var leastInterval = function (tasks, n) {
   let partLen = n - (mxCnt - 1)
   let emptySlots = partCnt * partLen
   let taskLeft = tasks.length - mx * mxCnt
+  // TODO:剩余 task 大于 空槽个数就 task 总数，就一定满足条件？？？
   let idles = Math.max(0, emptySlots - taskLeft)
   return tasks.length + idles
 }
