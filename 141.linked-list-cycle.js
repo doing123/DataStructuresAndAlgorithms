@@ -16,7 +16,8 @@
  * @return {boolean}
  */
 var hasCycle = function (head) {
-  if (!head || !head.next) return false
+  // 1.快慢指针
+  /* if (!head || !head.next) return false
   // 慢指针
   let slow = head
   // 快指针
@@ -31,5 +32,17 @@ var hasCycle = function (head) {
       slow = slow.next
       fast = fast.next.next
     }
+  } */
+
+  // 2. 重新赋值每个节点的值为最小安全值，再比较
+  while (head !== null) {
+    if (head.val === Number.MIN_SAFE_INTEGER) {
+      return true
+    } else {
+      head.val = Number.MIN_SAFE_INTEGER
+      head = head.next
+    }
   }
+
+  return false
 }
