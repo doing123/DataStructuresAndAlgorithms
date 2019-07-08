@@ -37,32 +37,51 @@ var sortList = function (head) {
   return head */
 
   // 2.快排 // TODO:error
-  /* quickSort(head, null)
+  if (!head || !head.next) return head
+  quickSort(head, null)
   return head
-  function quickSort (head, tail) {
-    if (head == tail) {
-      return head
-    }
-    let val = head.val
-    let prevSwapPtr = head
-    for (let ptr = head.next; ptr != tail; ptr = ptr.next) {
-      if (ptr.val < val) {
-        let tmp = prevSwapPtr.next.val
-        prevSwapPtr.next.val = ptr.val
-        ptr.val = tmp
 
-        prevSwapPtr = prevSwapPtr.next
+  // 交换两个节点的值
+  function swap (p, q) {
+    if (p === q) return
+    let val = p.val
+    p.val = q.val
+    q.val = val
+  }
+
+  // 寻找基准元素的节点
+  function partition (begin, end) {
+    // 第一个节点作为基准值
+    let val = begin.val
+    // p 慢指针：代表待交换的 大于 基准值的位置
+    // q 快指针：代表待交换的 小于 基准值的位置
+    // 当 快指针 指向的值 小于 基准值时，慢指针向前移动一位且交换彼此的值，之后快指针向前移动一位
+    let p = begin
+    let q = begin.next
+
+    while (q !== end) {
+      if (q.val < val) {
+        p = p.next
+        swap(p, q)
       }
-      head.val = prevSwapPtr.val
-      prevSwapPtr.val = val
-
-      quickSort(head, prevSwapPtr)
-      quickSort(prevSwapPtr.next, tail)
+      q = q.next
     }
-  } */
+
+    // 让基准元素跑到中间去
+    swap(p, begin)
+    return p
+  }
+
+  function quickSort (begin, end) {
+    if (begin !== end) {
+      let part = partition(begin, end)
+      quickSort(begin, part)
+      quickSort(part.next, end)
+    }
+  }
 
   // 3.归并
-  if (head === null || head.next === null) {
+  /* if (head === null || head.next === null) {
     return head
   }
   let slow = head
@@ -96,5 +115,5 @@ var sortList = function (head) {
       p.next = l2
     }
     return l.next
-  }
+  } */
 }
