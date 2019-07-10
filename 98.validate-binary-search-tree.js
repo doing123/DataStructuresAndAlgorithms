@@ -36,8 +36,8 @@ var isValidBST = function (root) {
     return valid(node.left, low, node.val) && valid(node.right, node.val, high)
   } */
 
-  // 2.中序遍历
-  let list = []
+  // 2.采用中序遍历：左根右；   先序遍历：根左右；后序遍历：左右根
+  /* let list = []
   inOrder(root, list)
   for (let i = 0; i < list.length; i++) {
     if (list[i] >= list[i + 1]) return false
@@ -50,5 +50,22 @@ var isValidBST = function (root) {
     inOrder(node.left, list)
     list.push(node.val)
     inOrder(node.right, list)
+  } */
+
+  // 3.中序遍历，不存入数组，每当遍历到一个新节点时和其上一个节点比较，如果不大于上一个节点则返回false，全部遍历完成后返回true
+  let pre = null
+  return inOrder(root) //  inOrder(root, pre) 把 pre 传入参数,原始类型（值类型）会值拷贝，函数外声明的 pre 无法拿到 内部拷贝值引用的 node 节点
+
+  function inOrder (node) {
+    if (!node) return true
+    let bool = inOrder(node.left)
+    if (!bool) return false
+    if (pre) {
+      if (node.val <= pre.val) return false
+    }
+    pre = node
+    return inOrder(node.right)
   }
+
+  // 4.非递归，用到栈 TODO:
 }
