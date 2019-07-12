@@ -21,7 +21,7 @@ var twoSum = function (numbers, target) {
   return [] */
 
   // 2.
-  let right = numbers.length
+  /* let right = numbers.length
   for (let i = 0; i < right; i++) {
     let tmp = target - numbers[i]
     let left = i + 1
@@ -32,7 +32,18 @@ var twoSum = function (numbers, target) {
       else right = mid
     }
   }
+  return [] */
+
+  // 3.
+  let left = 0
+  let right = numbers.length - 1
+  while (left < right) {
+    let sum = numbers[left] + numbers[right]
+    if (sum === target) return [left + 1, right + 1]
+    else if (sum < target) left++
+    else right--
+  }
   return []
 }
 
-twoSum([2, 7, 11, 15], 9)
+// twoSum([2, 7, 11, 15], 9)
