@@ -9,7 +9,8 @@
  * @return {number[]}
  */
 var twoSum = function (numbers, target) {
-  for (let i = 0; i < numbers.length; i++) {
+  // 1.
+  /* for (let i = 0; i < numbers.length; i++) {
     let tmp = target - numbers[i]
     for (let j = i + 1; j < numbers.length; j++) {
       if (tmp === numbers[j]) {
@@ -17,5 +18,21 @@ var twoSum = function (numbers, target) {
       }
     }
   }
+  return [] */
+
+  // 2.
+  let right = numbers.length
+  for (let i = 0; i < right; i++) {
+    let tmp = target - numbers[i]
+    let left = i + 1
+    while (left < right) {
+      let mid = left + Math.floor((right - left) / 2)
+      if (numbers[mid] === tmp) return [i + 1, mid + 1]
+      else if (numbers[mid] < tmp) left = mid + 1
+      else right = mid
+    }
+  }
   return []
 }
+
+twoSum([2, 7, 11, 15], 9)
