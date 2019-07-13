@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/451.sort-characters-by-frequency.js"
+      "program": "${workspaceFolder}/860.lemonade-change.js"
     }
   ]
 }

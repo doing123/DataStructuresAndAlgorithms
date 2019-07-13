@@ -8,6 +8,7 @@
  * @return {boolean}
  */
 var lemonadeChange = function (bills) {
+  // TODO:待优化
   // 钱箱，存储零钱
   let hand = []
   while (bills.length) {
@@ -19,7 +20,8 @@ var lemonadeChange = function (bills) {
       hand.sort((a, b) => b - a)
       // 顾客的钱减去饮料的钱就是需要找给顾客的零钱
       let change = money - 5
-      for (let i = 0, len = hand.length; i < len; i++) {
+      // for (let i = 0, len = hand.length; i < len; i++) { // hand.length 会动态改变
+      for (let i = 0; i < hand.length; i++) { // hand.length 会动态改变
         if (hand[i] <= change) {
           change -= hand[i]
           hand.splice(i, 1)
@@ -40,3 +42,5 @@ var lemonadeChange = function (bills) {
   }
   return true
 }
+
+// lemonadeChange([5, 5, 5, 10, 50])
