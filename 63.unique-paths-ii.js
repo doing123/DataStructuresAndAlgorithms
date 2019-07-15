@@ -35,8 +35,8 @@ var uniquePathsWithObstacles = function (obstacleGrid) {
   }
   return dp(m, n) */
 
-  // 2.
-  let m = obstacleGrid.length
+  // 2.二维数组
+  /* let m = obstacleGrid.length
   let n = obstacleGrid[0].length
   if (m === 0 || n === 0 || obstacleGrid[0][0] === 1) {
     return 0
@@ -52,7 +52,26 @@ var uniquePathsWithObstacles = function (obstacleGrid) {
       dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
     }
   }
-  return dp[m][n]
+  return dp[m][n] */
+
+  // 3.一维数组 TODO:待理解
+  let m = obstacleGrid.length
+  let n = obstacleGrid[0].length
+  if (m === 0 || n === 0 || obstacleGrid[0][0] === 1) {
+    return 0
+  }
+  let dp = Array(n).fill(0)
+  dp[0] = 1
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (obstacleGrid[i][j] === 1) {
+        dp[j] = 0
+      } else if (j > 0) {
+        dp[j] += dp[j - 1]
+      }
+    }
+  }
+  return dp[n - 1]
 }
 
-uniquePathsWithObstacles([[0, 0, 0], [0, 1, 0], [0, 0, 0]])
+// uniquePathsWithObstacles([[0, 0, 0], [0, 1, 0], [0, 0, 0]])
