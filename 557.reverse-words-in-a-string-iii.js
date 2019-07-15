@@ -22,9 +22,8 @@ var reverseWords = function (s) {
 
   // return s.split(' ').map(item => {
   return s.split(/\s/g).map(item => {
-  // return s.match(/[\w']+/g).map(item => {  
+  // return s.match(/[\w']+/g).map(item => {
   // TODO: match ???
     return item.split('').reverse().join('')
   }).join(' ')
-};
-
+}

@@ -7,7 +7,6 @@
  * @param {string} moves
  * @return {boolean}
  */
-var judgeCircle = function(moves) {
+var judgeCircle = function (moves) {
   // TODO:
-};
-
+}

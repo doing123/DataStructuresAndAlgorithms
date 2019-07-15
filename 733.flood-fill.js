@@ -10,7 +10,6 @@
  * @param {number} newColor
  * @return {number[][]}
  */
-var floodFill = function(image, sr, sc, newColor) {
-    // TODO:
-};
-
+var floodFill = function (image, sr, sc, newColor) {
+  // TODO:
+}

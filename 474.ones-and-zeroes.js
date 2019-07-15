@@ -9,9 +9,9 @@
  * @param {number} n
  * @return {number}
  */
-var findMaxForm = function(strs, m, n) {
-    // TODO: DP：Dynamic programming,动态规划算法
-    /* const dp = new Array(m + 1)
+var findMaxForm = function (strs, m, n) {
+  // TODO: DP：Dynamic programming,动态规划算法
+  /* const dp = new Array(m + 1)
     for(let i = 0; i < dp.length; i++) {
       dp[i] = new Array(n + 1).fill(0)
     }
@@ -36,5 +36,4 @@ var findMaxForm = function(strs, m, n) {
     }
 
     return dp[m][n] */
-};
-
+}

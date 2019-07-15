@@ -8,7 +8,6 @@
  * @param {number[][]} edges
  * @return {number[]}
  */
-var findMinHeightTrees = function(n, edges) {
-    // TODO:
-};
-
+var findMinHeightTrees = function (n, edges) {
+  // TODO:
+}

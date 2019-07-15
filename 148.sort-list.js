@@ -36,7 +36,7 @@ var sortList = function (head) {
   }
   return head */
 
-  // 2.快排 // TODO:error
+  // 2.快排
   if (!head || !head.next) return head
   quickSort(head, null)
   return head

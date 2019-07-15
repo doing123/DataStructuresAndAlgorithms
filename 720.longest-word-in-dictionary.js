@@ -7,7 +7,6 @@
  * @param {string[]} words
  * @return {string}
  */
-var longestWord = function(words) {
+var longestWord = function (words) {
   // TODO: 没状态，下一题
-};
-
+}

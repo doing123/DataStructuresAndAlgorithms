@@ -7,7 +7,6 @@
  * @param {number} target
  * @return {number}
  */
-var reachNumber = function(target) {
-    // TODO:
-};
-
+var reachNumber = function (target) {
+  // TODO:
+}
