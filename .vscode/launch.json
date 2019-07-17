@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/787.cheapest-flights-within-k-stops.js"
+      "program": "${workspaceFolder}/310.minimum-height-trees.js"
     }
   ]
 }
