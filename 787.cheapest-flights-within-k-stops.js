@@ -31,7 +31,7 @@ var findCheapestPrice = function (n, flights, src, dst, K) {
   return min >= Number.MAX_SAFE_INTEGER ? -1 : min */
 
   // 2.DFS：深度优先搜素
-  let res = Number.MAX_SAFE_INTEGER // 已经全局最便宜价格
+  /* let res = Number.MAX_SAFE_INTEGER // 已经全局最便宜价格
   let map = {}
   let visited = new Set() // 访问过的节点集
   visited.add(src)
@@ -63,11 +63,10 @@ var findCheapestPrice = function (n, flights, src, dst, K) {
       helpers(map, a[0], dst, K - 1, visited, out + a[1], res)
       visited.delete(a[0])
     }
-  }
+  } */
 
-  // TODO: error NewSpace::Rebalance Allocation failed - JavaScript heap out of memory
   // 3.BFS：广度优先搜索
-  /* let res = Number.MAX_SAFE_INTEGER
+  let res = Number.MAX_SAFE_INTEGER
   let count = 0
   let map = {}
   let queue = [[src, 0]]
@@ -83,7 +82,7 @@ var findCheapestPrice = function (n, flights, src, dst, K) {
 
   while (queue.length) {
     for (let i = queue.length; i > 0; i--) {
-      let top = queue.pop()
+      let top = queue.shift() // 队列，shift 取 top 值
       if (top[0] === dst) {
         res = Math.min(res, top[1])
       }
@@ -98,7 +97,7 @@ var findCheapestPrice = function (n, flights, src, dst, K) {
     }
     if (count++ > K) break
   }
-  return (res === Number.MAX_SAFE_INTEGER) ? -1 : res */
+  return (res === Number.MAX_SAFE_INTEGER) ? -1 : res
 
   // 4.TODO: DP：动态规划
 }
