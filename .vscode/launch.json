@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/310.minimum-height-trees.js"
+      "program": "${workspaceFolder}/4.median-of-two-sorted-arrays.js"
     }
   ]
 }
