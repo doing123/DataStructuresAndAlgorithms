@@ -15,7 +15,7 @@
  * @return {ListNode}
  */
 var mergeKLists = function (lists) {
-  // TODO:
+  // 1.模拟实现优先级队列：初始化时将每个链表的第一个结点加入队列，排序，之后每次弹出队首元素，将这个结点指向的下一个结点加入到队列，直至所有结点添加完毕
   let queue = []
   for (let i = 0; i < lists.length; i++) {
     if (lists[i]) {
@@ -39,4 +39,6 @@ var mergeKLists = function (lists) {
   cur = dummy.next
   dummy = null
   return cur
+
+  // 2.TODO:
 }
