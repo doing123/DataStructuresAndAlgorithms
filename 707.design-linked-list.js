@@ -12,7 +12,6 @@ var Node = function (val = 0) {
 }
 
 var MyLinkedList = function () {
-  // TODO:
   this.head = null
 }
 
