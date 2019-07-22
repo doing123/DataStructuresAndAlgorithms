@@ -8,5 +8,15 @@
  * @return {boolean}
  */
 var judgeCircle = function (moves) {
-  // TODO:
+  // 1.上下左右四个方向
+  let obj = {
+    'L': 0,
+    'R': 0,
+    'D': 0,
+    'U': 0
+  }
+  for (let i = 0, len = moves.length; i < len; i++) {
+    obj[moves[i]]++
+  }
+  return obj['L'] === obj['R'] && obj['U'] === obj['D']
 }
