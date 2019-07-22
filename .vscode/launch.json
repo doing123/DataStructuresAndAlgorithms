@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/474.ones-and-zeroes.js"
+      "program": "${workspaceFolder}/720.longest-word-in-dictionary.js"
     }
   ]
 }

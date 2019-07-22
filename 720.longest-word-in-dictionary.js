@@ -8,8 +8,8 @@
  * @return {string}
  */
 var longestWord = function (words) {
-  // BFS: Breadth First Search，广度优先搜索,使用 queue 辅助
-  let res = ''
+  // 1.BFS: Breadth First Search，广度优先搜索,使用 queue 辅助
+  /* let res = ''
   let maxLen = 0
   let queue = []
   for (let i = 0, len = words.length; i < len; i++) {
@@ -35,5 +35,33 @@ var longestWord = function (words) {
     }
   }
 
+  return res */
+
+  // 2.递归
+  let res = ''
+  let maxLen = 0
+  for (let i = 0, len = words.length; i < len; i++) {
+    if (words[i].length === 1) {
+      helper(words, words[i])
+    }
+  }
   return res
+
+  function helper (words, word) {
+    if (word.length > maxLen) {
+      maxLen = word.length
+      res = word
+    } else if (word.length === maxLen) {
+      res = res < word ? res : word
+    }
+
+    for (let i = 0; i < 26; i++) {
+      let tmp = word + String.fromCharCode(i + 97)
+      if (words.includes(tmp)) {
+        helper(words, tmp)
+      }
+    }
+  }
 }
+
+// longestWord(['m', 'mo', 'moc', 'moch', 'mocha', 'l', 'la', 'lat', 'latt', 'latte', 'c', 'ca', 'cat'])
