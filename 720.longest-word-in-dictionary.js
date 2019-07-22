@@ -38,7 +38,7 @@ var longestWord = function (words) {
   return res */
 
   // 2.递归
-  let res = ''
+  /* let res = ''
   let maxLen = 0
   for (let i = 0, len = words.length; i < len; i++) {
     if (words[i].length === 1) {
@@ -61,7 +61,22 @@ var longestWord = function (words) {
         helper(words, tmp)
       }
     }
+  } */
+
+  // 3.最优
+  let res = ''
+  let s = []
+  words.sort() // words.sort((a, b) => a - b): 排序不符合要求，采用默认排序
+  for (let i = 0, len = words.length; i < len; i++) {
+    // substr: 从起始索引提取字符串中指定数目的字符
+    // substring: 提取字符串中两个指定的索引号之间的字符
+    if (words[i].length === 1 || s.includes(words[i].substr(0, words[i].length - 1))) {
+      res = (words[i].length > res.length) ? words[i] : res
+      s.push(words[i])
+    }
   }
+
+  return res
 }
 
-// longestWord(['m', 'mo', 'moc', 'moch', 'mocha', 'l', 'la', 'lat', 'latt', 'latte', 'c', 'ca', 'cat'])
+// longestWord(['a', 'banana', 'app', 'appl', 'ap', 'apply', 'apple'])
