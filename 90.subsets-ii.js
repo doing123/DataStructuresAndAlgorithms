@@ -20,7 +20,10 @@ var subsetsWithDup = function (nums) {
     }
     let newSize = res.length
     for (let j = newSize - size; j < newSize; j++) {
-      let arr = JSON.parse(JSON.stringify(res[j]))
+      // let arr = JSON.parse(JSON.stringify(res[j]))
+      // let arr = [].concat(res[j])
+      // let arr = [...res[j]]
+      let [...arr] = res[j]
       arr.push(nums[i])
       res.push(arr)
     }
@@ -32,3 +35,11 @@ var subsetsWithDup = function (nums) {
 }
 
 // subsetsWithDup([1, 2, 2])
+
+// 数组拷贝四种方法
+/**
+ * 1.[].concat
+ * 2.JSON.parse(JSON.stringify(arr))
+ * 3.arr2 = [...arr1]
+ * 4.[...arr2] = arr1
+ */
