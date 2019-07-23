@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/720.longest-word-in-dictionary.js"
+      "program": "${workspaceFolder}/90.subsets-ii.js"
     }
   ]
 }
