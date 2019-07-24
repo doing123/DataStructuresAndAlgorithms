@@ -8,7 +8,7 @@
  * @return {number[][]}
  */
 var subsetsWithDup = function (nums) {
-  if (!nums.length) return []
+  /* if (!nums.length) return []
   let res = [[]]
   nums.sort((a, b) => a - b)
   let size = 1
@@ -29,12 +29,32 @@ var subsetsWithDup = function (nums) {
     }
   }
 
-  return res // res.sort()
+  return res // res.sort() */
 
-  // TODO:递归，构建树
+  // TODO:递归，构建树 ???
+  if (!nums.length) return []
+  let res = []
+  nums.sort((a, b) => a - b)
+  getSubsets(nums, 0, [])
+  return res
+
+  function getSubsets (nums, pos, out) {
+    if (pos === nums.length) {
+      res.push(out)
+      return
+    }
+    let next = pos + 1
+    // 找到第一个与当前元素不相等的元素
+    while (next < nums.length && nums[next] === nums[pos]) {
+      next++
+    }
+    // 如果当前不加入当前元素，那以后也不要加入了，避免重复
+    getSubsets(nums, next, out)
+    getSubsets(nums, pos + 1, out.concat(nums[pos]))
+  }
 }
 
-// subsetsWithDup([1, 2, 2])
+subsetsWithDup([1, 2, 2])
 
 // 数组拷贝四种方法
 /**
