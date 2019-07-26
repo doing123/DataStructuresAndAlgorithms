@@ -8,6 +8,7 @@
  * @return {number[][]}
  */
 var permute = function (nums) {
+  // TODO:待深入理解
   let result = []
   fullArrange(nums, nums.length, 0, result)
   return result
@@ -25,3 +26,5 @@ var permute = function (nums) {
     }
   }
 }
+
+// permute([1, 2, 3])
