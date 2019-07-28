@@ -1,0 +1,19 @@
+/*
+ * @lc app=leetcode id=124 lang=javascript
+ *
+ * [124] Binary Tree Maximum Path Sum
+ */
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxPathSum = function (root) {
+  // TODO:
+}
