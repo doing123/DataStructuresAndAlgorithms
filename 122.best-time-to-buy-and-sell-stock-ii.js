@@ -12,7 +12,7 @@ var maxProfit = function (prices) { // 贪心
   // 保存利润
   /* let count = 0
   for (let i = 0, len = prices.length; i < len; i++) {
-    for (let j = i; j < len - 1; j++) { //  TODO:待回顾
+    for (let j = i; j < len - 1; j++) {
       if (prices[j + 1] > prices[j]) { // 如果后面一天的价格大于当前的价格就一直持有
         count += prices[j + 1] - prices[j]
         i = j

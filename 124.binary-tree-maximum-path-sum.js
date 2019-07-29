@@ -16,4 +16,15 @@
  */
 var maxPathSum = function (root) {
   // TODO:
+  let res = Number.MIN_SAFE_INTEGER
+  helper(root)
+  return res
+
+  function helper (node) {
+    if (!node) return 0
+    let left = Math.max(helper(node.left), 0)
+    let right = Math.max(helper(node.right), 0)
+    res = Math.max(res, left + right + node.val)
+    return Math.max(left, right) + node.val
+  }
 }
