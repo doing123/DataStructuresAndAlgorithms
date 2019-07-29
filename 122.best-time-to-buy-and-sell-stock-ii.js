@@ -8,8 +8,9 @@
  * @return {number}
  */
 var maxProfit = function (prices) { // 贪心
+  // 1.
   // 保存利润
-  let count = 0
+  /* let count = 0
   for (let i = 0, len = prices.length; i < len; i++) {
     for (let j = i; j < len - 1; j++) { //  TODO:待回顾
       if (prices[j + 1] > prices[j]) { // 如果后面一天的价格大于当前的价格就一直持有
@@ -21,5 +22,16 @@ var maxProfit = function (prices) { // 贪心
       }
     }
   }
-  return count
+  return count */
+
+  // 2.
+  if (prices.length < 2) return 0
+  let maxPro = 0
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] - prices[i - 1] > 0) {
+      maxPro += prices[i] - prices[i - 1]
+    }
+  }
+
+  return maxPro
 }
