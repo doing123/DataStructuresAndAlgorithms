@@ -32,4 +32,17 @@ var uniquePaths = function (m, n) {
     denom *= i
   }
   return num / denom
+
+  // 3.动态规划：递归  Time Limit Exceeded
+  /* return helper(1, 1, m, n)
+
+  function helper (row, col, m, n) {
+    if (row === m || col === n) {
+      return 1
+    }
+    if (row > m || col > n) {
+      return 0
+    }
+    return helper(row + 1, col, m, n) + helper(row, col + 1, m, n)
+  } */
 }
