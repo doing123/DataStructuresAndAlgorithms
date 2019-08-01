@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/46.permutations.js"
+      "program": "${workspaceFolder}/146.lru-cache.js"
     }
   ]
 }

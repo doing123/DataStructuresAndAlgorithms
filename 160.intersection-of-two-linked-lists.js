@@ -17,7 +17,6 @@
  * @return {ListNode}
  */
 var getIntersectionNode = function (headA, headB) {
-  // TODO:
   let a = headA
   let b = headB
   while (a !== b) {

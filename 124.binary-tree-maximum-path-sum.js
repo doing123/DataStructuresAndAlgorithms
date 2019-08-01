@@ -15,7 +15,6 @@
  * @return {number}
  */
 var maxPathSum = function (root) {
-  // TODO:
   let res = Number.MIN_SAFE_INTEGER
   helper(root)
   return res
