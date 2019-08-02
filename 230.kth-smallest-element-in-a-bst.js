@@ -55,4 +55,6 @@ var kthSmallest = function (root, k) {
     node = node.right
   }
   return 0
+
+  // TODO:4.分治
 }
