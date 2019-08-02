@@ -7,7 +7,7 @@
  * @param {number} capacity
  */
 var LRUCache = function (capacity) {
-  // TODO:最近最少使用的放在链表的尾部，超出长度删除
+  // 最近最少使用的放在链表的尾部，超出长度删除
   this._capacity = capacity
   this._count = 0
   this._head = null

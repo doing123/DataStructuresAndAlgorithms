@@ -16,5 +16,16 @@
  * @return {number}
  */
 var kthSmallest = function (root, k) {
-  // TODO:
+  // 1.转数组吧
+  let res = []
+  recursive(root)
+  res.sort((a, b) => a - b)
+  return res[k - 1]
+
+  function recursive (node) {
+    if (!node) return
+    res.push(node.val)
+    if (node.left) recursive(node.left)
+    if (node.right) recursive(node.right)
+  }
 }
