@@ -30,13 +30,29 @@ var kthSmallest = function (root, k) {
     if (node.right) recursive(node.right)
   } */
 
-  // 2.看了博客，中序遍历足以
-  return kthSmallestDFS(root)
+  // 2.看了博客，中序遍历足以： k-- 计数
+  /* return kthSmallestDFS(root)
   function kthSmallestDFS (node) {
     if (!node) return -1
     let val = kthSmallestDFS(node.left)
     if (k === 0) return val
     if (--k === 0) return node.val
     return kthSmallestDFS(node.right)
+  } */
+
+  // 3.计数器
+  let count = 0
+  let stack = []
+  let node = root
+  while (node || stack.length) {
+    while (node) {
+      stack.push(node)
+      node = node.left
+    }
+    node = stack.pop()
+    count++
+    if (count === k) return node.val
+    node = node.right
   }
+  return 0
 }
