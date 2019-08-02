@@ -17,7 +17,8 @@
  */
 var kthSmallest = function (root, k) {
   // 1.转数组吧
-  let res = []
+  // 前序遍历，再排序求值
+  /* let res = []
   recursive(root)
   res.sort((a, b) => a - b)
   return res[k - 1]
@@ -27,5 +28,15 @@ var kthSmallest = function (root, k) {
     res.push(node.val)
     if (node.left) recursive(node.left)
     if (node.right) recursive(node.right)
+  } */
+
+  // 2.看了博客，中序遍历足以
+  return kthSmallestDFS(root)
+  function kthSmallestDFS (node) {
+    if (!node) return -1
+    let val = kthSmallestDFS(node.left)
+    if (k === 0) return val
+    if (--k === 0) return node.val
+    return kthSmallestDFS(node.right)
   }
 }
