@@ -41,7 +41,7 @@ var kthSmallest = function (root, k) {
   } */
 
   // 3.计数器
-  let count = 0
+  /* let count = 0
   let stack = []
   let node = root
   while (node || stack.length) {
@@ -54,7 +54,7 @@ var kthSmallest = function (root, k) {
     if (count === k) return node.val
     node = node.right
   }
-  return 0
+  return 0 */
 
   // TODO:4.分治
 }
