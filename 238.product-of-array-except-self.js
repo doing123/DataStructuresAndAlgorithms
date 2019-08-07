@@ -11,8 +11,9 @@ var productExceptSelf = function (nums) {
   let result = []
   let tmp
   for (let i = 0; i < nums.length; i++) {
-    tmp = nums.slice()
-    tmp[i] = 1
+    // tmp = nums.slice()
+    // tmp[i] = 1
+    tmp = nums.slice(0, i).concat(nums.slice(i + 1))
     result.push(getTotal(tmp))
   }
   return result
