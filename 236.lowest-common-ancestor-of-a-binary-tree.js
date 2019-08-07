@@ -17,12 +17,14 @@
  * @return {TreeNode}
  */
 var lowestCommonAncestor = function (root, p, q) {
-  // TODO: 237,238,292
+  // 普通二叉树，不是二叉搜索树
   if (root === null) return null
   if (root === p) return p
   if (root === q) return q
 
   let left = lowestCommonAncestor(root.left, p, q)
+  if (left && left !== p && left !== q) return left
+
   let right = lowestCommonAncestor(root.right, p, q)
 
   if (left !== null && right !== null) return root
