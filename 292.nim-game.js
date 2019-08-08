@@ -8,5 +8,11 @@
  * @return {boolean}
  */
 var canWinNim = function (n) {
-  // TODO:
+  /* if (n % 4 === 0) {
+    return false
+  } else {
+    return true
+  } */
+
+  return n % 4 !== 0
 }
