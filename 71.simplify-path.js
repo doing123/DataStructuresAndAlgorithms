@@ -8,5 +8,15 @@
  * @return {string}
  */
 var simplifyPath = function (path) {
-  // TODO:
+  let stack = []
+  let arr = path.split('/')
+  for (let i = 0; i < arr.length; i++) {
+    let tmp = arr[i]
+    if (stack.length && tmp === '..') {
+      stack.pop()
+    } else if (tmp !== '.' && tmp !== '' && tmp !== '..') {
+      stack.push(tmp)
+    }
+  }
+  return `/${stack.join('/')}`
 }
