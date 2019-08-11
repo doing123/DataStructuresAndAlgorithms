@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/238.product-of-array-except-self.js"
+      "program": "${workspaceFolder}/1122.relative-sort-array.js"
     }
   ]
 }
