@@ -24,6 +24,8 @@ var recoverTree = function (root) {
   for (let i = 0; i < vals.length; i++) {
     list[i].val = vals[i]
   }
+
+  // TODO:
 }
 
 function inOrder (root, list, vals) {
