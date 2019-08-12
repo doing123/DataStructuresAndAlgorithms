@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/1122.relative-sort-array.js"
+      "program": "${workspaceFolder}/929.unique-email-addresses.js"
     }
   ]
 }
