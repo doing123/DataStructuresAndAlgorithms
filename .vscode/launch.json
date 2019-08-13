@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/929.unique-email-addresses.js"
+      "program": "${workspaceFolder}/643.maximum-average-subarray-i.js"
     }
   ]
 }
