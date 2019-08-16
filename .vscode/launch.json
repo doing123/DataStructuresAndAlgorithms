@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/643.maximum-average-subarray-i.js"
+      "program": "${workspaceFolder}/496.next-greater-element-i.js"
     }
   ]
 }
