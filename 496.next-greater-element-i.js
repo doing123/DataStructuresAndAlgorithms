@@ -9,7 +9,8 @@
  * @return {number[]}
  */
 var nextGreaterElement = function (nums1, nums2) {
-  let result = []
+  // 1.
+  /* let result = []
   for (let i = 0; i < nums1.length; i++) {
     let greater = -1
     let index = nums2.findIndex((val) => {
@@ -22,6 +23,23 @@ var nextGreaterElement = function (nums1, nums2) {
       }
     }
     result.push(greater)
+  }
+  return result */
+
+  // 2.建立哈希表
+  let result = Array(nums1.length).fill(-1)
+  let map = {}
+  for (let i = 0; i < nums2.length; i++) {
+    map[nums2[i]] = i
+  }
+  for (let i = 0; i < nums1.length; i++) {
+    let start = map[nums1[i]]
+    for (let j = start + 1; j < nums2.length; j++) {
+      if (nums2[j] > nums1[i]) {
+        result[i] = nums2[j]
+        break
+      }
+    }
   }
   return result
 }
