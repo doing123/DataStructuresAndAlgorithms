@@ -9,6 +9,15 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var rotate = function (nums, k) {
+  // 1.
+  /* let arr2 = nums.splice(nums.length - k)
+  for (let i = arr2.length - 1; i >= 0; i--) {
+    nums.unshift(arr2[i])
+  } */
 
-  // TODO:
+  // 2.
+  for (var i = nums.length - 1; i >= nums.length - k; i--) {
+    var item = nums.pop()
+    nums.unshift(item)
+  }
 }
