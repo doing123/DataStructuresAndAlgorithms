@@ -16,8 +16,14 @@ var rotate = function (nums, k) {
   } */
 
   // 2.
-  for (var i = nums.length - 1; i >= nums.length - k; i--) {
+  /* for (var i = nums.length - 1; i >= nums.length - k; i--) {
     var item = nums.pop()
     nums.unshift(item)
+  } */
+
+  // 3.
+  let arr = nums.splice(nums.length - k).reverse()
+  for (let i = 0; i < arr.length; i++) {
+    nums.unshift(arr[i])
   }
 }
