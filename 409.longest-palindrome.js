@@ -20,18 +20,17 @@ var longestPalindrome = function (s) {
   if (map.size === 1) {
     return s.length
   }
-  let flag = false
+  let flag = 0
   for (let val of map.values()) {
-    if (val > 1) {
-      if (val % 2 === 1) flag = true
-      count += Math.floor(val / 2) * 2
-    } else if (!flag) {
-      flag = true
+    if (val % 2 === 0) {
+      count += val
+    } else {
+      count += val - 1
+      flag = 1
     }
   }
-  if (flag) count++
 
-  return count
+  return count + flag
 }
 
 // longestPalindrome('abccccdd')
