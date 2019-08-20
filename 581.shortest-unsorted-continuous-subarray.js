@@ -8,7 +8,8 @@
  * @return {number}
  */
 var findUnsortedSubarray = function (nums) {
-  let res = 0
+  // 1.
+  /* let res = 0
   let start = -1
   let n = nums.length
   for (let i = 1; i < n; i++) {
@@ -24,5 +25,16 @@ var findUnsortedSubarray = function (nums) {
       res = i - start + 1
     }
   }
-  return res
+  return res */
+
+  // 2.
+  let arr = nums.slice()
+  let i = 0
+  let n = nums.length
+  let j = n - 1
+  arr.sort((a, b) => a - b)
+
+  while (i < n && nums[i] === arr[i]) i++
+  while (j > i && nums[j] === arr[j]) j--
+  return j - i + 1
 }
