@@ -37,4 +37,6 @@ var findUnsortedSubarray = function (nums) {
   while (i < n && nums[i] === arr[i]) i++
   while (j > i && nums[j] === arr[j]) j--
   return j - i + 1
+
+  // 3.TODO
 }
