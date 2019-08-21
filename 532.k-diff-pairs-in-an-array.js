@@ -9,7 +9,8 @@
  * @return {number}
  */
 var findPairs = function (nums, k) {
-  let res = 0
+  // 1.使用哈希表
+  /* let res = 0
   let len = nums.length
   let map = new Map()
   for (let i = 0; i < len; i++) {
@@ -25,5 +26,18 @@ var findPairs = function (nums, k) {
     if (k > 0 && nums.includes(key + k)) res++
   }
 
+  return res */
+
+  // 2.双指针
+  let res = 0
+  let len = nums.length
+  let j = 0
+  nums.sort((a, b) => a - b)
+  for (let i = 0; i < len; i++) {
+    j = Math.max(j, i + 1)
+    while (j < len && nums[j] - nums[i] < k) j++
+    if (j < len && nums[j] - nums[i] === k) res++
+    while (i < len - 1 && nums[i] === nums[i + 1]) i++
+  }
   return res
 }
