@@ -9,5 +9,7 @@
  * @return {number[]}
  */
 var searchRange = function (nums, target) {
-  // TODO:
+  let first = nums.indexOf(target)
+  let last = nums.lastIndexOf(target)
+  return [first, last]
 }
