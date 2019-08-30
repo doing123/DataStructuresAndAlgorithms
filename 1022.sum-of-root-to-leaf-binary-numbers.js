@@ -15,32 +15,32 @@
  * @return {number}
  */
 var sumRootToLeaf = function (root) {
-  // TODO: 1、2 不通过: 58/63
   // 1.DFS递归
-  return sumNumbersDFS(root, 0)
+  // return sumNumbersDFS(root, 0)
 
   // 2.利用栈迭代求解
-  /* if (!root) return 0
+  if (!root) return 0
   let res = 0
   let stack = [root]
   while (stack.length) {
     let node = stack.pop()
     if (!node.left && !node.right) {
-      res += parseInt(node.val, 2)
+      // res += parseInt(node.val, 2) // * 10 结合parseInt 提交不通过: 58/63
+      res += node.val
     }
 
     if (node.right) {
-      node.right.val += node.val * 10
+      node.right.val += node.val * 2
       stack.push(node.right)
     }
 
     if (node.left) {
-      node.left.val += node.val * 10
+      node.left.val += node.val * 2
       stack.push(node.left)
     }
   }
 
-  return res */
+  return res
 
   // 3.递归
   /* let res = 0
