@@ -17,7 +17,7 @@
 var sumRootToLeaf = function (root) {
   // TODO: 1、2 不通过: 58/63
   // 1.DFS递归
-  // return sumNumbersDFS(root, 0)
+  return sumNumbersDFS(root, 0)
 
   // 2.利用栈迭代求解
   /* if (!root) return 0
@@ -43,8 +43,7 @@ var sumRootToLeaf = function (root) {
   return res */
 
   // 3.递归
-  
-  let res = 0
+  /* let res = 0
 
   dfs(root, 0)
   return res
@@ -59,7 +58,7 @@ var sumRootToLeaf = function (root) {
       dfs(node.left, val)
       dfs(node.right, val)
     }
-  }
+  } */
 }
 
 function sumNumbersDFS (root, sum) {
