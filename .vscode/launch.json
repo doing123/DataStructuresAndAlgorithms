@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/39.combination-sum.js"
+      "program": "${workspaceFolder}/1022.sum-of-root-to-leaf-binary-numbers.js"
     }
   ]
 }
