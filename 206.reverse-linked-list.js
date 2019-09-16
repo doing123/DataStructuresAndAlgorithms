@@ -17,7 +17,7 @@
 var reverseList = function (head) {
   // TODO:
   // 1.转数组
-  let arr = []
+  /* let arr = []
   let node = head
   while (node) {
     arr.push(node.val)
@@ -31,5 +31,16 @@ var reverseList = function (head) {
     newNode.next = new ListNode(val)
     newNode = newNode.next
   }
-  return newHead.next
+  return newHead.next */
+
+  // 2.迭代
+  let first = head
+  let reverseHead = null
+  while (first) {
+    let second = first.next
+    first.next = reverseHead
+    reverseHead = first
+    first = second
+  }
+  return reverseHead
 }
