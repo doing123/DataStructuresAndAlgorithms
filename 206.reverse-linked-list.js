@@ -15,5 +15,21 @@
  * @return {ListNode}
  */
 var reverseList = function (head) {
-  // TOOD:
+  // TODO:
+  // 1.转数组
+  let arr = []
+  let node = head
+  while (node) {
+    arr.push(node.val)
+    node = node.next
+  }
+  arr.reverse()
+  let newHead = new ListNode(0)
+  let newNode = newHead
+  while (arr.length) {
+    let val = arr.shift()
+    newNode.next = new ListNode(val)
+    newNode = newNode.next
+  }
+  return newHead.next
 }
