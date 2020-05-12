@@ -8,7 +8,7 @@
  * @return {number}
  */
 var maxArea = function (height) {
-  // 1.暴力求解，事件复杂度O(n^2)
+  // 1.暴力求解，时间复杂度O(n^2)
   let max = 0
   for (let i = 0; i < height.length - 1; i++) {
     for (let j = i + 1; j < height.length; j++) {
