@@ -94,7 +94,7 @@ class Heap {
     let i
     let iParent = Math.floor(arr.length / 2) - 1
 
-    // 从最后一个非叶子结点开始，从左至右，从下至上进行调整 构建最大堆
+    // 从最后一个非叶子结点开始，从右至左，从下至上进行调整 构建最大堆
     for (let i = iParent; i >= 0; i--) {
       Heap.maxHeapify(arr, i, arr.length)
     }
