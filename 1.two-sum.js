@@ -9,18 +9,12 @@
  * @return {number[]}
  */
 var twoSum = function (nums, target) {
-  let res = []
-  let map = {}
-  nums.forEach((item, index) => {
-    map[item] = index
-  })
+  const map = {};
   for (let i = 0; i < nums.length; i++) {
-    let tmp = map[target - nums[i]]
+    let tmp = map[target - nums[i]];
     if (tmp !== undefined && tmp !== i) {
-      res.push(i, tmp)
-      break
+      return [i, tmp];
     }
+    map[nums[i]] = i;
   }
-
-  return res
-}
+};
