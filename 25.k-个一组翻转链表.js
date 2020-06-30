@@ -17,12 +17,12 @@
  * @param {number} k
  * @return {ListNode}
  */
-var reverseKGroup = function(head, k) {
+var reverseKGroup = function (head, k) {
   const dummyHead = new ListNode(0);
   dummyHead.next = head;
   let [start, end] = [dummyHead, dummyHead.next];
   let count = 0;
-  while(end) {
+  while (end) {
     count++;
     if (count % k === 0) {
       start = reverseList(start, end.next);
@@ -33,15 +33,15 @@ var reverseKGroup = function(head, k) {
   }
 
   function reverseList(start, end) {
-    let prev = start;
-    let curr = start.next;
+    let [prev, curr] = [start, start.next];
     const tmp = curr;
-    while(curr != end) {
+    while (curr != end) {
       let next = curr.next;
       curr.next = prev;
       prev = curr;
       curr = next;
     }
+
     start.next = prev;
     tmp.next = curr;
     return tmp;
