@@ -10,39 +10,29 @@
  * @return {boolean}
  */
 var isValidSudoku = function (board) {
-  let columnMapArr = Array.apply(null, { length: board.length }).map(
-    () => new Map()
-  );
-  let boxMapArr = Array.apply(null, { length: board.length }).map(
-    () => new Map()
-  );
+  let columnMapArr = Array.apply(null, { length: 9 }).map(() => new Map()); // 列
+  let boxMapArr = Array.apply(null, { length: 9 }).map(() => new Map()); // 小宫格
 
-  for (let i = 0; i < board.length; i++) {
+  for (let i = 0; i < 9; i++) {
     let current = board[i];
-    let rowMap = new Map();
-    for (let j = 0; j < current.length; j++) {
+    let rowMap = new Map(); // 行
+    for (let j = 0; j < 9; j++) {
       if (current[j] == '.') continue;
-      // 验证当前行
-      if (rowMap.has(current[j])) {
-        return false;
-      } else {
-        rowMap.set(current[j], true);
-      }
 
-      // 当前列
-      if (columnMapArr[j].has(current[j])) {
-        return false;
-      } else {
-        columnMapArr[j].set(current[j], true);
-      }
-
-      // 验证3*3小宫格
       let boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
-      if (boxMapArr[boxIndex].has(current[j])) {
+
+      // 验证当前值
+      if (
+        rowMap.has(current[j]) ||
+        columnMapArr[j].has(current[j]) ||
+        boxMapArr[boxIndex].has(current[j])
+      ) {
         return false;
-      } else {
-        boxMapArr[boxIndex].set(current[j], true);
       }
+
+      rowMap.set(current[j], true);
+      columnMapArr[j].set(current[j], true);
+      boxMapArr[boxIndex].set(current[j], true);
     }
   }
 
