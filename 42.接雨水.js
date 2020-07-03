@@ -11,21 +11,21 @@
  */
 var trap = function (height) {
   if (height.length < 3) return 0;
-  let count = 0,
-    left = 0,
-    right = height.length - 1,
-    leftMax = 0,
-    rightMax = 0;
+  let left = 0;
+  let right = height.length - 1;
+  let count = 0;
+  let leftMax = 0;
+  let rightMax = 0;
   while (left < right) {
     if (height[left] < height[right]) {
-      if (height[left] >= leftMax) {
+      if (leftMax <= height[left]) {
         leftMax = height[left];
       } else {
         count += leftMax - height[left];
       }
       left++;
     } else {
-      if (height[right] >= rightMax) {
+      if (rightMax <= height[right]) {
         rightMax = height[right];
       } else {
         count += rightMax - height[right];
@@ -33,6 +33,7 @@ var trap = function (height) {
       right--;
     }
   }
+
   return count;
 };
 // @lc code=end
