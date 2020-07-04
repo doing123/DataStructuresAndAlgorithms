@@ -30,6 +30,7 @@ var isMatch = function(s, p) {
       }
     }
   }
+
   return dp[n][m];
 };
 // @lc code=end
