@@ -8,23 +8,24 @@
  * @return {number[][]}
  */
 var permute = function (nums) {
-  // TODO:待深入理解
-  let result = []
-  fullArrange(nums, nums.length, 0, result)
-  return result
+  const result = [];
 
-  function fullArrange (nums, size, n, result) {
-    if (n === size) {
-      result.push(nums)
+  function dfs(path) {
+    if (path.length === nums.length) {
+      result.push([...path]);
+      return;
     }
-    for (let i = n; i < size; i++) {
-      [nums[i], nums[n]] = [nums[n], nums[i]]
 
-      fullArrange(nums.concat(), size, n + 1, result);
-
-      [nums[i], nums[n]] = [nums[n], nums[i]]
+    for (let i = 0; i < nums.length; i++) {
+      if (path.includes(nums[i])) continue;
+      path.push(nums[i]);
+      dfs(path);
+      path.pop();
     }
   }
-}
+
+  dfs([]);
+  return result;
+};
 
 // permute([1, 2, 3])
