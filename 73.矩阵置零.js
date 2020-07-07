@@ -23,13 +23,12 @@ var setZeroes = function (matrix) {
     }
   }
 
-  for (let [i, row] of Object.entries([...rowSet])) {
-    matrix[row] = Array(cols).fill(0);
-  }
-
-  for (let col of Object.values(Array.from(colSet))) {
-    for (let i = 0; i < rows; i++) {
-      matrix[i][col] = 0;
+  // 优化
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      if (rowSet.has(i) || colSet.has(j)) {
+        matrix[i][j] = 0;
+      }
     }
   }
 };
