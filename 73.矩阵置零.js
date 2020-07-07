@@ -12,22 +12,30 @@
 var setZeroes = function (matrix) {
   let rows = matrix.length;
   let cols = matrix[0].length;
-  let rowSet = new Set();
-  let colSet = new Set();
+  // 进一步优化，原地修改，不消耗额外的空间
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      if (matrix[i][j] == 0) {
-        rowSet.add(i);
-        colSet.add(j);
+      if (matrix[i][j] === 0) {
+        // 列
+        for (let k = 0; k < rows; k++) {
+          if (matrix[k][j] !== 0) {
+            matrix[k][j] = false;
+          }
+        }
+        // 行
+        for (let k = 0; k < cols; k++) {
+          if (matrix[i][k] !== 0) {
+            matrix[i][k] = false;
+          }
+        }
       }
     }
   }
 
-  // 优化
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      if (rowSet.has(i) || colSet.has(j)) {
-        matrix[i][j] = 0;
+      if (matrix[i][j] === false) {
+        matrix[i][j] == 0;
       }
     }
   }
