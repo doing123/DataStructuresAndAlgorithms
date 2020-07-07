@@ -25,6 +25,7 @@ var minPathSum = function (grid) {
   }
   for (let i = 1; i < m; i++) {
     for (let j = 1; j < n; j++) {
+      // 对于每个元素考虑从上方移动过来还是从左方移动过来
       grid[i][j] += Math.min(grid[i - 1][j], grid[i][j - 1]);
     }
   }
