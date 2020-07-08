@@ -10,24 +10,12 @@
  * @return {number}
  */
 var removeDuplicates = function (nums) {
-  let count = 1;
+  // 优化
   for (let i = 1; i < nums.length; i++) {
-    if (nums[i] > nums[i - 1]) {
-      count = 0;
-    }
-    if (nums[i] == nums[i - 1] && count == 2) {
-      let j = i;
-      while (j < nums.length) {
-        if (nums[j] != nums[j + 1]) {
-          break;
-        }
-        j++;
-      }
-      nums.splice(i, j - i + 1);
-      count = 0;
+    if (nums[i] == nums[i - 1] && nums[i] == nums[i + 1]) {
+      nums.splice(i, 1);
       i--;
     }
-    count++;
   }
 
   return nums.length;
