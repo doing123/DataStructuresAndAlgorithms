@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/1022.sum-of-root-to-leaf-binary-numbers.js"
+      "program": "${workspaceFolder}/108.将有序数组转换为二叉搜索树.js"
     }
   ]
 }

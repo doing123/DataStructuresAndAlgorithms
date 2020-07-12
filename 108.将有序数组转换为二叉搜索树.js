@@ -16,8 +16,16 @@
  * @param {number[]} nums
  * @return {TreeNode}
  */
-var sortedArrayToBST = function(nums) {
-
+var sortedArrayToBST = function (nums) {
+  const buildBST = (nums, start, end) => {
+    if (start > end) return null; // 不在可用数据区间内 返回 null
+    // 数组的中点即可保证平衡
+    let mid = (start + end) >>> 1; // 无符号右移一位 8421
+    let root = new TreeNode(nums[mid]);
+    root.left = buildBST(nums, start, mid - 1);
+    root.right = buildBST(nums, mid + 1, end);
+    return root;
+  };
+  return buildBST(nums, 0, nums.length - 1);
 };
 // @lc code=end
-
