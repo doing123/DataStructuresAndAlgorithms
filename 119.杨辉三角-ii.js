@@ -10,17 +10,19 @@
  * @return {number[]}
  */
 var getRow = function (rowIndex) {
-  const result = [];
-  result.push([1]);
-  for (let i = 1; i < rowIndex + 1; i++) {
-    const row = result[i - 1];
-    const tmp = [1];
+  const result = [1];
+  let prev = [1];
+  if (rowIndex == 0) return result;
+  prev.push(1);
+  result.push(1);
+  if (rowIndex == 1) return result;
+  for (let i = 2; i < rowIndex + 1; i++) {
+    prev = result.slice();
     for (let j = 1; j < i; j++) {
-      tmp.push(row[j - 1] + row[j]);
+      result.splice(j, 1, prev[j - 1] + prev[j]);
     }
-    tmp.push(1);
-    result.push(tmp);
+    result.push(1);
   }
-  return result[rowIndex];
+  return result;
 };
 // @lc code=end

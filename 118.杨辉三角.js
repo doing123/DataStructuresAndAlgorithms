@@ -14,7 +14,7 @@ var generate = function (numRows) {
   const result = [];
   for (let i = 0; i < numRows; i++) {
     let temp = [1];
-    const row = result[i - 1];
+    const row = result[i - 1]; // 上一行
     for (let j = 1; j < i; j++) {
       temp.push(row[j - 1] + row[j]);
     }
