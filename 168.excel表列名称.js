@@ -10,15 +10,13 @@
  * @return {string}
  */
 var convertToTitle = function (n) {
-  let result = [];
+  let result = '';
   while (n > 0) {
-    n--
-    result.unshift(n % 26);
+    n--;
+    result = String.fromCharCode(65 + (n % 26)) + result;
     n = Math.floor(n / 26);
   }
   // 65:A  97:a
-  return result.reduce((prev, item) => {
-    return prev + String.fromCharCode(item + 65);
-  }, '');
+  return result;
 };
 // @lc code=end
