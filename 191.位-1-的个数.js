@@ -10,13 +10,15 @@
  * @return {number}
  */
 var hammingWeight = function (n) {
-  let str = n.toString(2);
-  let result = 0;
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] == 1) {
-      result++;
+  // 解法一：循环和位移动
+  let count = 0;
+  let mask = 1;
+  for (let i = 0; i < 32; i++) {
+    if ((mask & n) != 0) {
+      count++;
     }
+    mask <<= 1;
   }
-  return result;
+  return count;
 };
 // @lc code=end
