@@ -12,8 +12,8 @@
 var trailingZeroes = function (n) {
   var count = 0;
   while (n >= 5) {
-    count += (n / 5) | 0; // TODO 没理解
-    n /= 5;
+    n = Math.floor(n / 5); // TODO 没理解
+    count += n;
   }
   return count;
 };
