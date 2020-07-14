@@ -24,10 +24,25 @@ var maxProfit = function (prices) {
   // return result;
 
   // 2.优化
+  // let result = 0;
+  // for (let i = 1, len = prices.length; i < len; i++) {
+  //   if (prices[i] > prices[i - 1]) {
+  //     result += prices[i] - prices[i - 1];
+  //   }
+  // }
+  // return result;
+
+  // 3.
   let result = 0;
   for (let i = 1, len = prices.length; i < len; i++) {
-    if (prices[i] > prices[i - 1]) {
-      result += prices[i] - prices[i - 1];
+    for (let j = i; j < len; j++) {
+      if (prices[j] > prices[j - 1]) {
+        result += prices[j] - prices[j - 1];
+        i = j;
+      } else {
+        i = j;
+        break;
+      }
     }
   }
   return result;
