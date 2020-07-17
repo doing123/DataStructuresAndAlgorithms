@@ -11,24 +11,28 @@
  * @return {boolean}
  */
 var isMatch = function (s, p) {
-  // 边界
-  if (p.length <= 0) {
-    return s.length == 0;
-  }
+  if (s == null || p == null) return false;
+  let len1 = s.length,
+    len2 = p.length;
+  let dp = Array.apply(null, { length: len1 + 1 }).map(() => {
+    return new Array(len2 + 1).fill(false);  // dp[i][j]：表示 s 的前i个字符是否与 p的前j个字符是否匹配
+  });
 
-  // 第一个字符匹配
-  let match = false;
-  if (s.length > 0 && (s[0] === p[0] || p[0] === '.')) {
-    match = true;
+  dp[0][0] = true;// 初始化 s、p 都为空字符串为 true
+  for (let j = 2; j < len2 + 1; j++) {
+    if (p[j - 1] == '*') dp[0][j] = dp[0][j - 2];
   }
-
-  // 有模式
-  if (p.length > 1 && p[1] == '*') {
-    // s*匹配 0 个
-    // s*匹配一个， 且后续匹配下去
-    return isMatch(s, p.slice(2)) || (match && isMatch(s.slice(1), p));
-  } else {
-    return match && isMatch(s.slice(1), p.slice(1));
+  for (let i = 1; i < len1 + 1; i++) {
+    for (let j = 1; j < len2 + 1; j++) {
+      if (s[i - 1] == p[j - 1] || p[j - 1] == '.') {
+        dp[i][j] = dp[i - 1][j - 1];
+      } else if (p[j - 1] == '*') {
+        if (s[i - 1] == p[j - 2] || p[j - 2] == '.')
+          dp[i][j] = dp[i][j - 2] || dp[i - 1][j - 2] || dp[i - 1][j];
+        else dp[i][j] = dp[i][j - 2];
+      }
+    }
   }
+  return dp[len1][len2]; // len1长度的s串 是否匹配 len2长度的p串
 };
 // @lc code=end
