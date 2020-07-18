@@ -9,7 +9,36 @@
  * @param {number} N
  * @return {number}
  */
-var soupServings = function(N) {
-  // TODO 题目没理解
+var soupServings = function (N) {
+  // TODO 理解
+  N = Math.floor(N / 25) + (N % 25 > 0 ? 1 : 0);
+  if (N >= 500) return 1;
+
+  const dp = Array.from(new Array(N + 1), () => new Array(N + 1).fill(0));
+
+  for (let s = 0; s <= 2 * N; s++) { // ?
+    for (let i = 0; i <= N; i++) {
+      let j = s - i;
+      if (j < 0 || j > N) continue;
+      let ans = 0;
+      if (i == 0) ans = 1;
+      if (i == 0 && j == 0) ans = 0.5;
+      if (i > 0 && j > 0) {
+        ans =
+          0.25 *
+          (dp[M(i - 4)][j] +
+            dp[M(i - 3)][M(j - 1)] +
+            dp[M(i - 2)][M(j - 2)] +
+            dp[M(i - 1)][M(j - 3)]);
+      }
+      dp[i][j] = ans;
+    }
+  }
+
+  return dp[N][N];
+
+  function M(x) {
+    return Math.max(0, x);
+  }
 };
 // @lc code=end
