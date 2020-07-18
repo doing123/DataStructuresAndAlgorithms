@@ -16,12 +16,10 @@ var soupServings = function (N) {
 
   const dp = Array.from(new Array(N + 1), () => new Array(N + 1).fill(0));
 
-  for (let s = 0; s <= 2 * N; s++) { // ?
-    for (let i = 0; i <= N; i++) {
-      let j = s - i;
-      if (j < 0 || j > N) continue;
+  for (let i = 0; i <= N; i++) {
+    for (let j = 0; j <= N; j++) {
       let ans = 0;
-      if (i == 0) ans = 1;
+      if (i == 0) ans = 1; // 三种临界条件
       if (i == 0 && j == 0) ans = 0.5;
       if (i > 0 && j > 0) {
         ans =
