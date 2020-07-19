@@ -10,11 +10,17 @@
  * @return {number}
  */
 var findMin = function (nums) {
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i] > nums[i + 1]) {
-      return nums[i + 1];
+  // 二分查找
+  let left = 0;
+  let right = nums.length - 1;
+  while (left < right) {
+    let mid = left + ((right - left) >> 1);
+    if (nums[mid] > nums[right]) {
+      left = mid + 1;
+    } else {
+      right = mid;
     }
   }
-  return nums[0];
+  return nums[left];
 };
 // @lc code=end
