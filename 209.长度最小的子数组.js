@@ -12,7 +12,7 @@
  */
 var minSubArrayLen = function (s, nums) {
   let len = nums.length;
-  let min = len;
+  let min = Number.MAX_SAFE_INTEGER;
   for (let i = 0; i < len - 1; i++) {
     let end = i + 1;
     let total = nums[i];
@@ -22,11 +22,9 @@ var minSubArrayLen = function (s, nums) {
     }
     if (total >= s) {
       min = Math.min(min, end - i);
-    } else if (total < s && i == 0) {
-      return 0;
     }
   }
 
-  return min;
+  return min == Number.MAX_SAFE_INTEGER ? 0 : min;
 };
 // @lc code=end
