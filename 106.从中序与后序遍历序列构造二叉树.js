@@ -18,29 +18,32 @@
  * @return {TreeNode}
  */
 var buildTree = function (inorder, postorder) {
-  let len = inorder.length;
-  let map = new Map();
-  let rootIndex = len - 1; // 对应 postorder 的索引
-  for (let i = 0; i < len; i++) {
-    map.set(inorder[i], i); // 保存中序数组中每项的索引
+  let len = postorder.length;
+  if (len == 0) return null;
+  let index = len - 1; // inorder 的索引，从后往前遍历
+  let stack = [];
+  let root = new TreeNode(postorder[index]);
+  stack.push(root);
+
+  // 从后往前遍历 postorder
+  for (let i = len - 2; i >= 0; i--) {
+    let top = stack[stack.length - 1];
+    if (top.val != inorder[index]) {
+      let node = new TreeNode(postorder[i]);
+      top.right = node;
+      stack.push(node);
+    } else {
+      let node = null; // 保留上一次出栈的 节点
+      while (stack.length && top.val == inorder[index]) {
+        node = stack.pop();
+        top = stack[stack.length - 1]; // 更新栈顶指针
+        index--;
+      }
+      node.left = new TreeNode(postorder[i]);
+      stack.push(node.left);
+    }
   }
 
-  return helper(0, inorder.length - 1);
-
-  // left、right 对应在 inorder 中的索引
-  function helper(left, right) {
-    if (left > right) return null; // 没有元素构建子🌲
-    let val = postorder[rootIndex];
-    let root = new TreeNode(val);
-    // 找到在 inorder 中的数据 分割左右子树的 索引
-    let index = map.get(val);
-
-    // 递归
-    rootIndex--;
-    root.right = helper(index + 1, right);
-    root.left = helper(left, index - 1);
-
-    return root;
-  }
+  return root;
 };
 // @lc code=end
