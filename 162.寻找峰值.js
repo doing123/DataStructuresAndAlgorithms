@@ -10,6 +10,7 @@
  * @return {number}
  */
 var findPeakElement = function (nums) {
+  // 1.线性扫描
   for (let i = 0; i < nums.length; i++) {
     if (nums[i] > nums[i + 1]) {
       return i;
