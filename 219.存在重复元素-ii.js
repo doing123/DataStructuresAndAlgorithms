@@ -11,13 +11,12 @@
  * @return {boolean}
  */
 var containsNearbyDuplicate = function (nums, k) {
-  // 1.线性搜索
-  for (let i = 0; i < nums.length; i++) {
-    let target = nums[i];
-    let index = nums.slice(i + 1, i + k + 1).indexOf(target);
-    if (index > -1 && index - i <= k) {
-      return true;
-    }
+  // 2. Map映射
+  let map = new Map();
+  for(let i = 0; i < nums.length; i++) {
+    if (map.has(nums[i])) return true;
+    map.set(nums[i], true);
+    map.delete(nums[i - k]);
   }
   return false;
 };
