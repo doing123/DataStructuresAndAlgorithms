@@ -12,12 +12,11 @@
 var majorityElement = function (nums) {
   let result = [];
   let map = new Map();
-  let set = new Set();
   let len = nums.length;
   let target = len / 3;
   for (let i = 0; i < len; i++) {
     let curr = nums[i];
-    if (set.has(curr)) continue;
+    if (map.get(curr) === true) continue;
     if (map.has(curr)) {
       map.set(curr, map.get(curr) + 1);
     } else {
@@ -25,7 +24,7 @@ var majorityElement = function (nums) {
     }
     if (map.get(curr) > target) {
       result.push(curr);
-      set.add(curr);
+      map.set(curr, true);
     }
   }
 
