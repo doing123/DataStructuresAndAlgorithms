@@ -13,16 +13,19 @@
 var minSubArrayLen = function (s, nums) {
   let len = nums.length;
   let min = Number.MAX_SAFE_INTEGER;
-  for (let i = 0; i < len - 1; i++) {
-    let end = i + 1;
-    let total = nums[i];
-    while (total < s && end < len) {
-      total += nums[end];
-      end++;
+
+  // 滑动窗口
+  let total = 0;
+  let left = 0;
+  let right = 0;
+  while (right <= len) {
+    total += nums[right];
+    while (total >= s) {
+      min = Math.min(min, right - left + 1);
+      total -= nums[left];
+      left++;
     }
-    if (total >= s) {
-      min = Math.min(min, end - i);
-    }
+    right++;
   }
 
   return min == Number.MAX_SAFE_INTEGER ? 0 : min;
