@@ -12,22 +12,25 @@
  */
 var combinationSum2 = function (candidates, target) {
   let res = [];
-  if (candidates.length === 0) return res;
+  let len = candidates.length;
+  if (len === 0) return res;
   candidates.sort((a, b) => a - b);
-  getCombinations(res, '', candidates, target, 0);
-  return res.map(item => item.split(','));
 
-  function getCombinations(res, str, candidates, target, pos) {
+  helper(0, target, []);
+  return res;
+
+  function helper(start, target, arr) {
     if (target < 0) return;
-    if (target === 0 && !res.includes(str)) {
-      res.push(str);
+    if (target === 0) {
+      res.push(arr);
       return;
     }
 
-    for (let i = pos; i < candidates.length; i++) {
-      if (candidates[i] > target) break;
-      let tmp = str +  (str ? ',' : '') + candidates[i];
-      getCombinations(res, tmp, candidates, target - candidates[i], i + 1);
+    for (let i = start; i < candidates.length; i++) {
+      if (candidates[i] > target) break; // 大剪枝
+      // i > start &&  ?
+      if (i > start && candidates[i] == candidates[i - 1]) continue; // 小剪枝
+      helper(i + 1, target - candidates[i], arr.concat(candidates[i]));
     }
   }
 };
