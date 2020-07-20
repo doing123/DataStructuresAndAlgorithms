@@ -12,7 +12,7 @@
  */
 var combinationSum = function (candidates, target) {
   // 回溯
-  candidates.sort((a, b) => a - b);
+  candidates.sort((a, b) => a - b); // 排序是为了提前终止搜索
   let result = [];
   helper(0, target, []);
   return result;
