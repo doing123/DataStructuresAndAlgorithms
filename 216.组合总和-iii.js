@@ -11,7 +11,7 @@
  * @return {number[][]}
  */
 var combinationSum3 = function (k, n) {
-  // 回溯
+  // dfs（深度优先），回溯
   let result = [];
   helper(k, n, 1, []);
   return result;
@@ -23,7 +23,7 @@ var combinationSum3 = function (k, n) {
     }
 
     for (let i = start; i <= 9; i++) {
-      if (n - i < 0) break;
+      if (n - i < 0) break; // 剪枝
       helper(k - 1, n - i, i + 1, arr.concat(i));
     }
   }
