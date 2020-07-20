@@ -11,6 +11,7 @@
  * @return {boolean}
  */
 var containsNearbyDuplicate = function (nums, k) {
+  // 1.线性搜索
   for (let i = 0; i < nums.length; i++) {
     let target = nums[i];
     let index = nums.slice(i + 1, i + k + 1).indexOf(target);
