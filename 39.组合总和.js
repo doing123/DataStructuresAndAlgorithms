@@ -12,7 +12,6 @@
  */
 var combinationSum = function (candidates, target) {
   // 回溯
-  candidates.sort((a, b) => a - b); // 排序是为了提前终止搜索
   let result = [];
   helper(0, target, []);
   return result;
@@ -24,8 +23,9 @@ var combinationSum = function (candidates, target) {
     }
 
     for (let i = start; i < candidates.length; i++) {
-      if (target - candidates[i] < 0) break;
-      helper(i, target - candidates[i], arr.concat(candidates[i]));
+      if (target - candidates[i] >= 0) {
+        helper(i, target - candidates[i], arr.concat(candidates[i]));
+      }
     }
   }
 };
