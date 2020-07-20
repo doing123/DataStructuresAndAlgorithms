@@ -10,13 +10,11 @@
  * @return {boolean}
  */
 var containsDuplicate = function (nums) {
-  // 1.暴力 双循环
+  // 2.set
+  let set = new Set();
   for (let i = 0, len = nums.length; i < len; i++) {
-    for (let j = i + 1; j < len; j++) {
-      if (nums[i] === nums[j]) {
-        return true;
-      }
-    }
+    if (set.has(nums[i])) return true;
+    set.add(nums[i]);
   }
   return false;
 };
