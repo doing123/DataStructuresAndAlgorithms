@@ -10,22 +10,8 @@
  * @return {number}
  */
 var findDuplicate = function (nums) {
+  // 状态不好，暂搁置
   // TODO 1.二分查找
-  // 2.快慢指针
-  let slow = 0;
-  let fast = 0;
-  do {
-    slow = nums[slow]; // 慢指针走一步，快指针走两步
-    fast = nums[nums[fast]];
-  } while (slow != fast);
-
-  slow = 0;
-  while (slow != fast) {
-    slow = nums[slow];
-    fast = nums[fast];
-  }
-
-  return slow;
 
   // TODO 3.位运算
 };
