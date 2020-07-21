@@ -10,13 +10,23 @@
  * @return {number}
  */
 var findDuplicate = function (nums) {
-  let map = {};
-  for (let i = 0; i < nums.length; i++) {
-    let curr = nums[i];
-    if (map[curr]) {
-      return curr;
-    }
-    map[curr] = true;
+  // TODO 1.二分查找
+  // 2.快慢指针
+  let slow = 0;
+  let fast = 0;
+  do {
+    slow = nums[slow]; // 慢指针走一步，快指针走两步
+    fast = nums[nums[fast]];
+  } while (slow != fast);
+
+  slow = 0;
+  while (slow != fast) {
+    slow = nums[slow];
+    fast = nums[fast];
   }
+
+  return slow;
+
+  // TODO 3.位运算
 };
 // @lc code=end
