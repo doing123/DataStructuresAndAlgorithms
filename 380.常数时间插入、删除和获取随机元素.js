@@ -41,7 +41,6 @@ RandomizedSet.prototype.remove = function (val) {
  */
 RandomizedSet.prototype.getRandom = function () {
   let len = this.set.length;
-  if (len == 1) return this.set[0];
   let random = Math.floor(Math.random() * len);
   return this.set[random];
 };
