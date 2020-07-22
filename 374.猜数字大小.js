@@ -23,7 +23,7 @@ var guessNumber = function (n) {
   let right = n;
   let mid;
   while (left <= right) {
-    mid = parseInt((left + right) / 2);
+    mid = (right + left) >>> 1; // 使用 >>> 无符号右移，>> 会不通过
     let val = guess(mid);
     if (val == -1) {
       right = mid - 1;
