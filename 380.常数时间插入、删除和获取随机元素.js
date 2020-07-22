@@ -9,7 +9,7 @@
  * Initialize your data structure here.
  */
 var RandomizedSet = function () {
-  this.set = [];
+  this.set = new Set();
 };
 
 /**
@@ -18,8 +18,8 @@ var RandomizedSet = function () {
  * @return {boolean}
  */
 RandomizedSet.prototype.insert = function (val) {
-  if (this.set.includes(val)) return false;
-  this.set.push(val);
+  if (this.set.has(val)) return false;
+  this.set.add(val);
   return true;
 };
 
@@ -29,9 +29,8 @@ RandomizedSet.prototype.insert = function (val) {
  * @return {boolean}
  */
 RandomizedSet.prototype.remove = function (val) {
-  if (!this.set.includes(val)) return false;
-  const index = this.set.indexOf(val);
-  this.set.splice(index, 1);
+  if (!this.set.has(val)) return false;
+  this.set.delete(val);
   return true;
 };
 
@@ -40,9 +39,9 @@ RandomizedSet.prototype.remove = function (val) {
  * @return {number}
  */
 RandomizedSet.prototype.getRandom = function () {
-  let len = this.set.length;
+  let len = this.set.size;
   let random = Math.floor(Math.random() * len);
-  return this.set[random];
+  return [...this.set][random];
 };
 
 /**
