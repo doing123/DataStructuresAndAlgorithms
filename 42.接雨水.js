@@ -13,19 +13,20 @@ var trap = function (height) {
   if (height.length < 3) return 0;
   let left = 0;
   let right = height.length - 1;
-  let count = 0;
   let leftMax = 0;
   let rightMax = 0;
+  let count = 0;
+
   while (left < right) {
     if (height[left] < height[right]) {
-      if (leftMax <= height[left]) {
+      if (height[left] >= leftMax) {
         leftMax = height[left];
       } else {
         count += leftMax - height[left];
       }
       left++;
     } else {
-      if (rightMax <= height[right]) {
+      if (height[right] >= rightMax) {
         rightMax = height[right];
       } else {
         count += rightMax - height[right];
