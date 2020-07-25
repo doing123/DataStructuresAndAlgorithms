@@ -13,7 +13,6 @@
 var subarraySum = function (nums, k) {
   let result = 0;
   let len = nums.length;
-  if (len == 1 && k == 0) return 0;
   for (let i = 0; i < len; i++) {
     // 连续的子数组
     let count = 0;
