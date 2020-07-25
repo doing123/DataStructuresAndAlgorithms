@@ -10,22 +10,37 @@
  * @return {boolean}
  */
 var circularArrayLoop = function (nums) {
-  for (let i = 0, len = nums.length; i < len; i++) {
+  // 双指针，慢指针前进一步，快指针前进两步
+  let len = nums.length;
+  for (let i = 0; i < len; i++) {
     if (nums[i] === 0) continue;
-    let set = new Set();
     let item = nums[i];
-    let flag = item > 0; // 前后两个方向都可
-    let index = i;
-    while (item !== 0) {
-      if (flag != item > 0) break;
-      if (set.has(index) && set.size > 1) return true;
-      set.add(index);
-      let next = (((nums[index] + index) % len) + len) % len; // 加上 nums.length * 1000，考虑负的索引
-      if (next === index) break;
-      index = next;
-      item = nums[index];
+    let slow = i;
+    let fast = getnext(slow);
+    while (item * nums[fast] > 0 && item * nums[getnext(fast)] > 0) {
+      if (slow === fast) {
+        if (slow === getnext(slow)) {
+          break;
+        }
+        return true;
+      }
+
+      slow = getnext(slow);
+      fast = getnext(getnext(fast));
+    }
+
+    // 标记已经走过的结点，提高运算效率，方法就是将慢指针重置为i，再用一个 while 循环，条件是 nums[i] 和 慢指针指的数正负相同
+    slow = i;
+    while (item * nums[slow] > 0) {
+      let next = getnext(slow); //然后计算下一个位置，并且 nums[slow] 标记为0，并且慢指针移动到 next 位置。
+      nums[slow] = 0;
+      slow = next;
     }
   }
   return false;
+
+  function getnext(index) {
+    return (((nums[index] + index) % len) + len) % len;
+  }
 };
 // @lc code=end
