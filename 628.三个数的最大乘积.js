@@ -10,13 +10,33 @@
  * @return {number}
  */
 var maximumProduct = function (nums) {
-  // 1.排序
-  nums.sort((a, b) => a - b);
-  let len = nums.length;
-  // 排序之后，如都为非负数，则是后三个元素的乘积；如出现了负数，则是最小的两个负数和最大的一个正的乘积
-  return Math.max(
-    nums[0] * nums[1] * nums[len - 1],
-    nums[len - 1] * nums[len - 2] * nums[len - 3]
-  );
+  // 2.线性扫描
+  // 找出最大的三个数和最小的两个数
+  let min1 = Number.MAX_SAFE_INTEGER;
+  let min2 = Number.MAX_SAFE_INTEGER;
+  let max1 = Number.MIN_SAFE_INTEGER;
+  let max2 = Number.MIN_SAFE_INTEGER;
+  let max3 = Number.MIN_SAFE_INTEGER;
+  for (let val of nums) {
+    if (val <= min1) {
+      min2 = min1;
+      min1 = val;
+    } else if (val <= min2) {
+      min2 = val;
+    }
+
+    if (val >= max1) {
+      max3 = max2;
+      max2 = max1;
+      max1 = val;
+    } else if (val >= max2) {
+      max3 = max2;
+      max2 = val;
+    } else if (val >= max3) {
+      max3 = val;
+    }
+  }
+
+  return Math.max(max1 * max2 * max3, max1 * min1 * min2);
 };
 // @lc code=end
