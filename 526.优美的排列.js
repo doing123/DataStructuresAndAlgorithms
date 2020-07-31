@@ -10,40 +10,35 @@
  * @return {number}
  */
 var countArrangement = function (N) {
-  // 边回溯边统计
+  // 回溯
   if (N === 0) return 0;
   let result = 0;
-  let nums = [];
+  let map = new Map(); // 1-N 个数可选
+  let checkableMap = new Map(); // 1-N 每个数 对应的可选的所有数
   for (let i = 1; i <= N; i++) {
-    nums.push(i);
+    map.set(i, true);
+    let tmp = [];
+    for (let j = 1; j <= N; j++) {
+      if (j % i === 0 || i % j === 0) {
+        tmp.push(j);
+      }
+    }
+    checkableMap.set(i, tmp);
   }
-  backtrack([], nums);
+  backtrack([]);
   return result;
 
-  function backtrack(arr, nums) {
-    // 符合优美数组条件，统计 +1
-    if (
-      arr.length === N &&
-      (arr.length % arr[arr.length - 1] === 0 ||
-        arr[arr.length - 1] % arr.length === 0)
-    ) {
+  function backtrack(arr) {
+    if (arr.length === N) {
       result++;
       return;
     }
-    if (
-      nums.length === 0 ||
-      (arr.length !== 0 &&
-        arr.length % arr[arr.length - 1] !== 0 &&
-        arr[arr.length - 1] % arr.length !== 0)
-    ) {
-      return; // 有不符合的直接返回
-    }
-
-    for (let i = 0; i < nums.length; i++) {
-      backtrack(
-        arr.concat(nums[i]),
-        nums.slice(0, i).concat(nums.slice(i + 1)) // 已使用的踢出
-      );
+    let need = checkableMap.get(arr.length + 1);
+    for (let i = 0; i < need.length; i++) {
+      if (map.get(need[i]) === false) continue;
+      map.set(need[i], false);
+      backtrack(arr.concat(need[i]));
+      map.set(need[i], true);
     }
   }
 };
