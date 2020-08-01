@@ -11,24 +11,44 @@
  * @return {number}
  */
 var findLength = function (A, B) {
-  // 动态规划
+  // 滑动窗口
+  let m = A.length;
+  let n = B.length;
   let result = 0;
-  let aLen = A.length;
-  let bLen = B.length;
-  let dp = Array.from(new Array(aLen + 1), () => {
-    return new Array(bLen + 1).fill(0); // A、B任意长度为0，即没有公共部分，dp[i][j] = 0
-  });
 
-  for (let i = 1; i <= aLen; i++) {
-    for (let j = 1; j <= bLen; j++) {
-      if (A[i - 1] === B[j - 1]) {
-        // 当出现相同元素时，公共前缀等于前缀数组的【末尾项】的公共前缀 + 1
-        dp[i][j] = dp[i - 1][j - 1] + 1;
-      }
-      result = Math.max(result, dp[i][j]);
-    }
+  // 固定A，滑动B
+  for (let i = 0; i <= n; i++) {
+    let len = Math.min(m, n - i); // 滑动窗口长度 TODO?
+    let maxLen = findMaxLen(A, B, 0, i, len); // 窗口左侧A[0],B[i]
+    result = Math.max(result, maxLen);
+  }
+
+  // 固定B，滑动A
+  for (let i = 0; i <= m; i++) {
+    let len = Math.min(n, m - i); // 滑动窗口长度
+    let maxLen = findMaxLen(A, B, i, 0, len);
+    result = Math.max(result, maxLen);
   }
 
   return result;
 };
+
+function findMaxLen(A, B, aStart, bStart, winLen) {
+  let result = 0;
+  let count = 0; // 公共前缀计数
+  for (let i = 0; i < winLen; i++) {
+    if (
+      A[aStart + i] !== undefined &&
+      B[bStart + i] !== undefined &&
+      A[aStart + i] === B[bStart + i]
+    ) {
+      count++;
+    } else {
+      count = 0;
+    }
+    result = Math.max(result, count);
+  }
+
+  return result;
+}
 // @lc code=end
