@@ -12,10 +12,16 @@
  * @param {number} ty
  * @return {boolean}
  */
-var reachingPoints = function(sx, sy, tx, ty) {
-  // 1.递归
-  if (sx > tx || sy > ty) return false;
-  if (sx == tx || sy == ty) return true;
-  return reachingPoints(sx + sy, sy, tx, ty) || reachingPoints(sx, sx + sy, tx, ty);
+var reachingPoints = function (sx, sy, tx, ty) {
+  // 2.回溯
+  while (tx >= sx && ty >= sy) {
+    if (sx === tx && sy === ty) return true;
+    if (tx > ty) {
+      tx -= ty;
+    } else {
+      ty -= tx;
+    }
+  }
+  return false;
 };
 // @lc code=end
