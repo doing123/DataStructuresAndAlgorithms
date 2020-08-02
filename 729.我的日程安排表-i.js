@@ -16,6 +16,7 @@ var MyCalendar = function () {
  * @return {boolean}
  */
 MyCalendar.prototype.book = function (start, end) {
+  // TODO 没理解
   for (let [key, value] of this.map) {
     if (key[0] < end && start < key[1]) {
       return false;
