@@ -13,7 +13,7 @@
  * @return {boolean}
  */
 var reachingPoints = function (sx, sy, tx, ty) {
-  // 2.回溯
+  // 2.回溯 TODO
   while (tx >= sx && ty >= sy) {
     if (sx === tx && sy === ty) return true;
     if (tx > ty) {
