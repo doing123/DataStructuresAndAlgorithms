@@ -18,16 +18,19 @@
  * @return {number[]}
  */
 var preorder = function (root) {
-  const result = [];
-  recursive(root);
-  return result;
-
-  function recursive(node) {
-    if (!node) return;
-    result.push(node.val);
-    node.children.forEach((item) => {
-      recursive(item);
-    });
+  // 迭代
+  let result = [];
+  let queue = [root];
+  while (queue.length) {
+    let node = queue.shift();
+    if (node) {
+      result.push(node.val);
+      if (node.children) {
+        queue.unshift(...node.children);
+      }
+    }
   }
+
+  return result;
 };
 // @lc code=end
