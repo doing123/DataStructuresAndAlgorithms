@@ -19,15 +19,16 @@
  */
 var postorder = function (root) {
   let result = [];
-  recursive(root);
-  return result;
-
-  function recursive(node) {
-    if (!node) return;
-    node.children.forEach((item) => {
-      recursive(item);
-    });
-    result.push(node.val);
+  let queue = [root];
+  while (queue.length) {
+    let node = queue.pop();
+    if (node != null) {
+      result.unshift(node.val);
+      if (node.children) {
+        queue.push(...node.children);
+      }
+    }
   }
+  return result;
 };
 // @lc code=end
