@@ -17,15 +17,14 @@
  * @return {boolean}
  */
 var isPalindrome = function(head) {
-  let result = [];
+  let left = '';
+  let right = '';
   let node = head;
   while(node) {
-    result.push(node.val);
+    left += node.val;
+    right = node.val + right;
     node = node.next;
   }
-  if (result.length == 1) return true;
-  let left = result.join('');
-  let right = result.reverse().join('');
   return left === right;
 };
 // @lc code=end
