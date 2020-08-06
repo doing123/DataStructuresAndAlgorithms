@@ -11,13 +11,9 @@
  * @return {boolean}
  */
 var isIsomorphic = function (s, t) {
-  // 2.映射
-  let mapS = {};
-  let mapT = {};
+  // 1.还是这个巧妙，indexOf 得到对应字母第一次出现的下标 判断两者是否相等
   for (let i = 0; i < s.length; i++) {
-    if (!mapS[s[i]]) mapS[s[i]] = t[i];
-    if (!mapT[t[i]]) mapT[t[i]] = s[i];
-    if (mapS[s[i]] != t[i] || mapT[t[i]] != s[i]) return false;
+    if (s.indexOf(s[i]) != t.indexOf(t[i])) return false;
   }
   return true;
 };
