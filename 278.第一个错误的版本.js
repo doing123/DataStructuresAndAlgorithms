@@ -28,17 +28,15 @@ var solution = function (isBadVersion) {
     // 二分查找
     let left = 0;
     let right = n;
-    let firstBabVersion = n;
-    while (left <= right) {
-      let mid = (left + right) >>> 1;
+    while (left < right) {
+      let mid = left + ((right - left) >>> 1);
       if (isBadVersion(mid)) {
-        right = mid - 1;
-        firstBabVersion = mid;
+        right = mid;
       } else {
         left = mid + 1;
       }
     }
-    return firstBabVersion;
+    return left;
   };
 };
 // @lc code=end
