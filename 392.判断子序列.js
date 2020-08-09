@@ -11,16 +11,17 @@
  * @return {boolean}
  */
 var isSubsequence = function (s, t) {
-  // 1.双指针
+  // 2.递归
   if (s.length === 0) return true;
-  let sIndex = 0;
-  let tIndex = 0;
-  while (tIndex < t.length) {
-    if (s[sIndex] === t[tIndex]) {
-      sIndex++;
+  let i = 0;
+  while (i < t.length) {
+    if (s[0] == t[i]) {
+      // 对比剩余值
+      let sRest = s.substring(1);
+      let tRest = t.substring(i + 1);
+      return isSubsequence(sRest, tRest);
     }
-    if (sIndex >= s.length) return true;
-    tIndex++;
+    i++;
   }
   return false;
 };
