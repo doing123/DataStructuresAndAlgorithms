@@ -9,25 +9,25 @@
  * @param {number} num
  * @return {string[]}
  */
-var readBinaryWatch = function(num) {
-  // 递归回溯: 使用 10bit 同时保存小时和分钟
-  // TODO 没完全理解
-  const result = [];
-  dfs(0, num, 0);
-  return result;
+var readBinaryWatch = function (num) {
+  let result = [];
+  // 遍历  0:00 -> 12:00   每个时间有多少1
+  for (let i = 0; i < 12; i++) {
+    for (let j = 0; j < 60; j++) {
+      if (count(i) + count(j) == num) {
+        result.push(`${i}:${j < 10 ? '0' + j : j}`);
+      }
+    }
+  }
 
-  function dfs(time, n, index) {
-    const hour = time >> 6;
-    const minute = time & 0b111111;
-    if (hour > 11 || minute > 59) return;
-    if(n == 0) {
-      result.push(`${hour}:${minute < 10 ? '0' + minute : minute}`);
-      return;
+  // 计算二进制中 1 的个数
+  function count(n) {
+    let res = 0;
+    while (n != 0) {
+      n = n & (n - 1); // TODO
+      res++;
     }
-    const end = 10 - n;
-    while(index <= end) {
-      dfs(time | (1 << index), n - 1, ++index);
-    }
+    return res;
   }
 };
 // @lc code=end
