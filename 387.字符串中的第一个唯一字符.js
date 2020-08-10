@@ -10,8 +10,13 @@
  * @return {number}
  */
 var firstUniqChar = function (s) {
+  // 2 计数
+  let map = {};
+  for (const char of s) {
+    map[char] = ++map[char] || 0;
+  }
   for (let i = 0; i < s.length; i++) {
-    if (s.indexOf(s[i]) === s.lastIndexOf(s[i])) return i;
+    if (map[s[i]] == 0) return i;
   }
   return -1;
 };
