@@ -10,8 +10,7 @@
  * @return {boolean}
  */
 var isPowerOfFour = function (n) {
-  // 2.递归
-  if (n < 4) return n == 1;
-  return isPowerOfFour(n / 4);
+  // 3.转换为 4 进制
+  return /^10*$/.test(n.toString(4));
 };
 // @lc code=end
