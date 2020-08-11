@@ -9,11 +9,9 @@
  * @param {number} num
  * @return {boolean}
  */
-var isPowerOfFour = function (num) {
-  // 1.循环
-  while (num >= 4) {
-    num = num / 4;
-  }
-  return num == 1;
+var isPowerOfFour = function (n) {
+  // 2.递归
+  if (n < 4) return n == 1;
+  return isPowerOfFour(n / 4);
 };
 // @lc code=end
