@@ -10,11 +10,13 @@
  */
 var NumArray = function (nums) {
   // 前缀和的应用
-  this.prevSum = new Array(nums.length + 1);
-  this.prevSum[0] = 0;
-  for (let i = 1; i <= nums.length; i++) {
-    this.prevSum[i] = this.prevSum[i - 1] + nums[i - 1];
-  }
+  this.prevSum = [];
+  let sum = 0;
+  nums.forEach((item) => {
+    let tmp = sum + item;
+    this.prevSum.push(tmp);
+    sum = tmp;
+  });
 };
 
 /**
@@ -23,8 +25,8 @@ var NumArray = function (nums) {
  * @return {number}
  */
 NumArray.prototype.sumRange = function (i, j) {
-  if (i == 0) return this.prevSum[j + 1];
-  return this.prevSum[j + 1] - this.prevSum[i];
+  if (i == 0) return this.prevSum[j];
+  return this.prevSum[j] - this.prevSum[i - 1];
 };
 
 /**
