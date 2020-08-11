@@ -10,10 +10,10 @@
  * @return {boolean}
  */
 var isPowerOfThree = function (n) {
-  // 1.循环
-  while (n >= 3) {
-    n = n / 3;
+  // 2.递归
+  if (n < 3) {
+    return n == 1;
   }
-  return n == 1;
+  return isPowerOfThree(n / 3);
 };
 // @lc code=end
