@@ -10,11 +10,7 @@
  * @return {boolean}
  */
 var isPowerOfFour = function (n) {
-  // 4.循环迭代
-  if (n < 1) return false;
-  while (n % 4 == 0) {
-    n /= 4;
-  }
-  return n == 1;
+  // 5.运算符
+  return (Math.log10(n) / Math.log10(4)) % 1 == 0;
 };
 // @lc code=end
