@@ -11,16 +11,13 @@
  * @return {number}
  */
 var hammingDistance = function (x, y) {
-  // 1.使用掩码，位与：相同为0， 不同为1
-  let mask = 0b01; // 1
-  let times = 0;
+  // 2.布赖恩·克尼根算法
+  // 借助 num & (num - 1) 来直接去除 num 的二进制中最右边的 1
+  let n = x ^ y; // 异或：不同为1
   let result = 0;
-  while (times < 31) {
-    if ((x & mask) != (y & mask)) {
-      result++;
-    }
-    mask = mask << 1;
-    times++;
+  while (n) {
+    n = n & (n - 1);
+    result++;
   }
   return result;
 };
