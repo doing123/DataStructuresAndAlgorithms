@@ -10,13 +10,11 @@
  * @return {number}
  */
 var countSegments = function (s) {
+  // 2.单词判定：当前为非空格，且前一个为空格
   let count = 0;
-  let inSpace = true;
   for (let i = 0; i < s.length; i++) {
-    if (s[i] == ' ') {
-      inSpace = true;
-    } else if (inSpace) {
-      inSpace = false;
+    let prev = s[i - 1];
+    if ((prev == undefined || prev == ' ') && s[i] != ' ') {
       count++;
     }
   }
