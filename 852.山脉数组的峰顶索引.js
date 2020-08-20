@@ -10,21 +10,7 @@
  * @return {number}
  */
 var peakIndexInMountainArray = function (A) {
-  // 2.二分查找
-  let left = 0;
-  let right = A.length - 1;
-  while (left < right) {
-    let mid = (left + right) >>> 1;
-    if (A[mid] > A[mid + 1] && A[mid] > A[mid - 1]) {
-      // 封顶
-      return mid;
-    } else if (A[mid] > A[mid - 1] && A[mid] < A[mid + 1]) {
-      // 递增，封顶在 右侧
-      left = mid + 1;
-    } else {
-      right = mid;
-    }
-  }
-  return left;
+  // 3.api
+  return A.indexOf(Math.max(...A));
 };
 // @lc code=end
