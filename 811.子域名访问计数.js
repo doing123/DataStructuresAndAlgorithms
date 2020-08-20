@@ -17,9 +17,9 @@ var subdomainVisits = function (cpdomains) {
     map[str] = map[str] ? map[str] + +count : +count;
     let index = str.indexOf('.');
     while (index > -1) {
-      var subStr = str.substring(index + 1);
-      map[subStr] = map[subStr] ? map[subStr] + +count : +count;
-      index = str.indexOf('.', index + 1);
+      str = str.substring(index + 1);
+      map[str] = map[str] ? map[str] + +count : +count;
+      index = str.indexOf('.');
     }
   }
   for (let key in map) {
