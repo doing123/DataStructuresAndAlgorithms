@@ -10,11 +10,20 @@
  * @return {number}
  */
 var hIndex = function (citations) {
-  // 2.线性查找
-  for (let i = 0, len = citations.length; i < len; i++) {
-    // 查找 第一篇文章 c = citation[i] 大于或等于 len - i，即 c >= len - i，即 len - i 个文章引用次数至少为 c 次
-    if (citations[i] >= len - i) return len - i;
+  // 3.二分查找
+  let len = citations.length;
+  let left = 0;
+  let right = len - 1;
+  while (left <= right) {
+    let mid = left + ((right - left) >>> 1);
+    // 引用次数：item = citations[mid]，引用次数高于 item 的文章数量是 n-i-1，加上当前文章，有n-i个文章引用次数至少大于 item
+    if (citations[mid] == len - mid) return len - mid;
+    if (citations[mid] > len - mid) {
+      right = mid - 1;
+    } else {
+      left = mid + 1;
+    }
   }
-  return 0;
+  return len - left;
 };
 // @lc code=end
