@@ -10,20 +10,29 @@
  * @return {number}
  */
 var lengthOfLIS = function (nums) {
-  // 1.动态规划
+  // 2.二分查找
   let len = nums.length;
-  if (len == 0) return 0;
-  let dp = new Array(len).fill(1);
-  for (let i = 1; i < len; i++) {
-    // 状态转移方程：
-    // 定义状态要有两个意识：1.最后一步是什么；2.化成子问题；
-    // 以nums[i]结尾，不断的去找前面比自己小的
-    for (let j = 0; j < i; j++) {
-      if (nums[j] < nums[i]) {
-        dp[i] = Math.max(dp[i], dp[j] + 1);
+  if (len <= 1) return len;
+  let tail = []; // 递增子序列
+  tail.push(nums[0]);
+  for (let i = 0; i < len; i++) {
+    if (nums[i] > tail[tail.length - 1]) {
+      tail.push(nums[i]);
+    } else {
+      // 二分查找递增子序列 tail 中 第一个大于当前值 nums[i] 的元素，替换为当前值
+      let left = 0;
+      let right = tail.length - 1;
+      while (left < right) {
+        let mid = (left + right) >>> 1;
+        if (tail[mid] < nums[i]) {
+          left = mid + 1;
+        } else {
+          right = mid;
+        }
       }
+      tail[left] = nums[i];
     }
   }
-  return Math.max(...dp);
+  return tail.length;
 };
 // @lc code=end
