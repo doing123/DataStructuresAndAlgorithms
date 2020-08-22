@@ -11,12 +11,17 @@
  * @return {number}
  */
 var myPow = function (x, n) {
-  // 1.递归
-  if (n == 0) return 1;
-  if (n < 0) return 1 / myPow(x, -n);
-  if (n % 2 == 0) {
-    return myPow(x * x, n / 2);
+  // 2.迭代
+  if (n < 0) {
+    x = 1 / x;
+    n = -n;
   }
-  return myPow(x, n - 1) * x;
+  let pow = 1;
+  while (n) {
+    if (n & 1) pow *= x; // n%2 == 1 奇数
+    x *= x;
+    n >>>= 1;
+  }
+  return pow;
 };
 // @lc code=end
