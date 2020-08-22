@@ -10,24 +10,18 @@
  * @return {string}
  */
 var longestDupSubstring = function (S) {
-  // 1.超时
-  let result = 0;
-  let str = '';
-  for (let i = 0, len = S.length; i < len; i++) {
-    for (let j = i + 1; j < len; j++) {
-      let m = i;
-      while (j < len && S[j] == S[m]) {
-        j++;
-        m++;
+  // 2.暴力 依然超时
+  for (let i = 1, len = S.length; i < len; i++) {
+    let maxLen = len - i;
+    for (let j = 0; j < i; j++) {
+      for (let m = j + 1; m <= i; m++) {
+        if (S.substring(j, j + maxLen) === S.substring(m, m + maxLen)) {
+          return S.substring(j, j + maxLen);
+        }
       }
-      if (m - i > result) {
-        result = Math.max(result, m - i);
-        str = S.substring(i, m);
-      }
-
     }
   }
-  return str;
+  return '';
 };
 
 // @lc code=end
