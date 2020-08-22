@@ -17,16 +17,16 @@
  * @return {number}
  */
 var countNodes = function (root) {
-  // 1.递归
+  // 1.迭代
   let result = 0;
-  helper(root);
-  return result;
-
-  function helper(root) {
-    if (!root) return;
-    result += 1;
-    if (root.left) helper(root.left);
-    if (root.right) helper(root.right);
+  let stack = [root];
+  while (stack.length) {
+    let top = stack.pop();
+    if (!top) break;
+    result++;
+    if (top.left) stack.push(top.left);
+    if (top.right) stack.push(top.right);
   }
+  return result;
 };
 // @lc code=end
