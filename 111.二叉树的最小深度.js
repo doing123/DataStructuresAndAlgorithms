@@ -16,21 +16,22 @@
  * @param {TreeNode} root
  * @return {number}
  */
-var minDepth = function(root) {
-  // 2.递归 优化
+var minDepth = function (root) {
+  // 3.定义一个深度变量
   if (root == null) return 0;
 
+  let depth = 1;
   let left = minDepth(root.left);
   let right = minDepth(root.right);
 
   if (left > 0 && right > 0) {
-    return 1 + Math.min(left, right);
+    depth += Math.min(left, right);
   } else if (left > 0) {
-    return 1 + left;
+    depth += left;
   } else if (right > 0) {
-    return 1 + right;
-  } else {
-    return 1;
+    depth += right;
   }
+
+  return depth;
 };
 // @lc code=end
