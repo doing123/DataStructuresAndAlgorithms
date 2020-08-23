@@ -11,23 +11,22 @@
  * @return {number[]}
  */
 var intersect = function (nums1, nums2) {
-  // 1.哈希存值
+  // 2.双指针
+  nums1.sort((a, b) => a - b);
+  nums2.sort((a, b) => a - b);
+
+  let p1 = 0;
+  let p2 = 0;
   let result = [];
-  let map = {};
-
-  // 统计 nums1 中元素的出现次数
-  for (const item of nums1) {
-    if (map[item]) {
-      map[item]++;
+  while (p1 < nums1.length && p2 < nums2.length) {
+    if (nums1[p1] < nums2[p2]) {
+      p1++;
+    } else if (nums1[p1] > nums2[p2]) {
+      p2++;
     } else {
-      map[item] = 1;
-    }
-  }
-
-  for (const val of nums2) {
-    if (map[val] > 0) {
-      result.push(val);
-      map[val]--;
+      result.push(nums1[p1]);
+      p1++;
+      p2++;
     }
   }
 
