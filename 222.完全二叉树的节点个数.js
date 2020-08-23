@@ -17,16 +17,12 @@
  * @return {number}
  */
 var countNodes = function (root) {
-  // 1.迭代
-  let result = 0;
-  let stack = [root];
-  while (stack.length) {
-    let top = stack.pop();
-    if (!top) break;
-    result++;
-    if (top.left) stack.push(top.left);
-    if (top.right) stack.push(top.right);
-  }
-  return result;
+  // 3.二叉树遍历
+  if (!root) return 0;
+  if (root.left && root.right)
+    return 1 + countNodes(root.left) + countNodes(root.right);
+  if (root.left) return 1 + countNodes(root.left);
+  if (root.right) return 1 + countNodes(root.right);
+  return 1;
 };
 // @lc code=end
