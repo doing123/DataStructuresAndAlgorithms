@@ -17,18 +17,18 @@
  * @return {ListNode}
  */
 var deleteDuplicates = function (head) {
-  // 1.双指针
+  // 2.双指针：快慢指针 优化
   let dummyHead = new ListNode(0);
   let prev = dummyHead;
   let curr = head;
   dummyHead.next = curr;
   while (curr && curr.next) {
     if (curr.val == curr.next.val) {
-      while (curr && curr.next && curr.val == curr.next.val) {
+      let tmp = curr.val;
+      while (curr && curr.val == tmp) {
         curr = curr.next; // 相同的节点前进一步
       }
-      curr = curr.next; // 前进一步，不取该节点
-      prev.next = curr;
+      prev.next = curr; // 慢指针prev的next指向curr，但prev不前进，因为下一个循环中curr可能也是存在相同值的节点
     } else {
       prev = prev.next;
       curr = curr.next;
