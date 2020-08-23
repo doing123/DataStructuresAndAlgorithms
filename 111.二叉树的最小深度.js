@@ -17,14 +17,18 @@
  * @return {number}
  */
 var minDepth = function(root) {
+  // 2.递归 优化
   if (root == null) return 0;
 
-  if (root.left && root.right) {
-    return 1 + Math.min(minDepth(root.left), minDepth(root.right));
-  } else if (root.left) {
-    return 1 + minDepth(root.left);
-  } else if (root.right) {
-    return 1 + minDepth(root.right);
+  let left = minDepth(root.left);
+  let right = minDepth(root.right);
+
+  if (left > 0 && right > 0) {
+    return 1 + Math.min(left, right);
+  } else if (left > 0) {
+    return 1 + left;
+  } else if (right > 0) {
+    return 1 + right;
   } else {
     return 1;
   }
