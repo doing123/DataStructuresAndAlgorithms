@@ -17,14 +17,21 @@
  * @return {number}
  */
 var minDepth = function (root) {
-  // 4.dfs：深度优先搜索 定义一个深度变量
-  if (root == null) return 0;
+  // 5.bfs:广度优先搜索
+  if (!root) return 0
 
-  let depth = Infinity;
-  if (root.left) depth = Math.min(depth, 1 + minDepth(root.left));
-  if (root.right) depth = Math.min(depth, 1 + minDepth(root.right));
-  if (!root.left && !root.right) depth = 1;
-
+  let depth = 0;
+  let queue = [root];
+  while (queue.length) {
+    depth++;
+    let len = queue.length; // 缓存长度
+    for (let i = 0; i < len; i++) {
+      let node = queue.shift();
+      if (!node.left && !node.right) return depth;
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+  }
   return depth;
 };
 // @lc code=end
