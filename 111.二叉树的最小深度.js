@@ -17,20 +17,13 @@
  * @return {number}
  */
 var minDepth = function (root) {
-  // 3.定义一个深度变量
+  // 4.dfs：深度优先搜索 定义一个深度变量
   if (root == null) return 0;
 
-  let depth = 1;
-  let left = minDepth(root.left);
-  let right = minDepth(root.right);
-
-  if (left > 0 && right > 0) {
-    depth += Math.min(left, right);
-  } else if (left > 0) {
-    depth += left;
-  } else if (right > 0) {
-    depth += right;
-  }
+  let depth = Infinity;
+  if (root.left) depth = Math.min(depth, 1 + minDepth(root.left));
+  if (root.right) depth = Math.min(depth, 1 + minDepth(root.right));
+  if (!root.left && !root.right) depth = 1;
 
   return depth;
 };
