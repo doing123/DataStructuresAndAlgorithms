@@ -20,16 +20,13 @@
  * @return {TreeNode}
  */
 var lowestCommonAncestor = function (root, p, q) {
-  // 1.迭代
-  while (true) {
-    if (root.val > Math.max(p.val, q.val)) {
-      root = root.left;
-    } else if (root.val < Math.min(p.val, q.val)) {
-      root = root.right;
-    } else {
-      break;
-    }
+  // 2.递归
+  if (root.val > Math.max(p.val, q.val)) {
+    return lowestCommonAncestor(root.left, p, q);
+  } else if (root.val < Math.min(p.val, q.val)) {
+    return lowestCommonAncestor(root.right, p, q);
+  } else {
+    return root;
   }
-  return root;
 };
 // @lc code=end
