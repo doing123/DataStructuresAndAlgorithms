@@ -11,36 +11,28 @@
  * @return {number}
  */
 var findKthLargest = function (nums, k) {
-  // 4.归并排序
+  // 5-1.快排
   let len = nums.length;
   recursive(0, len - 1);
   return nums[len - k];
 
   function recursive(left, right) {
     if (left >= right) return;
-    let mid = (left + right) >>> 1;
-    recursive(left, mid);
-    recursive(mid + 1, right);
-    merge(left, mid, mid + 1, right);
+    let base = partition(left, right);
+    recursive(left, base - 1);
+    recursive(base + 1, right);
   }
 
-  function merge(l1, end1, l2, end2) {
-    let arr = [];
-    let index = 0;
-    let i = l1;
-    while (l1 <= end1 && l2 <= end2) {
-      arr[index++] = nums[l1] < nums[l2] ? nums[l1++] : nums[l2++];
+  function partition(left, right) {
+    let base = nums[left]; // 取第一个数为基数
+    while (left < right) {
+      while (left < right && nums[right] >= base) right--;
+      nums[left] = nums[right];
+      while (left < right && nums[left] < base) left++;
+      nums[right] = nums[left];
     }
-    while (l1 <= end1) {
-      arr[index++] = nums[l1++];
-    }
-    while (l2 <= end2) {
-      arr[index++] = nums[l2++];
-    }
-    // 将有序合并后的数组修改回原数组
-    for (let k = 0; k < index; k++) {
-      nums[i + k] = arr[k];
-    }
+    nums[left] = base; // 修改基数
+    return left;
   }
 };
 // @lc code=end
