@@ -11,7 +11,7 @@
  * @return {number}
  */
 var findKthLargest = function (nums, k) {
-  // 5-1.快排
+  // 5-1.快排: 划分交换排序，in-palce算法，不占用额外内存
   let len = nums.length;
   recursive(0, len - 1);
   return nums[len - k];
@@ -25,14 +25,18 @@ var findKthLargest = function (nums, k) {
 
   function partition(left, right) {
     let base = nums[left]; // 取第一个数为基数
-    while (left < right) {
-      while (left < right && nums[right] >= base) right--;
-      nums[left] = nums[right];
-      while (left < right && nums[left] < base) left++;
-      nums[right] = nums[left];
+    let p = left + 1;
+    while (p <= right) {
+      while (p <= right && nums[right] > base) right--;
+      while (p <= right && nums[p] < base) p++;
+      if (p <= right) {
+        [nums[p], nums[right]] = [nums[right], nums[p]];
+        p++;
+        right--;
+      }
     }
-    nums[left] = base; // 修改基数
-    return left;
+    [nums[left], nums[right]] = [nums[right], nums[left]]; // 修改基数
+    return right;
   }
 };
 // @lc code=end
