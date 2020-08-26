@@ -11,15 +11,17 @@
  * @return {number}
  */
 var findKthLargest = function (nums, k) {
-  // 1.冒泡排序
+  // 2.选择排序
   let len = nums.length;
-  for (let i = len - 1; i >= 0; i--) {
-    for (let j = 0; j < i; j++) {
-      if (nums[j] > nums[j + 1]) {
-        [nums[j], nums[j + 1]] = [nums[j + 1], nums[j]];
+  for (let i = 0; i < len; i++) {
+    let maxIndex = i;
+    for (let j = i + 1; j < len; j++) {
+      if (nums[j] > nums[maxIndex]) {
+        maxIndex = j;
       }
     }
-    if (k == len - i) {
+    [nums[i], nums[maxIndex]] = [nums[maxIndex], nums[i]];
+    if (k == i + 1) {
       return nums[i];
     }
   }
