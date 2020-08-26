@@ -16,12 +16,13 @@ var findKthLargest = function (nums, k) {
   for (let i = 1; i < len; i++) {
     let item = nums[i];
     let j = i;
-    while (j >= 0 && nums[j - 1] > item) {
+    // 降序
+    while (j >= 0 && nums[j - 1] < item) {
       nums[j] = nums[j - 1];
       j--;
     }
     nums[j] = item;
   }
-  return nums[len - k];
+  return nums[k - 1];
 };
 // @lc code=end
