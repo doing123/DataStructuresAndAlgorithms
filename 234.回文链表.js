@@ -29,12 +29,15 @@ var isPalindrome = function (head) {
     prev.next = reserved;
     reserved = prev;
   }
+
   if (head) slow = slow.next; // 长度为奇数
+
   while (slow) {
     if (slow.val !== reserved.val) return false;
     slow = slow.next;
     reserved = reserved.next;
   }
+
   return true;
 };
 // @lc code=end
