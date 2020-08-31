@@ -19,37 +19,27 @@
  * @return {Node}
  */
 var copyRandomList = function (head) {
-  // 1.先复制节点，再遍历链表匹配随机指针
+  // 2.两次遍历 + map 保存映射关系
+  if (!head) return null;
   let node = head;
   let newHead = new Node();
   let copy = newHead;
+  let map = new Map();
   while (node) {
-    copy.next = new Node(node.val);
-    copy = copy.next;
-    node = node.next;
-  }
-
-  node = head;
-  copy = newHead.next;
-
-  // 处理随机指针
-  while (node) {
-    if (node.random) {
-      copy.random = getRandom(head, newHead.next, node.random);
-    }
+    copy.val = node.val;
+    copy.next = node.next ? new Node() : null;
+    map.set(node, copy); // 新旧链表节点按次序一一对应
     node = node.next;
     copy = copy.next;
   }
 
-  return newHead.next;
-
-  function getRandom(head, copy, random) {
-    while (head) {
-      if (head == random) return copy;
-      head = head.next;
-      copy = copy.next;
-    }
-    return null;
+  copy = newHead;
+  while (head) {
+    copy.random = head.random ? map.get(head.random) : null;
+    head = head.next;
+    copy = copy.next;
   }
+
+  return newHead;
 };
 // @lc code=end
