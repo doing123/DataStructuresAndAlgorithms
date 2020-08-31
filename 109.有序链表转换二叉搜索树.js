@@ -25,25 +25,28 @@
  * @return {TreeNode}
  */
 var sortedListToBST = function (head) {
-  // 2.快慢指针
+  // 3.使用“中序遍历”策略的优化
+  // BST 的中序遍历的节点值，是单调递增的
   if (!head) return null;
-  let slow = head;
-  let fast = head;
-  let prevSlow; // slow 的前一个节点
-
-  while (fast && fast.next) {
-    prevSlow = slow;
-    slow = slow.next;
-    fast = fast.next.next;
+  let len = 0;
+  let h = head; // 指向头节点
+  while(head) {
+    len++;
+    head = head.next;
   }
 
-  const root = new TreeNode(slow.val);
+  const buildBST = (start, end) => {
+    if (start > end) return null; // 递归结束
+    const mid = (start + end) >>> 1; // 分治
+    const left = buildBST(start, mid - 1); // 递归调用生成左子树，h移动到中间节点
+    const root = new TreeNode(h.val);
 
-  if (prevSlow) { // 中点slow不是head，需要构建左子树 TODO ?
-    prevSlow.next = null; // 与slow节点断开
-    root.left = sortedListToBST(head);
+    h = h.next; // h，父作用域变量，每次调用buildBST函数，h指针前进一步
+    root.left = left;
+    root.right = buildBST(mid + 1, end); // 右子树
+    return root;
   }
-  root.right = sortedListToBST(slow.next);
-  return root;
+
+  return buildBST(0, len - 1);
 };
 // @lc code=end
