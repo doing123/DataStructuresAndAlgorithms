@@ -25,22 +25,25 @@
  * @return {TreeNode}
  */
 var sortedListToBST = function (head) {
-  // 1.将有序链表转化为有序数组
-  let arr = [];
-  while (head) {
-    arr.push(head.val);
-    head = head.next;
+  // 2.快慢指针
+  if (!head) return null;
+  let slow = head;
+  let fast = head;
+  let prevSlow; // slow 的前一个节点
+
+  while (fast && fast.next) {
+    prevSlow = slow;
+    slow = slow.next;
+    fast = fast.next.next;
   }
 
-  const buildBST = (start, end) => {
-    if (start > end) return null;
-    const mid = (start + end) >>> 1;
-    const root = new TreeNode(arr[mid]);
-    root.left = buildBST(start, mid - 1);
-    root.right = buildBST(mid + 1, end);
-    return root;
-  };
+  const root = new TreeNode(slow.val);
 
-  return buildBST(0, arr.length - 1);
+  if (prevSlow) { // 中点slow不是head，需要构建左子树 TODO ?
+    prevSlow.next = null; // 与slow节点断开
+    root.left = sortedListToBST(head);
+  }
+  root.right = sortedListToBST(slow.next);
+  return root;
 };
 // @lc code=end
