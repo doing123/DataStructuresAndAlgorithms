@@ -30,7 +30,6 @@ var reorderList = function (head) {
   slow.next = null;
 
   // 翻转right链表
-  let reverseHead;
   let prev = null;
   let curr = right;
   while (curr) {
@@ -39,8 +38,7 @@ var reorderList = function (head) {
     prev = curr;
     curr = next;
   }
-  reverseHead = prev;
-  right = reverseHead;
+  right = prev;
 
   // 最后交替拼接left、right链表节点
   let dummyHead = new ListNode(0);
