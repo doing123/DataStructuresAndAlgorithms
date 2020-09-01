@@ -32,7 +32,5 @@ var reorderList = function (head) {
 
     p = p.next.next;
   }
-
-  return head;
 };
 // @lc code=end
