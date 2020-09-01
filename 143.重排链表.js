@@ -17,41 +17,22 @@
  * @return {void} Do not return anything, modify head in-place instead.
  */
 var reorderList = function (head) {
-  if (!head || !head.next) return head;
-  // 1.分割left、right链表两部分
-  let slow = head;
-  let fast = head;
-  while (fast && fast.next) {
-    slow = slow.next;
-    fast = fast.next.next;
-  }
-  let left = head;
-  let right = slow.next;
-  slow.next = null;
+  // 2.空间优先：一边删除末尾节点，一边插入到新位置
+  let p = head;
+  while (p && p.next && p.next.next) {
+    let q = p;
+    while (q && q.next && q.next.next) {
+      q = q.next; // q 指向倒数第二个节点
+    }
 
-  // 翻转right链表
-  let prev = null;
-  let curr = right;
-  while (curr) {
-    let next = curr.next;
-    curr.next = prev;
-    prev = curr;
-    curr = next;
-  }
-  right = prev;
+    // 插入新位置
+    q.next.next = p.next; // q.next 最后一个节点
+    p.next = q.next;
+    q.next = null; // 删除尾节点
 
-  // 最后交替拼接left、right链表节点
-  let dummyHead = new ListNode(0);
-  dummyHead.next = head;
-  while (left && right) {
-    let lNext = left.next;
-    let rNext = right.next;
-    left.next = right;
-    right.next = lNext;
-    left = lNext;
-    right = rNext;
+    p = p.next.next;
   }
 
-  return dummyHead.next;
+  return head;
 };
 // @lc code=end
