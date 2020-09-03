@@ -9,14 +9,22 @@
  * @param {number[]} nums
  * @return {boolean}
  */
-var PredictTheWinner = function(nums) {
-  // 1.迭代
-  function helper(start, end) {
-    if (start === end) return nums[start];
-    const left = nums[start] - helper(start + 1, end);
-    const right = nums[end] - helper(start, end - 1);
-    return Math.max(left, right);
+var PredictTheWinner = function (nums) {
+  // 2.动态规划 // TODO
+  const len = nums.length;
+  const dp = Array.from(new Array(len), () => new Array(len));
+  for (let i = 0; i < len; i++) {
+    dp[i][i] = nums[i];
   }
-  return helper(0, nums.length - 1) >= 0;
+
+  for (let i = len - 2; i >= 0; i--) {
+    for (let j = i + 1; j < len; j++) {
+      const pickI = nums[i] - dp[i + 1][j];
+      const pickJ = nums[j] - dp[i][j - 1];
+      dp[i][j] = Math.max(pickI, pickJ);
+    }
+  }
+
+  return dp[0][len - 1] >= 0;
 };
 // @lc code=end
