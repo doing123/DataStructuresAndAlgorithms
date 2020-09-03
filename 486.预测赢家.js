@@ -10,21 +10,25 @@
  * @return {boolean}
  */
 var PredictTheWinner = function (nums) {
-  // 2.动态规划 // TODO
+  // 2.记忆化递归
   const len = nums.length;
-  const dp = Array.from(new Array(len), () => new Array(len));
-  for (let i = 0; i < len; i++) {
-    dp[i][i] = nums[i];
-  }
+  const memo = Array.from(new Array(len), () => new Array(len));
 
-  for (let i = len - 2; i >= 0; i--) {
-    for (let j = i + 1; j < len; j++) {
-      const pickI = nums[i] - dp[i + 1][j];
-      const pickJ = nums[j] - dp[i][j - 1];
-      dp[i][j] = Math.max(pickI, pickJ);
+  function helper(i, j) {
+    if (memo[i][j]) {
+      return memo[i][j];
     }
+
+    if (i === j) {
+      memo[i][j] = nums[i];
+      return nums[i];
+    }
+    const pickI = nums[i] - helper(i + 1, j);
+    const pickJ = nums[j] - helper(i, j - 1);
+    memo[i][j] = Math.max(pickI, pickJ);
+    return memo[i][j];
   }
 
-  return dp[0][len - 1] >= 0;
+  return helper(0, len - 1) >= 0;
 };
 // @lc code=end
