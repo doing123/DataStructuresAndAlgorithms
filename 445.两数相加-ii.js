@@ -18,40 +18,38 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function (l1, l2) {
-  // 1.先翻转链表，相加之后返回新链表，反转之后返回
-  let p = helper(l1);
-  let q = helper(l2);
-  let sumHead = new ListNode(0);
+  // 2.利用栈，不翻转链表
+  let stack1 = [];
+  let stack2 = [];
+  let result = [];
+  let node1 = l1;
+  let node2 = l2;
   let curry = 0;
-  let curr = sumHead;
-  while (p || q) {
-    let x = p ? p.val : 0;
-    let y = q ? q.val : 0;
+  while (node1) {
+    stack1.push(node1.val);
+    node1 = node1.next;
+  }
+  while (node2) {
+    stack2.push(node2.val);
+    node2 = node2.next;
+  }
+
+  while (stack1.length || stack2.length) {
+    let x = stack1.pop() || 0;
+    let y = stack2.pop() || 0;
     let sum = x + y + curry;
     curry = parseInt(sum / 10);
     let val = sum % 10;
-    curr.next = new ListNode(val);
-    curr = curr.next;
-    if (p) p = p.next;
-    if (q) q = q.next;
+    result.push(new ListNode(val));
   }
-  if (curry) {
-    curr.next = new ListNode(curry);
+  if (curry) result.push(new ListNode(curry));
+
+  let dummyHead = new ListNode(0);
+  let node = dummyHead;
+  while (result.length) {
+    node.next = result.pop();
+    node = node.next;
   }
-
-  return helper(sumHead.next);
-
-  function helper(head) {
-    let node = head;
-    let prev = null;
-    while (node) {
-      let next = node.next;
-      node.next = prev;
-      prev = node;
-      node = next;
-    }
-
-    return prev;
-  }
+  return dummyHead.next;
 };
 // @lc code=end
