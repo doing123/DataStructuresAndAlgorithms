@@ -18,33 +18,36 @@
  * @return {ListNode[]}
  */
 var splitListToParts = function (root, k) {
-  // 1.利用栈
-  const list = [];
+  // 2.遍历
+  let len = 0;
   let node = root;
   while (node) {
-    list.push(node);
+    len++;
     node = node.next;
   }
 
-  let len = list.length;
-  let resLen = Math.floor(len / k);
-  let curry = len % k;
-  let m = 0;
+  let itemLen = Math.floor(len / k); // 每一项的长度
+  let curry = len % k; // 余数，即前 curry 项多一个元素
+  let m = 0; // curry 计数
   let result = [];
+  let dummyHead = new ListNode(0);
+  dummyHead.next = root;
   for (let i = 0; i < k; i++) {
-    let arr = [];
+    node = dummyHead;
     let j = 0;
-    while (j < resLen) {
-      arr.push(list.shift() || null);
+    while (j < itemLen) {
+      node = node ? node.next : null;
       j++;
     }
     if (m < curry) {
-      arr.push(list.shift() || null);
+      node = node ? node.next : null;
       m++;
     }
-    let last = arr[arr.length - 1];
-    if (last) last.next = null;
-    result.push(arr.shift() || null);
+
+    result.push(dummyHead.next || null);
+    let next = node.next || null;
+    if (node) node.next = null;
+    dummyHead.next = next;
   }
   return result;
 };
