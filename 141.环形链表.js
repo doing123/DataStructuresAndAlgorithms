@@ -18,13 +18,13 @@
  * @return {boolean}
  */
 var hasCycle = function (head) {
-  // 1.快慢指针 改进
-  let fast = head;
-  let slow = head;
-  while (slow && fast && fast.next) {
-    slow = slow.next;
-    fast = fast.next.next;
-    if (slow === fast) return true;
+  // 3.使用set保存值
+  let node = head;
+  let set = new Set();
+  while (node) {
+    if (set.has(node)) return true;
+    set.add(node);
+    node = node.next;
   }
   return false;
 };
