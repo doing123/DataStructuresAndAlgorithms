@@ -9,9 +9,15 @@
  * @param {number} N
  * @return {number}
  */
-var fib = function (N) {
-  if (N === 0) return 0;
-  if (N === 1) return 1;
-  return fib(N - 1) + fib(N - 2);
-};
+var fib = (function () {
+  // 2.立即可执行函数，保留计算的值
+  let memo = [];
+  return function (N) {
+    if (memo[N]) return memo[N];
+    if (N === 0) return 0;
+    if (N === 1) return 1;
+    memo[N] = fib(N - 1) + fib(N - 2);
+    return memo[N];
+  };
+})();
 // @lc code=end
