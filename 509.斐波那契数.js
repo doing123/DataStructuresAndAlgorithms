@@ -11,16 +11,13 @@
  */
 var fib = function (N) {
   if (N == 0) return 0;
-  // 4.循环
+  // 4.循环 解构赋值
   let n1 = 0;
   let n2 = 1;
-  let sum = 1;
   for (let i = 1; i < N; i++) {
-    sum = n1 + n2;
-    n1 = n2;
-    n2 = sum;
+    [n1, n2] = [n2, n1 + n2];
   }
 
-  return sum;
+  return n2;
 };
 // @lc code=end
