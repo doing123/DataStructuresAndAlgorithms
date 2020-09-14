@@ -19,14 +19,14 @@
 var swapPairs = function (head) {
   const dummyHead = new ListNode(0);
   dummyHead.next = head;
-  let after = dummyHead;
-  while (after.next && after.next.next) {
-    let curr = after.next;
-    let prev = curr.next;
-    after.next = prev;
-    curr.next = prev.next;
-    prev.next = curr;
-    after = curr;
+  let prev = dummyHead;
+  while (prev.next && prev.next.next) {
+    let curr = prev.next;
+    let next = curr.next;
+    prev.next = next;
+    curr.next = next.next;
+    next.next = curr;
+    prev = curr;
   }
 
   return dummyHead.next;
