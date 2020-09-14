@@ -10,17 +10,16 @@
  * @return {boolean}
  */
 var isValid = function (s) {
-  // 1.利用栈和映射
   let stack = [];
   let map = {
-    ')': '(',
-    ']': '[',
-    '}': '{',
+    '(': ')',
+    '[': ']',
+    '{': '}',
   };
   for (let c of s) {
-    if (!(c in map)) {
+    if (c in map) {
       stack.push(c);
-    } else if (map[c] !== stack.pop()) {
+    } else if (c !== map[stack.pop()]) {
       return false;
     }
   }
