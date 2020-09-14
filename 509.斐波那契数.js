@@ -9,18 +9,18 @@
  * @param {number} N
  * @return {number}
  */
-var fib = memorizer(function (N) {
-  // 3.改进递归
+var fib = function (N) {
   if (N == 0) return 0;
-  if (N == 1 || N == 2) return 1;
-  return fib(N - 1) + fib(N - 2);
-});
+  // 4.循环
+  let n1 = 0;
+  let n2 = 1;
+  let sum = 1;
+  for (let i = 1; i < N; i++) {
+    sum = n1 + n2;
+    n1 = n2;
+    n2 = sum;
+  }
 
-function memorizer(fn) {
-  let memo = [];
-  return function (n) {
-    if (!memo[n]) memo[n] = fn(n);
-    return memo[n];
-  };
-}
+  return sum;
+};
 // @lc code=end
