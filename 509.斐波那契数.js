@@ -10,9 +10,12 @@
  * @return {number}
  */
 var fib = function (N) {
-  // 1.普通递归
   if (N == 0) return 0;
-  if (N == 1 || N == 2) return 1;
-  return fib(N - 1) + fib(N - 2);
+  // 1.普通递归 改进
+  function helper(n, v1, v2) {
+    if (n == 1 || n == 2) return v2;
+    return helper(n - 1, v2, v1 + v2);
+  }
+  return helper(N, 1, 1);
 };
 // @lc code=end
