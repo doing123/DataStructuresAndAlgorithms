@@ -9,13 +9,18 @@
  * @param {number} N
  * @return {number}
  */
-var fib = function (N) {
+var fib = memorizer(function (N) {
+  // 3.改进递归
   if (N == 0) return 0;
-  // 1.普通递归 改进
-  function helper(n, v1, v2) {
-    if (n == 1 || n == 2) return v2;
-    return helper(n - 1, v2, v1 + v2);
-  }
-  return helper(N, 1, 1);
-};
+  if (N == 1 || N == 2) return 1;
+  return fib(N - 1) + fib(N - 2);
+});
+
+function memorizer(fn) {
+  let memo = [];
+  return function (n) {
+    if (!memo[n]) memo[n] = fn(n);
+    return memo[n];
+  };
+}
 // @lc code=end
