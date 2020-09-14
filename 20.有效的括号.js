@@ -10,19 +10,12 @@
  * @return {boolean}
  */
 var isValid = function (s) {
-  let stack = [];
-  let map = {
-    '(': ')',
-    '[': ']',
-    '{': '}',
-  };
-  for (let c of s) {
-    if (c in map) {
-      stack.push(c);
-    } else if (c !== map[stack.pop()]) {
-      return false;
-    }
-  }
-  return stack.length === 0;
+  // 2.使用 replace
+  let len;
+  do {
+    len = s.length;
+    s = s.replace('()', '').replace('[]', '').replace('{}', '');
+  } while (len !== s.length);
+  return s.length === 0;
 };
 // @lc code=end
