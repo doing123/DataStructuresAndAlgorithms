@@ -18,11 +18,13 @@
  * @return {boolean}
  */
 var hasCycle = function (head) {
-  // 2.每个节点值重新赋值为最小安全值，再比较
-  while (head) {
-    if (head.val === Number.MIN_SAFE_INTEGER) return true;
-    head.val = Number.MIN_SAFE_INTEGER;
-    head = head.next;
+  // 1.快慢指针 改进
+  let fast = head;
+  let slow = head;
+  while (slow && fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) return true;
   }
   return false;
 };
