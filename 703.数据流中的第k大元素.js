@@ -22,8 +22,8 @@ function swap (arr, a, b) {
  * @param {number[]} nums
  */
 var KthLargest = function (k, nums) {
-  // 第一个元素空着
-  this.minHeap = [null]
+  // TODO 第一个元素空着 ? 不为null,就验证不通过？？？
+  this.minHeap = []
   this.k = k
   // 所有元素都添加到最小堆
   for (let i = 0; i < nums.length; i++) {
@@ -36,21 +36,21 @@ var KthLargest = function (k, nums) {
  * @return {number}
  */
 KthLargest.prototype.add = function (val) {
-  if (this.minHeap.length <= this.k) {
+  if (this.minHeap.length < this.k) {
     // 最小堆没满，放到最小堆
     this.minHeap.push(val)
     // 上浮最新的元素，维护堆的秩序
     this.up(this.minHeap.length - 1)
   } else {
-    if (val > this.minHeap[1]) {
+    if (val > this.minHeap[0]) {
       // 新的元素比最小堆堆顶大，替换最小堆堆顶
-      this.minHeap[1] = val
+      this.minHeap[0] = val
       // 下沉这个元素，维护堆的秩序
-      this.down(1)
+      this.down(0)
     }
     // 否则直接丢弃这个元素
   }
-  return this.minHeap[1]
+  return this.minHeap[0]
 }
 /**
  * 最小堆的上浮操作
@@ -58,7 +58,7 @@ KthLargest.prototype.add = function (val) {
  */
 KthLargest.prototype.up = function (idx) {
   let parent = idx >>> 1
-  if (parent >= 1 && this.minHeap[parent] > this.minHeap[idx]) {
+  if (parent >= 0 && this.minHeap[parent] > this.minHeap[idx]) {
     swap(this.minHeap, parent, idx)
     // 递归上浮
     this.up(parent)
@@ -71,12 +71,12 @@ KthLargest.prototype.up = function (idx) {
 KthLargest.prototype.down = function (idx) {
   let to = idx
   // 和左子元素比较
-  let left = idx * 2
+  let left = idx * 2 + 1
   if (left < this.minHeap.length && this.minHeap[left] < this.minHeap[to]) {
     to = left
   }
   // 和右子元素比较
-  let right = idx * 2 + 1
+  let right = idx * 2 + 2
   if (right < this.minHeap.length && this.minHeap[right] < this.minHeap[to]) {
     to = right
   }
