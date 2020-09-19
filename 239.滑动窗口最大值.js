@@ -11,18 +11,44 @@
  * @return {number[]}
  */
 var maxSlidingWindow = function (nums, k) {
-  // 1.暴力法
-  let n = nums.length;
-  if (n == 0) return [];
-  let res = [];
-  for (let i = 0; i < n - k + 1; i++) {
-    // TODO 使用数组就超时，遍历就OK？？？
-    let max = Number.MIN_SAFE_INTEGER;
-    for (let j = i; j < i + k; j++) {
-      max = Math.max(max, nums[j]);
+  // 2.滑动窗口 + 双端队列
+  let len = nums.length
+  class SlideWindow {
+    constructor () {
+      this.data = []
     }
-    res.push(max);
+
+    push (val) {
+      let data = this.data
+      while (data.length && data[data.length - 1] < val) {
+        data.pop()
+      }
+      data.push(val)
+    }
+
+    pop (val) {
+      let data = this.data
+      if (data.length && data[0] === val) {
+        data.shift()
+      }
+    }
+
+    max () {
+      return this.data[0]
+    }
   }
-  return res;
-};
+
+  let result = []
+  let instance = new SlideWindow()
+  for (let i = 0; i < len; i++) {
+    if (i < k - 1) {
+      instance.push(nums[i])
+    } else {
+      instance.push(nums[i])
+      result.push(instance.max())
+      instance.pop(nums[i - k + 1])
+    }
+  }
+  return result
+}
 // @lc code=end
