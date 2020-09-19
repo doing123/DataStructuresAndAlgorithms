@@ -11,13 +11,18 @@
  * @return {number[]}
  */
 var maxSlidingWindow = function (nums, k) {
-  // 1.子数组里取最大值
-  let result = [];
-  let len = nums.length;
-  for (let i = 0; i <= len - k; i++) {
-    let sub = nums.slice(i, i + k);
-    result.push(Math.max(...sub));
+  // 1.暴力法
+  let n = nums.length;
+  if (n == 0) return [];
+  let res = [];
+  for (let i = 0; i < n - k + 1; i++) {
+    // TODO 使用数组就超时，遍历就OK？？？
+    let max = Number.MIN_SAFE_INTEGER;
+    for (let j = i; j < i + k; j++) {
+      max = Math.max(max, nums[j]);
+    }
+    res.push(max);
   }
-  return result;
+  return res;
 };
 // @lc code=end
