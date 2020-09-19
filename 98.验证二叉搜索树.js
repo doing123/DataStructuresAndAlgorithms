@@ -17,19 +17,19 @@
  * @return {boolean}
  */
 var isValidBST = function (root) {
-  // 2.中序遍历，保存值
-  let list = []
-  inOrder(root)
-  for (let i = 0; i < list.length - 1; i++) {
-    if (list[i] >= list[i + 1]) return false
-  }
-  return true
+  // 3.中序遍历，prev 引用前一个节点，利用 prev.val< node.val作判断
+  let prev
+  return inOrder(root)
 
-  function inOrder (root) {
-    if (!root) return
-    inOrder(root.left)
-    list.push(root.val)
-    inOrder(root.right)
+  function inOrder (node) {
+    if (!node) return true
+    let bool = inOrder(node.left)
+    if (!bool) return false
+    if (prev) {
+      if (prev.val >= node.val) return false
+    }
+    prev = node // 更新 prev 指针
+    return inOrder(node.right)
   }
 }
 // @lc code=end
