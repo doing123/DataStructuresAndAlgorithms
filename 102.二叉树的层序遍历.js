@@ -17,21 +17,20 @@
  * @return {number[][]}
  */
 var levelOrder = function (root) {
-  // 1.BFS 广度优先
+  // 2.DFS 深度优先
   if (!root) return [];
   let result = [];
-  let queue = [root];
-  while (queue.length) {
-    let len = queue.length;
-    let arr = [];
-    for (let i = 0; i < len; i++) {
-      let node = queue.shift();
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
-      arr.push(node.val);
-    }
-    result.push(arr);
-  }
+
+  helper(0, root);
   return result;
+  function helper (level, node) {
+    if (!node) return;
+    if (level + 1 > result.length) {
+      result.push([]);
+    }
+    result[level].push(node.val);
+    helper(level + 1, node.left);
+    helper(level + 1, node.right);
+  }
 };
 // @lc code=end
