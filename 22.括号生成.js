@@ -12,16 +12,16 @@
 var generateParenthesis = function (n) {
   // 1.
   let result = [];
-  generate(0, 0, '');
+  generate(n, n, '');
   return result;
   // left：当前已用左括号 right：已用右括号, s：当前字符
   function generate (left, right, s) {
-    if (left === n && right === n) {
+    if (left === 0 && right === 0) {
       result.push(s);
       return;
     }
-    if (left < n) generate(left + 1, right, s + '(');
-    if (right < left) generate(left, right + 1, s + ')');
+    if (left > 0) generate(left - 1, right, s + '(');
+    if (right > left) generate(left, right - 1, s + ')');
   }
 };
 // @lc code=end
