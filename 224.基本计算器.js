@@ -46,7 +46,7 @@ var calculate = function (s) {
 
   return sum;
 
-  function isNumber(c) {
+  function isNumber (c) {
     c = Number(c);
     return typeof c === 'number' && !isNaN(c);
   }
