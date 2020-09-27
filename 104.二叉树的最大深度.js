@@ -17,19 +17,17 @@
  * @return {number}
  */
 var maxDepth = function (root) {
-  // 1.BFS 2
+  // 2.DFS
   if (!root) return 0;
-  let level = 0;
-  let queue = [root];
-  while (queue.length) {
-    level++;
-    let arr = [...queue];
-    queue = [];
-    for (let node of arr) {
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
-    }
+  let result = 0;
+  helper(0, root);
+  return result;
+
+  function helper (level, node) {
+    result = Math.max(result, level);
+    if (!node) return;
+    helper(level + 1, node.left);
+    helper(level + 1, node.right);
   }
-  return level;
 };
 // @lc code=end
