@@ -17,21 +17,14 @@
  * @return {number}
  */
 var minDepth = function (root) {
-  // 5.bfs:广度优先搜索
-  if (!root) return 0
+  // 6.DFS
+  if (!root) return 0;
 
-  let depth = 0;
-  let queue = [root];
-  while (queue.length) {
-    depth++;
-    let len = queue.length; // 缓存长度
-    for (let i = 0; i < len; i++) {
-      let node = queue.shift();
-      if (!node.left && !node.right) return depth;
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
-    }
+  let left = minDepth(root.left);
+  let right = minDepth(root.right);
+  if (left && right) return 1 + Math.min(left, right);
+  if (left === 0 || right === 0) {
+    return left + right + 1;
   }
-  return depth;
 };
 // @lc code=end
