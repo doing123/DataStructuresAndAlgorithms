@@ -17,17 +17,8 @@
  * @return {number}
  */
 var maxDepth = function (root) {
-  // 2.DFS
+  // 2.DFS-2
   if (!root) return 0;
-  let result = 0;
-  helper(0, root);
-  return result;
-
-  function helper (level, node) {
-    result = Math.max(result, level);
-    if (!node) return;
-    helper(level + 1, node.left);
-    helper(level + 1, node.right);
-  }
+  return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
 };
 // @lc code=end
