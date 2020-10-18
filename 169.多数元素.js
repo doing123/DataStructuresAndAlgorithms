@@ -10,16 +10,25 @@
  * @return {number}
  */
 var majorityElement = function (nums) {
-  // 1.暴力 双循环
-  let len = nums.length;
-  let hasCheck = new Set();
+  // 2.Map 计数
+  let result = 0;
+  let map = new Map();
   for (let item of nums) {
-    if (hasCheck.has(item)) continue;
-    let total = nums.reduce((prev, val) => {
-      return prev + (val === item ? 1 : 0);
-    }, 0);
-    if (total > len / 2) return item;
-    hasCheck.add(item);
+    if (map.has(item)) {
+      map.set(item, map.get(item) + 1);
+    } else {
+      map.set(item, 1);
+    }
   }
+
+  let tmp = 0;
+  for (const [key, val] of map) {
+    if (val > tmp) {
+      result = key;
+      tmp = val;
+    }
+  }
+
+  return result;
 };
 // @lc code=end
