@@ -10,25 +10,20 @@
  * @return {number}
  */
 var majorityElement = function (nums) {
-  // 2.Map 计数
+  // 3.sort排序之后，计数
   let result = 0;
-  let map = new Map();
-  for (let item of nums) {
-    if (map.has(item)) {
-      map.set(item, map.get(item) + 1);
+  let len = nums.length;
+  if (len === 1) return nums[0];
+  nums.sort((a, b) => a - b);
+  let count = 1;
+  for (let i = 1; i < len; i++) {
+    if (nums[i] === nums[i - 1]) {
+      count++;
+      if (count > len / 2) return nums[i];
     } else {
-      map.set(item, 1);
+      count = 1;
     }
   }
-
-  let tmp = 0;
-  for (const [key, val] of map) {
-    if (val > tmp) {
-      result = key;
-      tmp = val;
-    }
-  }
-
   return result;
 };
 // @lc code=end
