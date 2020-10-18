@@ -10,34 +10,35 @@
  * @return {string[][]}
  */
 var solveNQueens = function (n) {
-  // 1.
-  var isQueen = (queens, colNew, rowNew) =>
-    queens.every(
-      (col, row) =>
-        col !== colNew && Math.abs(colNew - col) !== Math.abs(rowNew - row)
-    );
-
-  var res = [];
-  var helper = (row, queens) => {
-    if (row === n && queens.length === n) {
-      return res.push(
-        queens.map((col) => {
-          var arr = new Array(n).fill('.');
-          arr.splice(col, 1, 'Q');
-          return arr.join('');
-        })
-      );
+  // 2.剪枝
+  let res = [];
+  let cols = new Set();
+  let pie = new Set();
+  let na = new Set();
+  let helper = (row, arr) => {
+    if (row >= n) {
+      res.push(arr);
     }
     for (var col = 0; col < n; col++) {
-      queens = queens.slice();
-      // 第一行
-      if (row === 0 || isQueen(queens, col, row)) {
-        queens[row] = col; // 保存列，即每一行皇后的位置
-        helper(row + 1, queens);
-      }
+      if (cols.has(col) || pie.has(row + col) || na.has(row - col)) continue;
+      cols.add(col);
+      pie.add(row + col);
+      na.add(row - col);
+
+      helper(row + 1, arr.concat(col));
+
+      cols.delete(col);
+      pie.delete(row + col);
+      na.delete(row - col);
     }
   };
-  helper(0, []);
-  return res;
+  helper(0, []); // 参数：行、列数组
+  return res.map((item) => {
+    return item.map((col) => {
+      var arr = new Array(n).fill('.');
+      arr.splice(col, 1, 'Q');
+      return arr.join('');
+    });
+  });
 };
 // @lc code=end
