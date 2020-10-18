@@ -13,7 +13,7 @@ var generateParenthesis = function (n) {
   const result = [];
 
   // left：当前已用左括号 right：已用右括号, s：当前字符
-  function generate(left, right, s) {
+  function generate (left, right, s) {
     //  终止条件：如果左右括弧都用完则结束
     if (s.length === 2 * n) {
       result.push(s);
