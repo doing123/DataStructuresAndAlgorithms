@@ -19,17 +19,16 @@
  */
 var addTwoNumbers = function (l1, l2) {
   let dummyHead = new ListNode(0);
+  let node = dummyHead;
   let p = l1;
   let q = l2;
-  let curry = 0;
-  let node = dummyHead;
-  while (q || p) {
-    let x = q ? q.val : 0;
-    let y = p ? p.val : 0;
+  let curry = 0; // 进位
+  while (p || q) {
+    let x = p ? p.val : 0;
+    let y = q ? q.val : 0;
     let sum = x + y + curry;
+    node.next = new ListNode(sum % 10);
     curry = parseInt(sum / 10);
-    let val = sum % 10;
-    node.next = new ListNode(val);
     node = node.next;
     if (p) p = p.next;
     if (q) q = q.next;
