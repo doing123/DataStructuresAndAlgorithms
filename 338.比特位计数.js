@@ -10,13 +10,10 @@
  * @return {number[]}
  */
 var countBits = function (num) {
-  // 遍历
+  // 2. n 包含1的个数 等于：n & n -1 的个数 + 1
   let result = new Array(num + 1).fill(0);
-  for (let i = 0; i <= num; i++) {
-    let item = i.toString(2);
-    for (let j = 0; j < item.length; j++) {
-      if (item[j] === '1') result[i]++;
-    }
+  for (let i = 1; i <= num; i++) {
+    result[i] += result[i & (i - 1)] + 1;
   }
   return result;
 };
