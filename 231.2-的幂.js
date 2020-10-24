@@ -10,7 +10,11 @@
  * @return {boolean}
  */
 var isPowerOfTwo = function (n) {
-  // n & n - 1
-  return n > 0 && (n & (n - 1)) === 0;
+  // 1. n % 2
+  while (n > 1) {
+    if (n % 2) return false;
+    n /= 2;
+  }
+  return n > 0;
 };
 // @lc code=end
