@@ -10,6 +10,7 @@
  * @return {number}
  */
 var totalNQueens = function (n) {
+  // 1.DFS
   let result = 0;
   let cols = new Set();
   let pie = new Set();
@@ -31,7 +32,7 @@ var totalNQueens = function (n) {
     }
   };
 
-  helper(0);
+  helper(0); // 从第一行开始
   return result;
 };
 // @lc code=end
