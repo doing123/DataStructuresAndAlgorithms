@@ -12,14 +12,13 @@
 var climbStairs = function (n) {
   // 2.临时变量缓存 + 循环
   if (n <= 2) return n;
-  let result = 0;
   let a = 1;
   let b = 2;
   for (let i = 2; i < n; i++) {
-    result = a + b;
-    a = b;
-    b = result;
+    let tmp = b;
+    b = a + b;
+    a = tmp;
   }
-  return result;
+  return b;
 };
 // @lc code=end
