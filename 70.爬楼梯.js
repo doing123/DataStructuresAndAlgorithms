@@ -10,8 +10,14 @@
  * @return {number}
  */
 var climbStairs = function (n) {
-  // 1.动态规划 超时
+  // 1.动态规划 + 缓存
   if (n <= 2) return n;
-  return climbStairs(n - 1) + climbStairs(n - 2);
+  let memory = new Array(n);
+  memory[0] = 1;
+  memory[1] = 2;
+  for (let i = 2; i < n; i++) {
+    memory[i] = memory[i - 1] + memory[i - 2];
+  }
+  return memory[n - 1];
 };
 // @lc code=end
