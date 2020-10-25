@@ -15,9 +15,7 @@ var climbStairs = function (n) {
   let a = 1;
   let b = 2;
   for (let i = 2; i < n; i++) {
-    let tmp = b;
-    b = a + b;
-    a = tmp;
+    [a, b] = [b, a + b];
   }
   return b;
 };
