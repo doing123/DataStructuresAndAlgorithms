@@ -10,29 +10,29 @@
  * @return {number}
  */
 var totalNQueens = function (n) {
-  // 1.DFS
+  // 2.位运算
   let result = 0;
-  let cols = new Set();
-  let pie = new Set();
-  let na = new Set();
 
-  let helper = (row) => {
-    if (row >= n) result++;
-    for (let col = 0; col < n; col++) {
-      if (cols.has(col) || pie.has(row + col) || na.has(row - col)) continue;
-      cols.add(col);
-      pie.add(row + col);
-      na.add(row - col);
+  let DFS = (row, col, pie, na) => {
+    if (row >= n) {
+      result++;
+      return;
+    }
 
-      helper(row + 1); // 下一行
-
-      cols.delete(col);
-      pie.delete(row + col);
-      na.delete(row - col);
+    // 得到当前所有空位bits
+    // ~(col | pie | na) 或在一起，取反得到32位所有可用的为1的位
+    // (1 << n) - 1 筛选的作用 只保留从最低位开始的 n 位可用的1
+    let bits = ~(col | pie | na) & ((1 << n) - 1);
+    while (bits > 0) {
+      // 空位不为0
+      let p = bits & -bits; // 得到最低位的1，即放Q的位置  -x: x取反加1
+      // 参数：行数，合并列，pie左移一位，na右移一位
+      DFS(row + 1, col | p, (pie | p) << 1, (na | p) >> 1);
+      bits &= bits - 1; // 去掉最低位的1
     }
   };
 
-  helper(0); // 从第一行开始
+  DFS(0, 0, 0, 0);
   return result;
 };
 // @lc code=end
