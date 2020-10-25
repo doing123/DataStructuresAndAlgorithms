@@ -10,14 +10,16 @@
  * @return {number}
  */
 var climbStairs = function (n) {
-  // 1.动态规划 + 缓存
+  // 2.临时变量缓存 + 循环
   if (n <= 2) return n;
-  let memory = new Array(n);
-  memory[0] = 1;
-  memory[1] = 2;
+  let result = 0;
+  let a = 1;
+  let b = 2;
   for (let i = 2; i < n; i++) {
-    memory[i] = memory[i - 1] + memory[i - 2];
+    result = a + b;
+    a = b;
+    b = result;
   }
-  return memory[n - 1];
+  return result;
 };
 // @lc code=end
