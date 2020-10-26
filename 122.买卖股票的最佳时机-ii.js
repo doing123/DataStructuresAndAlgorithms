@@ -10,11 +10,17 @@
  * @return {number}
  */
 var maxProfit = function (prices) {
-  // 1.循环：线性连续遍历
+  // 1.循环：线性连续遍历，优化
   let result = 0;
   for (let i = 1; i < prices.length; i++) {
-    if (prices[i] > prices[i - 1]) {
-      result += prices[i] - prices[i - 1];
+    for (let j = i; j < prices.length; j++) {
+      if (prices[j] > prices[j - 1]) {
+        result += prices[j] - prices[j - 1];
+        i = j;
+      } else {
+        i = j;
+        break;
+      }
     }
   }
   return result;
