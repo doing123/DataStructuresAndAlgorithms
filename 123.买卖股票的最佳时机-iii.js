@@ -31,12 +31,11 @@ var maxProfit = function (prices) {
   // DESC: https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/solution/yi-ge-tong-yong-fang-fa-tuan-mie-6-dao-gu-piao-wen/
   let len = prices.length;
   if (len === 0) return 0;
-  let hold1 = -prices[0];
+  let hold1 = Number.MIN_SAFE_INTEGER;
   let hold2 = Number.MIN_SAFE_INTEGER;
-  let release1 = Number.MIN_SAFE_INTEGER;
-  let release2 = Number.MIN_SAFE_INTEGER;
-  for (let i = 1; i < len; i++) {
-    let val = prices[i];
+  let release1 = 0;
+  let release2 = 0;
+  for (let val of prices) {
     hold1 = Math.max(hold1, -val);
     release1 = Math.max(release1, hold1 + val);
     hold2 = Math.max(hold2, release1 - val);
