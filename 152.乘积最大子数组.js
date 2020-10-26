@@ -10,6 +10,7 @@
  * @return {number}
  */
 var maxProduct = function (nums) {
+  // 1.循环
   let result = nums[0];
   let prevMax = nums[0];
   let prevMin = nums[0];
@@ -17,7 +18,7 @@ var maxProduct = function (nums) {
   for (let i = 1; i < nums.length; i++) {
     temp1 = prevMax * nums[i];
     temp2 = prevMin * nums[i];
-    // 对 j 来说，j - 1j−1 的最优解 可能是 最大乘积 ，也可能是 最小乘积
+    // 对于i来说，i - 1的最优解可能是最大值，也可能是最小值
     prevMin = Math.min(temp1, temp2, nums[i]);
     prevMax = Math.max(temp1, temp2, nums[i]);
     result = Math.max(result, prevMax);
