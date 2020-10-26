@@ -10,13 +10,12 @@
  * @return {number}
  */
 var maxProfit = function (prices) {
-  // 1.双循环，暴力求解
+  // 2.单循环，保存最大、最小值
   let max = 0;
-  let len = prices.length;
-  for (let i = 0; i < len; i++) {
-    for (let j = i; j < len; j++) {
-      max = Math.max(max, prices[j] - prices[i]);
-    }
+  let min = prices[0];
+  for (let i = 1; i < prices.length; i++) {
+    max = Math.max(max, prices[i] - min);
+    min = Math.min(min, prices[i]);
   }
   return max;
 };
