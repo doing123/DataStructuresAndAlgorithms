@@ -19,7 +19,7 @@ var minimumTotal = function (triangle) {
 
   // 从后往前遍历处理：从死到生
   for (let i = height - 1; i >= 0; i--) {
-    for (let j = 0; j < height; j++) {
+    for (let j = 0; j < triangle[i].length; j++) {
       if (i === height - 1) {
         dp[i][j] = triangle[i][j];
       } else {
