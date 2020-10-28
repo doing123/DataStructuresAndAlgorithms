@@ -22,7 +22,7 @@ var sortList = function (head) {
   quickSort(head, null);
   return head;
 
-  function quickSort(begin, end) {
+  function quickSort (begin, end) {
     if (begin !== end) {
       let part = partition(begin, end);
       quickSort(begin, part);
@@ -30,7 +30,7 @@ var sortList = function (head) {
     }
   }
 
-  function partition(begin, end) {
+  function partition (begin, end) {
     let part = begin.val;
     let slow = begin;
     let fast = begin.next;
@@ -46,7 +46,7 @@ var sortList = function (head) {
     return slow;
   }
 
-  function swap(p, q) {
+  function swap (p, q) {
     if (p === q) return;
     let val = p.val;
     p.val = q.val;
