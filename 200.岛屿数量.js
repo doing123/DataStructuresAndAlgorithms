@@ -73,12 +73,19 @@ class UnionFind {
 
   // 找到 x 节点的 root
   find (x) {
-    while (this.parent[x] !== x) {
-      // 进行路径压缩
-      this.parent[x] = this.parent[this.parent[x]];
-      x = this.parent[x];
+    // 进行路径压缩，TODO：有点绕，改写如下
+    let root = x;
+    // 找到 根父节点
+    while (root !== this.parent[root]) {
+      root = this.parent[root];
     }
-    return x;
+    // 路径压缩
+    while (this.parent[x] !== x) {
+      let tmp = this.parent[x];
+      this.parent[x] = root; // 直接指向根节点
+      x = tmp;
+    }
+    return root;
   }
 
   // 返回节点数
