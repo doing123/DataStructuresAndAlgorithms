@@ -17,23 +17,23 @@ var numIslands = function (grid) {
   let col = grid[0].length;
   for (let i = 0; i < row; i++) {
     for (let j = 0; j < col; j++) {
-      if (grid[i][j] == '1') {
-        helper(i, j, row, col);
+      if (grid[i][j] === '1') {
         result++;
+        helper(i, j);
       }
     }
   }
   return result;
 
-  function helper(i, j, row, col) {
-    if (i < 0 || j < 0 || i >= row || j >= col || grid[i][j] === '0') {
+  function helper (i, j) {
+    if (i < 0 || i >= row || j < 0 || j >= col || grid[i][j] === '0') {
       return;
     }
     grid[i][j] = '0';
-    helper(i - 1, j, row, col);
-    helper(i + 1, j, row, col);
-    helper(i, j - 1, row, col);
-    helper(i, j + 1, row, col);
+    helper(i - 1, j);
+    helper(i + 1, j);
+    helper(i, j - 1);
+    helper(i, j + 1);
   }
 };
 // @lc code=end
