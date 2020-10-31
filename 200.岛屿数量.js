@@ -10,41 +10,54 @@
  * @return {number}
  */
 var numIslands = function (grid) {
-  // 1.BFS 广度优先搜索 + 改变颜色
+  // 3.并查集 TODO 没吃透
   if (!grid.length || !grid[0].length) return 0;
-  let result = 0;
   let row = grid.length;
   let col = grid[0].length;
   let x = [1, -1, 0, 0];
   let y = [0, 0, 1, -1];
-  let visited = new Set();
-  let queue = [];
+  let result = 0;
+  let parents = new Array(row * col);
+
   for (let i = 0; i < row; i++) {
     for (let j = 0; j < col; j++) {
-      if (grid[i][j] === '1' && !visited.has(`${i},${j}`)) {
+      if (grid[i][j] === '1') {
         result++;
-        queue.push([i, j]);
+        parents[i * col + j] = i * col + j; // parent指向自身
       }
+    }
+  }
 
-      while (queue.length) {
-        const [i, j] = queue.shift();
-        if (
-          i < 0 ||
-          i >= row ||
-          j < 0 ||
-          j >= col ||
-          grid[i][j] === '0' ||
-          visited.has(`${i},${j}`)
-        ) {
-          continue;
-        }
-        visited.add(`${i},${j}`);
+  for (let i = 0; i < row; i++) {
+    for (let j = 0; j < col; j++) {
+      if (grid[i][j] === '1') {
         for (let k = 0; k < 4; k++) {
-          queue.push([i + x[k], j + y[k]]);
+          let m = i + x[k];
+          let n = j + y[k];
+          if (m >= 0 && m < row && n >= 0 && n < col && grid[m][n] === '1') {
+            union(i * col + j, m * col + n);
+          }
         }
       }
     }
   }
+
   return result;
+
+  function union (p, q) {
+    let rootP = find(p);
+    let rootQ = find(q);
+    if (rootQ === rootP) return;
+    parents[rootP] = rootQ;
+    result--;
+  }
+
+  function find (i) {
+    while (i !== parents[i]) {
+      parents[i] = parents[parents[i]];
+      i = parents[i];
+    }
+    return i;
+  }
 };
 // @lc code=end
