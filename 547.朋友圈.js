@@ -10,29 +10,30 @@
  * @return {number}
  */
 var findCircleNum = function (M) {
-  // 1.DFS 另一种写法
+  // 1.BFS
 
   // 初始状态：每个学生都没有被访问
   const visited = Array.from({ length: M.length }).fill(0);
   let result = 0;
-  for (let i = 0; i < visited.length; i++) {
+  const queue = [];
+  for (let i = 0; i < M.length; i++) {
     if (!visited[i]) {
       visited[i] = 1;
-      dfs(i);
       result++;
+      queue.push(i);
+    }
+    while (queue.length) {
+      const i = queue.shift();
+      // 只查找 行，迭代下去
+      for (let j = 0; j < M.length; j++) {
+        if (i !== j && M[i][j] && !visited[j]) {
+          queue.push(j);
+          visited[j] = 1;
+        }
+      }
     }
   }
 
   return result;
-
-  function dfs (i) {
-    for (let j = 0; j < M.length; j++) {
-      // i===j 时为自身，即不是自身且不在其他朋友圈且互为朋友
-      if (i !== j && !visited[j] && M[i][j] === 1) {
-        visited[j] = 1;
-        dfs(j);
-      }
-    }
-  }
 };
 // @lc code=end
