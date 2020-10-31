@@ -18,9 +18,10 @@ var numIslands = function (grid) {
   let col = grid[0].length;
   let x = [1, -1, 0, 0];
   let y = [0, 0, 1, -1];
+  let visited = new Set();
   for (let i = 0; i < row; i++) {
     for (let j = 0; j < col; j++) {
-      if (grid[i][j] === '1') {
+      if (grid[i][j] === '1' && !visited.has(`${i},${j}`)) {
         result++;
         helper(i, j);
       }
@@ -29,10 +30,17 @@ var numIslands = function (grid) {
   return result;
 
   function helper (i, j) {
-    if (i < 0 || i >= row || j < 0 || j >= col || grid[i][j] === '0') {
+    if (
+      i < 0 ||
+      i >= row ||
+      j < 0 ||
+      j >= col ||
+      grid[i][j] === '0' ||
+      visited.has(`${i},${j}`)
+    ) {
       return;
     }
-    grid[i][j] = '0';
+    visited.add(`${i},${j}`);
     for (let k = 0; k < 4; k++) {
       helper(i + x[k], j + y[k]);
     }
