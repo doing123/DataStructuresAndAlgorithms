@@ -11,32 +11,50 @@
  * @return {number}
  */
 var findKthLargest = function (nums, k) {
-  // 5-1.快排: 划分交换排序，in-palce算法，不占用额外内存
-  let len = nums.length;
-  recursive(0, len - 1);
-  return nums[len - k];
-
-  function recursive(left, right) {
-    if (left >= right) return;
-    let base = partition(left, right);
-    recursive(left, base - 1);
-    recursive(base + 1, right);
+  // 6.优先级队列
+  let pq = new PriorityQueue(k);
+  for (let i = 0; i < nums.length; i++) {
+    pq.add(nums[i]);
   }
 
-  function partition(left, right) {
-    let base = nums[left]; // 取第一个数为基数
-    let p = left + 1;
-    while (p <= right) {
-      while (p <= right && nums[right] > base) right--;
-      while (p <= right && nums[p] < base) p++;
-      if (p <= right) {
-        [nums[p], nums[right]] = [nums[right], nums[p]];
-        p++;
-        right--;
+  return pq.front();
+};
+
+class PriorityQueue {
+  constructor (k) {
+    this.limit = k;
+    this.queue = [];
+  }
+
+  add (val) {
+    let added = false;
+    // 升序
+    for (let i = 0; i < this.queue.length; i++) {
+      if (val < this.queue[i]) {
+        this.queue.splice(i, 0, val);
+        added = true;
+        break;
       }
     }
-    [nums[left], nums[right]] = [nums[right], nums[left]]; // 修改基数
-    return right;
+    if (!added) {
+      this.queue.push(val);
+    }
+
+    if (this.queue.length > this.limit) {
+      this.del();
+    }
   }
-};
+
+  size () {
+    return this.queue.length;
+  }
+
+  del () {
+    this.queue.shift();
+  }
+
+  front () {
+    return this.queue[0];
+  }
+}
 // @lc code=end
