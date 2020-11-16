@@ -10,21 +10,26 @@
  * @return {number[][]}
  */
 var threeSum = function (nums) {
-  // 1.暴力： 三层嵌套循环 // 不通过
+  // 2.暴力 + map
   let result = [];
   let len = nums.length;
-  let set = new Set();
+  nums.sort((a, b) => a - b);
   for (let i = 0; i < len - 2; i++) {
-    for (let j = i + 1; j < len - 1; j++) {
-      for (let k = j + 1; k < len; k++) {
-        if (nums[i] + nums[j] + nums[k] === 0) {
-          let tmpArr = [nums[i], nums[j], nums[k]];
-          let tmpStr = tmpArr.sort().toString();
-          if (!set.has(tmpStr)) {
-            result.push(tmpArr);
-            set.add(tmpStr);
-          }
-        }
+    if (nums[i] === nums[i - 1]) continue; // 去重
+    let target = nums[i]; // 求两数之和等于 a;
+    let map = new Map();
+    for (let j = i + 1; j < len; j++) {
+      let b = nums[j];
+      let c = -target - b;
+      if (result.length) {
+        let [x, y, z] = result[result.length - 1];
+        if (y === b && z === c) continue;
+      }
+
+      if (map.has(c)) {
+        result.push([target, b, c]);
+      } else {
+        map.set(b, true);
       }
     }
   }
