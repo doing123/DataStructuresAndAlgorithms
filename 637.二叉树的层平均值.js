@@ -17,24 +17,23 @@
  * @return {number[]}
  */
 var averageOfLevels = function (root) {
-  // 1.广度优先遍历
-  if (!root) return [];
+  // 2.深度优先
   let result = [];
-  let queue = [root];
+  let map = new Map(); // 记录每层的个数
 
-  while (queue.length) {
-    let len = queue.length;
-    let total = 0;
-    for (let i = 0; i < len; i++) {
-      const item = queue.shift();
-      total += item.val;
-      item.left && queue.push(item.left);
-      item.right && queue.push(item.right);
-    }
+  helper(root, 0);
 
-    result.push(total / len);
+  return result.map((item, index) => {
+    return item / map.get(index);
+  });
+
+  function helper (node, level) {
+    if (!node) return;
+    map.set(level, (map.get(level) || 0) + 1);
+    result[level] = (result[level] || 0) + node.val;
+    helper(node.left, level + 1);
+    helper(node.right, level + 1);
   }
-
-  return result;
 };
+
 // @lc code=end
