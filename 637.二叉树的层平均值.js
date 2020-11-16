@@ -23,15 +23,16 @@ var averageOfLevels = function (root) {
   let queue = [root];
 
   while (queue.length) {
-    let subArr = [...queue];
-    queue = [];
+    let len = queue.length;
     let total = 0;
-    subArr.forEach((item) => {
+    for (let i = 0; i < len; i++) {
+      const item = queue.shift();
       total += item.val;
       item.left && queue.push(item.left);
       item.right && queue.push(item.right);
-    });
-    result.push(total / subArr.length);
+    }
+
+    result.push(total / len);
   }
 
   return result;
