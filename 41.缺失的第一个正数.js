@@ -10,11 +10,15 @@
  * @return {number}
  */
 var firstMissingPositive = function (nums) {
+  // 2.map 保存 nums 的值
+  const map = {};
+  nums.forEach((item) => {
+    map[item] = true;
+  });
+
   let i = 1;
   while (i < Number.MAX_VALUE) {
-    if (!nums.includes(i)) {
-      return i;
-    }
+    if (!map[i]) return i;
     i++;
   }
 };
