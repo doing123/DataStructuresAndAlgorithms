@@ -11,7 +11,7 @@
  * @return {string}
  */
 var licenseKeyFormatting = function (S, K) {
-  // 从后遍历
+  // 1.从后遍历
   S = S.replace(/-/g, '');
   let result = '';
   let i = S.length - K;
