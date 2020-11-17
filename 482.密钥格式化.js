@@ -11,14 +11,18 @@
  * @return {string}
  */
 var licenseKeyFormatting = function (S, K) {
-  // 1.从后遍历
-  S = S.replace(/-/g, '');
-  let result = '';
-  let i = S.length - K;
-  while (i + K > 0) {
-    result = (i > 0 ? '-' : '') + S.substring(i, i + K) + result;
-    i -= K;
+  // 2.数组 unshift
+  S = S.toUpperCase().split('-').join('');
+  let result = [];
+  while (S.length) {
+    if (S.length > K) {
+      result.unshift(S.slice(-K));
+      S = S.slice(0, S.length - K);
+    } else {
+      result.unshift(S);
+      S = '';
+    }
   }
-  return result.toUpperCase();
+  return result.join('-');
 };
 // @lc code=end
