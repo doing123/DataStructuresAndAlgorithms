@@ -10,7 +10,7 @@
  * @return {number}
  */
 var maxProfit = function (prices) {
-  let max = 0;
+  // 2.动态规划
   let len = prices.length;
   if (len === 0) return 0;
   const dp = Array.from({ length: len }, () => {
