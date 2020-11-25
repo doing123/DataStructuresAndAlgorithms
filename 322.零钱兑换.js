@@ -11,17 +11,21 @@
  * @return {number}
  */
 var coinChange = function (coins, amount) {
-  // 1.dp 转为爬楼梯 [1,2,5] 可以爬1，2，5阶
-  let dp = new Array(amount + 1).fill(amount + 1);
-  dp[0] = 0;
-  for (let i = 1; i <= amount; i++) {
-    for (let j = 0; j < coins.length; j++) {
-      if (coins[j] <= i) {
-        dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
-      }
-    }
-  }
+  // 1.暴力递归：TODO 超出时间限制
+  return dp(amount);
 
-  return dp[amount] > amount ? -1 : dp[amount];
+  function dp (n) {
+    if (n === 0) return 0;
+    if (n < 0) return -1;
+
+    // 最小值
+    let res = Number.MAX_SAFE_INTEGER;
+    for (const coin of coins) {
+      let sub = dp(n - coin);
+      if (sub === -1) continue;
+      res = Math.min(res, 1 + sub);
+    }
+    return res === Number.MAX_SAFE_INTEGER ? -1 : res;
+  }
 };
 // @lc code=end
