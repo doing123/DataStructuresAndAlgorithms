@@ -10,7 +10,7 @@
  * @return {number}
  */
 var fib = function (N) {
-  // 2.备忘录
+  // 2.备忘录 自动向下
   if (N === 0) return 0;
   const memory = [];
 
