@@ -11,21 +11,27 @@
  * @return {number}
  */
 var coinChange = function (coins, amount) {
-  // 1.暴力递归：TODO 超出时间限制
+  // 2.带备忘录的递归
+  let memory = [];
+
   return dp(amount);
 
   function dp (n) {
+    if (memory[n]) return memory[n];
+
     if (n === 0) return 0;
     if (n < 0) return -1;
-
-    // 最小值
     let res = Number.MAX_SAFE_INTEGER;
+
     for (const coin of coins) {
       let sub = dp(n - coin);
       if (sub === -1) continue;
-      res = Math.min(res, 1 + sub);
+      res = Math.min(res, sub + 1);
     }
-    return res === Number.MAX_SAFE_INTEGER ? -1 : res;
+
+    // 记入备忘录
+    memory[n] = res === Number.MAX_SAFE_INTEGER ? -1 : res;
+    return memory[n];
   }
 };
 // @lc code=end
