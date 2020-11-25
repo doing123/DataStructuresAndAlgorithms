@@ -10,13 +10,13 @@
  * @return {number}
  */
 var fib = function (N) {
-  // 3.dp 数组的迭代解法：自底向上
+  // 3.dp 数组的迭代解法：自底向上，优化：不需要那么长的一个 DP table 来存储所有的状态，只存储两个状态
   if (N === 0) return 0;
-  const dp = new Array(N + 1).fill(0);
-  dp[1] = dp[2] = 1;
+  let a = 1;
+  let b = 1;
   for (let i = 3; i <= N; i++) {
-    dp[i] = dp[i - 1] + dp[i - 2];
+    [a, b] = [b, a + b];
   }
-  return dp[N];
+  return b;
 };
 // @lc code=end
