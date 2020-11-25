@@ -10,9 +10,18 @@
  * @return {number}
  */
 var fib = function (N) {
-  // 1.暴力递归
+  // 2.备忘录
   if (N === 0) return 0;
-  if (N === 1 || N === 2) return 1;
-  return fib(N - 1) + fib(N - 2);
+  const memory = [];
+
+  return helper(N);
+
+  function helper (N) {
+    if (N === 1 || N === 2) return 1;
+    if (!memory[N]) {
+      memory[N] = helper(N - 1) + helper(N - 2);
+    }
+    return memory[N];
+  }
 };
 // @lc code=end
