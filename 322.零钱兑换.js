@@ -11,27 +11,20 @@
  * @return {number}
  */
 var coinChange = function (coins, amount) {
-  // 2.带备忘录的递归
-  let memory = [];
+  // 3.dp 数组的迭代解法
+  const dp = new Array(amount + 1).fill(amount + 1);
+  dp[0] = 0;
 
-  return dp(amount);
-
-  function dp (n) {
-    if (memory[n]) return memory[n];
-
-    if (n === 0) return 0;
-    if (n < 0) return -1;
-    let res = Number.MAX_SAFE_INTEGER;
-
+  // 外层 for 循环遍历所有状态的所有取值
+  for (let i = 1; i < dp.length; i++) {
+    // 内层 循环 求所有选择的最小值
     for (const coin of coins) {
-      let sub = dp(n - coin);
-      if (sub === -1) continue;
-      res = Math.min(res, sub + 1);
+      // 子问题无解
+      if (i - coin < 0) continue;
+      dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
     }
-
-    // 记入备忘录
-    memory[n] = res === Number.MAX_SAFE_INTEGER ? -1 : res;
-    return memory[n];
   }
+
+  return dp[amount] === amount + 1 ? -1 : dp[amount];
 };
 // @lc code=end
