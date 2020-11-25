@@ -20,28 +20,29 @@
 var buildTree = function (preorder, inorder) {
   // preorder[0]: 3 为 head，[1]：9 为 leftTree 的顶点
   // 中序遍历数组中以 3 为分割点，左边为 leftTree 的数据，右边第为 rightTree 的数据
-  // // 1.递归
-  let map = new Map();
+  // 1.递归
   let len = inorder.length;
-  let rootIndex = 0; // 对应 preorder 索引
+  let map = new Map();
   for (let i = 0; i < len; i++) {
-    map.set(inorder[i], i); // 保存 索引
+    map.set(inorder[i], i);
   }
 
-  return helper(0, len - 1);
+  return helper(0, len - 1, 0, len - 1);
 
-  // left、right 对应在 inorder 中的索引
-  function helper(left, right) {
-    if (left > right) return null;
-    let val = preorder[rootIndex];
-    let root = new TreeNode(val);
-    // 找到在 inorder 中的数据 分割左右子树的 索引
+  // 前序数组左边界、右边界、中序数组左边界、右边界
+  function helper (prevLeft, prevRight, inLeft, inRight) {
+    if (prevLeft > prevRight) return null;
+    let val = preorder[prevLeft]; // 前序遍历的第一个 为 根节点
     let index = map.get(val);
-
-    // 递归
-    rootIndex++; // 对应 preorder 的每一项
-    root.left = helper(left, index - 1);
-    root.right = helper(index + 1, right);
+    let root = new TreeNode(val);
+    let leftTreeLen = index - inLeft;
+    root.left = helper(prevLeft + 1, prevLeft + leftTreeLen, inLeft, index - 1);
+    root.right = helper(
+      prevLeft + leftTreeLen + 1,
+      prevRight,
+      index + 1,
+      inRight
+    );
 
     return root;
   }
