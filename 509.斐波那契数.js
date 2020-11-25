@@ -10,14 +10,9 @@
  * @return {number}
  */
 var fib = function (N) {
-  if (N == 0) return 0;
-  // 4.循环 解构赋值
-  let n1 = 0;
-  let n2 = 1;
-  for (let i = 1; i < N; i++) {
-    [n1, n2] = [n2, n1 + n2];
-  }
-
-  return n2;
+  // 1.暴力递归
+  if (N === 0) return 0;
+  if (N === 1 || N === 2) return 1;
+  return fib(N - 1) + fib(N - 2);
 };
 // @lc code=end
