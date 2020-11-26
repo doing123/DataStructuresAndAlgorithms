@@ -13,18 +13,18 @@
 var combinationSum = function (candidates, target) {
   // 回溯
   let result = [];
-  helper(0, target, []);
+  helper(0, 0, []);
   return result;
 
-  function helper(start, target, arr) {
-    if (target == 0) {
+  function helper (start, sum, arr) {
+    if (target === sum) {
       result.push(arr);
       return;
     }
 
     for (let i = start; i < candidates.length; i++) {
-      if (target - candidates[i] >= 0) {
-        helper(i, target - candidates[i], arr.concat(candidates[i]));
+      if (sum + candidates[i] <= target) {
+        helper(i, sum + candidates[i], arr.concat(candidates[i]));
       }
     }
   }
