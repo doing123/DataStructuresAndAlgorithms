@@ -10,14 +10,15 @@
  * @return {number[][]}
  */
 var permute = function (nums) {
-  // 1.回溯
+  // 1.回溯，优化 使用全局备忘录数组
   let result = [];
+  let arr = [];
   backtrack(nums, []);
   return result;
 
-  function backtrack (nums, arr) {
+  function backtrack (nums) {
     if (arr.length === nums.length) {
-      result.push(arr);
+      result.push([...arr]);
       return;
     }
 
@@ -26,7 +27,7 @@ var permute = function (nums) {
       if (arr.includes(nums[i])) continue;
 
       arr.push(nums[i]); // 做选择
-      backtrack(nums, arr.slice()); // 进入下一层决策树
+      backtrack(nums); // 进入下一层决策树
       arr.pop(); // 取消选择
     }
   }
