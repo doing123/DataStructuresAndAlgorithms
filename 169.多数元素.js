@@ -10,20 +10,18 @@
  * @return {number}
  */
 var majorityElement = function (nums) {
-  // 3.sort排序之后，计数
-  let result = 0;
-  let len = nums.length;
-  if (len === 1) return nums[0];
-  nums.sort((a, b) => a - b);
+  // 4.投票算法
+  let result = nums[0];
   let count = 1;
-  for (let i = 1; i < len; i++) {
-    if (nums[i] === nums[i - 1]) {
+  for (let i = 1; i < nums.length; i++) {
+    if (count === 0) result = nums[i];
+    if (result === nums[i]) {
       count++;
-      if (count > len / 2) return nums[i];
     } else {
-      count = 1;
+      count--;
     }
   }
+
   return result;
 };
 // @lc code=end
