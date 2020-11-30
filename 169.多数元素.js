@@ -11,9 +11,9 @@
  */
 var majorityElement = function (nums) {
   // 4.投票算法
-  let result = nums[0];
-  let count = 1;
-  for (let i = 1; i < nums.length; i++) {
+  let result = '';
+  let count = 0;
+  for (let i = 0; i < nums.length; i++) {
     if (count === 0) result = nums[i];
     if (result === nums[i]) {
       count++;
