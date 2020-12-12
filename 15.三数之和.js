@@ -10,34 +10,45 @@
  * @return {number[][]}
  */
 var threeSum = function (nums) {
-  // 3.双指针
-  let result = [];
-  let len = nums.length;
+  // 4.使用归纳的 nSum
   nums.sort((a, b) => a - b);
-  for (let i = 0; i < len - 2; i++) {
-    let n1 = nums[i];
-    if (nums[i] > 0) break;
-    if (nums[i] === nums[i - 1]) continue; // 去重
+  let len = nums.length;
+  return nSum(3, 0, 0);
 
-    let left = i + 1;
-    let right = len - 1;
-    while (left < right) {
-      let n2 = nums[left];
-      let n3 = nums[right];
-      let sum = n1 + n2 + n3;
-      if (sum === 0) {
-        result.push([n1, n2, n3]);
-        // 去重
-        while (left < right && nums[left] === n2) left++;
-        while (left < right && nums[right] === n3) right--;
-      } else if (sum < 0) {
-        left++;
-      } else {
-        right--;
+  function nSum (n, start, target) {
+    let result = [];
+    if (n < 2 || len < n) return result;
+    if (n === 2) {
+      // 两数之和
+      let left = start;
+      let right = len - 1;
+      while (left < right) {
+        let n1 = nums[left];
+        let n2 = nums[right];
+        let sum = n1 + n2;
+        if (sum > target) {
+          while (left < right && nums[right] === n2) right--;
+        } else if (sum < target) {
+          while (left < right && nums[left] === n1) left++;
+        } else if (sum === target) {
+          result.push([n1, n2]);
+          while (left < right && nums[right] === n2) right--;
+          while (left < right && nums[left] === n1) left++;
+        }
+      }
+    } else {
+      for (let i = start; i < len; i++) {
+        let sub = nSum(n - 1, i + 1, target - nums[i]);
+        // 拼接上当前值
+        for (let item of sub) {
+          item.push(nums[i]);
+          result.push(item);
+        }
+
+        while (i < len && nums[i] === nums[i + 1]) i++;
       }
     }
+    return result;
   }
-
-  return result;
 };
 // @lc code=end
