@@ -29,7 +29,8 @@ function leftBound (nums, target) {
       right = mid - 1; // 收缩右边界
     }
   }
-  if (nums[left] !== target) return -1;
+  // 处理越界情况
+  if (left > nums.length || nums[left] !== target) return -1;
   return left;
 }
 
@@ -46,7 +47,8 @@ function rightBound (nums, target) {
       left = mid + 1; // 收缩左边界
     }
   }
-  if (nums[right] !== target) return -1;
+  // 处理越界情况
+  if (right < 0 || nums[right] !== target) return -1;
   return right;
 }
 // @lc code=end
