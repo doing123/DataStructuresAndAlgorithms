@@ -11,29 +11,26 @@
  * @return {number}
  */
 var longestCommonSubsequence = function (text1, text2) {
-  // 2.备忘录
+  // 3.动态规划
   let m = text1.length;
   let n = text2.length;
-  let memo = Array.from({ length: m }, () => {
-    return new Array(n).fill(-1); // 初始值 -1 代表未曾计算
+  let dp = Array.from({ length: m + 1 }, () => {
+    return new Array(n + 1).fill(0); // 初始值 0 base case
   });
 
-  return dp(0, 0);
-
-  // 两个指针 i,j 分别在两个字符串上移动，大概率是动态规划
-  function dp (i, j) {
-    // base case
-    if (i === m || j === n) return 0;
-    if (memo[i][j] !== -1) return memo[i][j];
-    if (text1[i] === text2[j]) {
-      memo[i][j] = 1 + dp(i + 1, j + 1);
-    } else {
-      // text1[i] 和 text2 至少有一个字符不在 最长公共子序列中
-      // 穷举三种情况：text1[i]不在 lcs；text2[j]不在 lcs；都不在 lcs，取最大值
-      // 情况三被一和二包含了
-      memo[i][j] = Math.max(dp(i + 1, j), dp(i, j + 1));
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      // 指针从 1 开始，但字符下标从 0 开始， 故减 1
+      if (text1[i - 1] === text2[j - 1]) {
+        // 都在 lcs 中
+        dp[i][j] = 1 + dp[i - 1][j - 1];
+      } else {
+        // 至少有一个不在 lcs 中
+        dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j]);
+      }
     }
-    return memo[i][j];
   }
+
+  return dp[m][n];
 };
 // @lc code=end
