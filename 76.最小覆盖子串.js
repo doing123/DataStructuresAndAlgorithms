@@ -11,14 +11,14 @@
  * @return {string}
  */
 var minWindow = function (s, t) {
-  let countMap = {};
+  // 滑动窗口 + map
+  let countMap = new Map();
   let window = {};
   for (let c of t) {
-    if (!countMap[c]) countMap[c] = 0;
-    countMap[c]++;
+    if (!countMap.has(c)) countMap.set(c, 0);
+    countMap.set(c, countMap.get(c) + 1);
   }
 
-  let needCount = Object.keys(countMap).length;
   let minLen = Number.MAX_VALUE; // 求的最小子串长度
   let start = 0;
   let left = 0;
@@ -29,14 +29,14 @@ var minWindow = function (s, t) {
     let c = s[right];
     right++;
     // 是 t 中所需字符，窗口内的数据进行一系列更新
-    if (countMap[c]) {
+    if (countMap.has(c)) {
       if (!window[c]) window[c] = 0;
       window[c]++;
-      if (window[c] === countMap[c]) count++;
+      if (window[c] === countMap.get(c)) count++;
     }
 
     // 判断左侧窗口是否要收缩
-    while (count === needCount) {
+    while (count === countMap.size) {
       // 更新最小覆盖子串
       if (right - left < minLen) {
         start = left;
@@ -46,8 +46,8 @@ var minWindow = function (s, t) {
       let d = s[left];
       left++;
       // 是 t 中所需字符，窗口内的数据进行一系列更新
-      if (countMap[d]) {
-        if (window[d] === countMap[d]) count--;
+      if (countMap.has(d)) {
+        if (window[d] === countMap.get(d)) count--;
         window[d]--;
       }
     }
