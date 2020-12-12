@@ -10,16 +10,28 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function (s) {
-  let fast = 0; // 快指针
-  let set = new Set();
+  // 2.滑动窗口，使用 set 效率更高
+  let window = {};
   let result = 0;
-  for (let i = 0, len = s.length; i < len; i++) {
-    while (fast < len && !set.has(s[fast])) {
-      set.add(s[fast]);
-      fast++;
+  let left = 0;
+  let right = 0;
+  let len = s.length;
+  while (right < len) {
+    let c = s[right];
+    right++;
+    // 更新窗口数据
+    if (!window[c]) window[c] = 0;
+    window[c]++;
+
+    // 判断收缩窗口
+    while (window[c] > 1) {
+      let d = s[left];
+      left++;
+      // 更新窗口数据
+      window[d]--;
     }
-    result = Math.max(result, set.size);
-    set.delete(s[i]);
+
+    result = Math.max(result, right - left);
   }
 
   return result;
