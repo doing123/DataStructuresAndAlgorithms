@@ -11,29 +11,36 @@
  * @return {number}
  */
 var findTargetSumWays = function (nums, S) {
-  // 2. 备忘录
-  let len = nums.length;
-  let memo = new Map();
-  if (len === 0) return 0;
-  return dp(0, S);
+  // 3.dp
+  let sum = 0;
+  for (let num of nums) sum += num;
+  // 以下两种情况不存在合法的子集划分
+  if (sum < S || (sum + S) % 2 === 1) return 0;
+  return subsets(nums, (sum + S) / 2);
 
-  function dp (i, rest) {
-    // base case
-    if (i === len) {
-      if (rest === 0) return 1;
-      return 0;
+  // 计算 nums 中有几个子集的和为 sum
+  function subsets (nums, sum) {
+    let len = nums.length;
+    // 表示，若只在前 i 个物品中选择，若当前背包的容量为 j，则最多有 x 种方法可以恰好装满背包。
+    let dp = Array.from({ length: len + 1 }, () => {
+      return new Array(sum + 1).fill(0);
+    });
+    for (let i = 0; i <= len; i++) {
+      dp[i][0] = 1; // 如果背包的最大载重为 0，「什么都不装」就是唯一的一种装法。
     }
 
-    // 哈希表的 key
-    let key = `${i},${rest}`;
-    if (memo.has(key)) {
-      return memo.get(key);
+    for (let i = 1; i <= len; i++) {
+      for (let j = 0; j <= sum; j++) {
+        if (j >= nums[i - 1]) {
+          // 两种选择的结果之和
+          dp[i][j] = dp[i - 1][j] + dp[i - 1][j - nums[i - 1]];
+        } else {
+          dp[i][j] = dp[i - 1][j];
+        }
+      }
     }
 
-    // 穷举
-    let result = dp(i + 1, rest - nums[i]) + dp(i + 1, rest + nums[i]);
-    memo.set(key, result);
-    return result;
+    return dp[len][sum];
   }
 };
 // @lc code=end
