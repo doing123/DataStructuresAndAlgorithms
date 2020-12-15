@@ -11,30 +11,29 @@
  * @return {number}
  */
 var findTargetSumWays = function (nums, S) {
-  // 1.回溯
-  let result = 0;
-  backtrack(0, S);
-  return result;
+  // 2. 备忘录
+  let len = nums.length;
+  let memo = new Map();
+  if (len === 0) return 0;
+  return dp(0, S);
 
-  function backtrack (i, rest) {
+  function dp (i, rest) {
     // base case
-    if (i === nums.length) {
-      if (rest === 0) {
-        result++;
-      }
-      return;
+    if (i === len) {
+      if (rest === 0) return 1;
+      return 0;
     }
-    // 给 nums[i] 选择 - 号
-    rest += nums[i];
-    // 穷举 nums[i+1]
-    backtrack(i + 1, rest);
-    // 撤销选择
-    rest -= nums[i];
 
-    // 给 nums[i] 选择 + 号
-    rest -= nums[i];
-    backtrack(i + 1, rest);
-    rest += nums[i];
+    // 哈希表的 key
+    let key = `${i},${rest}`;
+    if (memo.has(key)) {
+      return memo.get(key);
+    }
+
+    // 穷举
+    let result = dp(i + 1, rest - nums[i]) + dp(i + 1, rest + nums[i]);
+    memo.set(key, result);
+    return result;
   }
 };
 // @lc code=end
