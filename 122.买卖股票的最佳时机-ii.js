@@ -10,19 +10,28 @@
  * @return {number}
  */
 var maxProfit = function (prices) {
-  // 3.递归：无穷 for 的情况就是递归的暗示 TODO 最后三个用例不过
-  let result = 0;
-  // 买
-  for (let i = 0, len = prices.length; i < len; i++) {
+  // 3.递归 + 备忘录 TODO 内存超过限制
+  let len = prices.length;
+  let memo = [];
+
+  return dp(0);
+
+  function dp (start) {
+    if (start > len) return 0;
+    if (memo[start]) return memo[start];
+
+    let result = 0;
+    let curMin = prices[start];
     // 卖
-    for (let j = i + 1; j < len; j++) {
+    for (let j = start + 1; j < len; j++) {
+      curMin = Math.min(curMin, prices[j]);
       result = Math.max(
         result,
-        maxProfit(prices.slice(j + 1)) + prices[j] - prices[i] // 子集 + 当前买卖股票的收益
+        dp(j + 1) + prices[j] - curMin // 子集 + 当前买卖股票的收益
       );
     }
+    memo[start] = result;
+    return result;
   }
-
-  return result;
 };
 // @lc code=end
