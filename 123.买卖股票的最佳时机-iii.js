@@ -10,37 +10,25 @@
  * @return {number}
  */
 var maxProfit = function (prices) {
-  // let result = [];
-  // let start = 0;
-  // for (let i = 1, len = prices.length; i < len; i++) {
-  //   if (prices[i] < prices[i - 1]) {
-  //     start = i;
-  //   }
-  //   if (prices[i] > prices[i + 1] || i == len - 1) {
-  //     result.push(prices[i] - prices[start]);
-  //   }
-  // }
-  // // TODO 只考虑到所有交易中收益最高的两次，场景考虑不全
-  // return result
-  //   .sort((a, b) => b - a)
-  //   .slice(0, 2)
-  //   .reduce((prev, val) => {
-  //     return (prev += val);
-  //   }, 0);
-
-  // DESC: https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/solution/yi-ge-tong-yong-fang-fa-tuan-mie-6-dao-gu-piao-wen/
+  // 递归 + 备忘录，参考 买卖股票 iv, TODO 超出时间限制
   let len = prices.length;
-  if (len === 0) return 0;
-  let hold1 = Number.MIN_SAFE_INTEGER;
-  let hold2 = Number.MIN_SAFE_INTEGER;
-  let release1 = 0;
-  let release2 = 0;
-  for (let val of prices) {
-    hold1 = Math.max(hold1, -val);
-    release1 = Math.max(release1, hold1 + val);
-    hold2 = Math.max(hold2, release1 - val);
-    release2 = Math.max(release2, hold2 + val);
+  let memo = new Map();
+  return dp(0, 2); // 买卖次数限制为 2
+
+  function dp (start, k) {
+    if (start > len) return 0;
+    if (k === 0) return 0;
+    let key = `${start},${k}`;
+    if (memo.has(key)) return memo.get(key);
+
+    let result = 0;
+    let min = prices[start];
+    for (let sell = start + 1; sell < len; sell++) {
+      min = Math.min(min, prices[sell]);
+      result = Math.max(result, dp(sell + 1, k - 1) + prices[sell] - min);
+    }
+    memo.set(key, result);
+    return result;
   }
-  return Math.max(0, release2);
 };
 // @lc code=end
