@@ -11,23 +11,23 @@
  * @return {number}
  */
 var maxProfit = function (prices, fee) {
-  // 动态规划
-  // 假设每次买股票的时候付手续费
-  const dp = Array.from(new Array(prices.length), () => {
-    return new Array(2); // 0:不持股，1:持股
-  });
+  // 2.递归 + 备忘录 TODO 超出时间限制
+  let len = prices.length;
+  let memo = [];
+  return dp(0); // 不限次数，但每次买的时候需要手续费
 
-  // 第一天
-  dp[0][0] = 0; // 不持股的收益
-  dp[0][1] = 0 - prices[0] - fee; // 持股的收益
-  for (let i = 1; i < prices.length; i++) {
-    // 动态方程
-    // 不持股：1.前一天不持股；2.前一天持股今天卖了
-    dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
-    // 持股：1.前一天持股；2.前一天不持股今天买了
-    dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i] - fee);
+  function dp (start) {
+    if (start > len) return 0;
+    if (memo[start]) return memo[start];
+
+    let min = prices[start];
+    let result = 0;
+    for (let sell = start + 1; sell < len; sell++) {
+      min = Math.min(min, prices[sell]);
+      result = Math.max(result, dp(sell + 1) + prices[sell] - min - fee);
+    }
+    memo[start] = result;
+    return result;
   }
-
-  return dp[prices.length - 1][0];
 };
 // @lc code=end
