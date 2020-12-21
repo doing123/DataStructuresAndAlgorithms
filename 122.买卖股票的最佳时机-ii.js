@@ -10,17 +10,11 @@
  * @return {number}
  */
 var maxProfit = function (prices) {
-  // 1.快慢双指针
+  // 1.线性查找
   let result = 0;
   for (let i = 1, len = prices.length; i < len; i++) {
-    for (let j = i; j < len; j++) {
-      if (prices[j] > prices[j - 1]) {
-        result += prices[j] - prices[j - 1];
-        i = j;
-      } else {
-        i = j;
-        break;
-      }
+    if (prices[i] > prices[i - 1]) {
+      result += prices[i] - prices[i - 1]
     }
   }
 
