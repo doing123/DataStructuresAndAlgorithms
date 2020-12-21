@@ -9,28 +9,29 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var permuteUnique = function(nums) {
-  // TODO
+var permuteUnique = function (nums) {
+  // 2.回溯
+  nums.sort((a, b) => a - b);
+  let len = nums.length;
+  let visited = new Array(len).fill(false);
   const result = [];
-  let count = 0;
-  nums.sort((a, b) => a- b);
-  calc(count, nums);
+
+  backtrack(0, []);
   return result;
 
-  function calc(count, nums) {
-    if (count == nums.length) {
-      result.push([...nums]);
+  function backtrack (count, arr) {
+    if (count === len) {
+      result.push([...arr]);
       return;
     }
 
-    const map = new Map();
-    for (let i = count; i < nums.length; i++) {
-      if (!map.get(nums[i])) {
-        map.set(nums[i], true);
-        [nums[i], nums[count]] = [nums[count], nums[i]];
-        calc(count + 1, nums);
-        [nums[i], nums[count]] = [nums[count], nums[i]];
-      }
+    for (let i = 0; i < len; i++) {
+      if (visited[i] || (nums[i] === nums[i - 1] && !visited[i - 1])) continue;
+      arr.push(nums[i]);
+      visited[i] = true;
+      backtrack(count + 1, arr);
+      visited[i] = false;
+      arr.pop();
     }
   }
 };
