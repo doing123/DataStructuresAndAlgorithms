@@ -10,15 +10,21 @@
  * @return {number}
  */
 var maxSubArray = function (nums) {
-  // 1.dp
+  // 1.dp：降低空间复杂度
   let len = nums.length;
   let dp = Array(len).fill(0);
-  dp[0] = nums[0]; // base case
+  // dp[i] 仅仅和 ap[i - 1] 的状态有关
+  let dp0 = nums[0];
+  let dp1 = 0;
+  let result = dp0;
   for (let i = 1; i < len; i++) {
     // 状态转移方程：状态 + 选择
-    dp[i] = Math.max(dp[i - 1] + nums[i], nums[i]);
+    dp1 = Math.max(dp0 + nums[i], nums[i]);
+    dp0 = dp1;
+    // 求最大值
+    result = Math.max(result, dp0);
   }
 
-  return Math.max(...dp);
+  return result;
 };
 // @lc code=end
