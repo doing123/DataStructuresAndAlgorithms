@@ -10,24 +10,21 @@
  * @return {number}
  */
 var jump = function (nums) {
-  // 1.递归 + 备忘录  超出时间限制
+  // 2.贪心
   let n = nums.length;
-  let memo = new Array(n).fill(n);
-  return dp(nums, 0);
-
-  function dp (nums, p) {
-    if (p >= n - 1) return 0; // 当 p 跳过最后一格时，不需要跳跃
-    if (memo[p] !== n) return memo[p];
-
-    let steps = nums[p];
-    for (let i = 1; i <= steps; i++) {
-      // 穷举每一个选择，计算每一个子问题的结果
-      let subProblem = dp(nums, p + i);
-      // 取最小
-      memo[p] = Math.min(memo[p], subProblem + 1);
+  let end = 0;
+  let farthest = 0;
+  let jumps = 0;
+  // 从索引 0 开始第一步
+  for (let i = 0; i < n - 1; i++) {
+    // 求出最有大的跳远距离，即局部最优
+    farthest = Math.max(farthest, i + nums[i]);
+    if (end === i) {
+      jumps++;
+      end = farthest;
     }
-
-    return memo[p];
   }
+
+  return jumps;
 };
 // @lc code=end
