@@ -10,19 +10,24 @@
  * @return {number}
  */
 var jump = function (nums) {
-  // TODO:不断作出局部最优决策
-  // 遍历一个可抵达的区间，从中选出能跳最远的点，就有了新的可抵达的区间，然后跳一次，进入新的区间继续便利寻找最优解
-  let step = 0;
-  let end = 0;
-  let max = 0; // 记录当前能去到的最远的位置
-  for (let i = 0; i < nums.length - 1; i++) {
-    max = Math.max(max, nums[i] + i);
-    if (i == end) {
-      end = max;
-      step++;
-    }
-  }
+  // 1.递归 + 备忘录  超出时间限制
+  let n = nums.length;
+  let memo = new Array(n).fill(n);
+  return dp(nums, 0);
 
-  return step;
+  function dp (nums, p) {
+    if (p >= n - 1) return 0; // 当 p 跳过最后一格时，不需要跳跃
+    if (memo[p] !== n) return memo[p];
+
+    let steps = nums[p];
+    for (let i = 1; i <= steps; i++) {
+      // 穷举每一个选择，计算每一个子问题的结果
+      let subProblem = dp(nums, p + i);
+      // 取最小
+      memo[p] = Math.min(memo[p], subProblem + 1);
+    }
+
+    return memo[p];
+  }
 };
 // @lc code=end
