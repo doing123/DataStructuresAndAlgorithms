@@ -10,12 +10,16 @@
  * @return {boolean}
  */
 var canJump = function (nums) {
-  // TODO 脑子不够用了
-  let max = 0; // 能够走到的数组下标
-  for (let i = 0; i < nums.length; i++) {
-    if (max < i) return false;  // 当前这一步都走不到，后面更走不到了
-    max = Math.max(max, nums[i] + i);
+  // 可以理解为：最多能跳多远
+  let len = nums.length;
+  let farthest = 0;
+  for (let i = 0; i < len - 1; i++) {
+    // 更新能跳到的最远距离
+    farthest = Math.max(farthest, i + nums[i]);
+    // 可能碰到了 0，卡住跳不动了
+    if (farthest <= i) return false;
   }
-  return max >= nums.length - 1;
+
+  return farthest >= len - 1;
 };
 // @lc code=end
