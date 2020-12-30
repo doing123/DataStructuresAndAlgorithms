@@ -17,6 +17,7 @@
  * @return {ListNode}
  */
 var reverseList = function (head) {
+  // 1.迭代
   let prev = null;
   let curr = head;
   while (curr) {
