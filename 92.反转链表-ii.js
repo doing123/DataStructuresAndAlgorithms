@@ -19,25 +19,30 @@
  * @return {ListNode}
  */
 var reverseBetween = function (head, m, n) {
-  let preHead = new ListNode(0);
-  preHead.next = head;
+  // 1.迭代
+  let prevHead = new ListNode(0);
+  prevHead.next = head;
+  let tmpHead = prevHead;
   let pos = 0;
-  let tmpHead = preHead;
   while (pos < m - 1) {
     tmpHead = tmpHead.next;
     pos++;
   }
-  let pre = null;
-  let cur = tmpHead.next;
+
+  // 反转链表
+  let prev = null;
+  let curr = tmpHead.next;
   while (pos < n) {
-    let next = cur.next;
-    cur.next = pre;
-    pre = cur;
-    cur = next;
+    let next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
     pos++;
   }
-  tmpHead.next.next = cur;
-  tmpHead.next = pre;
-  return preHead.next;
+
+  // 反转之后的链表拼接到原链表中
+  tmpHead.next.next = curr;
+  tmpHead.next = prev;
+  return prevHead.next;
 };
 // @lc code=end
