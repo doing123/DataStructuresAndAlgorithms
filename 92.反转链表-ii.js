@@ -19,30 +19,29 @@
  * @return {ListNode}
  */
 var reverseBetween = function (head, m, n) {
-  // 1.迭代
-  let prevHead = new ListNode(0);
-  prevHead.next = head;
-  let tmpHead = prevHead;
-  let pos = 0;
-  while (pos < m - 1) {
-    tmpHead = tmpHead.next;
-    pos++;
+  // 2.递归
+  if (m === 1) {
+    // 转化为：反转前 N 个节点
+    return reverseN(head, n);
   }
-
-  // 反转链表
-  let prev = null;
-  let curr = tmpHead.next;
-  while (pos < n) {
-    let next = curr.next;
-    curr.next = prev;
-    prev = curr;
-    curr = next;
-    pos++;
-  }
-
-  // 反转之后的链表拼接到原链表中
-  tmpHead.next.next = curr;
-  tmpHead.next = prev;
-  return prevHead.next;
+  // 前进到反转的起点触发 base case
+  head.next = reverseBetween(head.next, m - 1, n - 1);
+  return head;
 };
+
+let theNext = null; // 后继节点
+// 反转以 head 开头的前 n 个节点
+function reverseN (head, n) {
+  if (n === 1) {
+    // 记录第 n + 1 个节点
+    theNext = head.next;
+    return head;
+  }
+  // 以 head.next 为起点，需要反转前 n - 1 个节点
+  let last = reverseN(head.next, n - 1);
+  head.next.next = head;
+  // 反转后的节点 与 后继节点连接
+  head.next = theNext;
+  return last;
+}
 // @lc code=end
