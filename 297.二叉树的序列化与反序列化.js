@@ -20,21 +20,8 @@
  * @return {string}
  */
 var serialize = function (root) {
-  // 2.后序遍历
-  let result = [];
-  traversal(root);
-  return result.toString();
+  // 3.中序遍历 无法实现反序列化，因 根节点 在序列化的中间位置
 
-  function traversal (root) {
-    if (!root) {
-      result.push('#');
-      return;
-    }
-
-    traversal(root.left);
-    traversal(root.right);
-    result.push(root.val);
-  }
 };
 
 /**
@@ -44,22 +31,7 @@ var serialize = function (root) {
  * @return {TreeNode}
  */
 var deserialize = function (data) {
-  let nodes = data.split(',');
-  return traversal(nodes);
 
-  function traversal (nodes) {
-    if (!nodes.length) {
-      return null;
-    }
-    // 后序遍历，nodes 第一个就是根节点
-    let first = nodes.pop();
-    if (first === '#') return null;
-    let root = new TreeNode(+first);
-    root.right = traversal(nodes);
-    root.left = traversal(nodes);
-
-    return root;
-  }
 };
 
 /**
