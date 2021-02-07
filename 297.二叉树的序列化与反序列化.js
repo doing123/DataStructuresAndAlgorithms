@@ -20,7 +20,7 @@
  * @return {string}
  */
 var serialize = function (root) {
-  // 前序遍历
+  // 2.后序遍历
   let result = [];
   traversal(root);
   return result.toString();
@@ -30,10 +30,10 @@ var serialize = function (root) {
       result.push('#');
       return;
     }
-    result.push(root.val);
 
     traversal(root.left);
     traversal(root.right);
+    result.push(root.val);
   }
 };
 
@@ -51,12 +51,12 @@ var deserialize = function (data) {
     if (!nodes.length) {
       return null;
     }
-    // 前序遍历，nodes 第一个就是根节点
-    let first = nodes.shift();
+    // 后序遍历，nodes 第一个就是根节点
+    let first = nodes.pop();
     if (first === '#') return null;
     let root = new TreeNode(+first);
-    root.left = traversal(nodes);
     root.right = traversal(nodes);
+    root.left = traversal(nodes);
 
     return root;
   }
