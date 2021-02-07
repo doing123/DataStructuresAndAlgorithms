@@ -17,16 +17,19 @@
  * @return {TreeNode}
  */
 var invertTree = function (root) {
-  recursive(root);
-  return root;
+  // 1.前序遍历
+  // base case
+  if (!root) return null;
 
-  function recursive(node) {
-    if (!node) return;
-    recursive(node.left);
-    recursive(node.right);
-    let left = node.left;
-    node.left = node.right;
-    node.right = left;
-  }
+  // 前序遍历
+  let tmp = root.left;
+  root.left = root.right;
+  root.right = tmp;
+
+  // 递归翻转子树
+  invertTree(root.left);
+  invertTree(root.right);
+
+  return root;
 };
 // @lc code=end
