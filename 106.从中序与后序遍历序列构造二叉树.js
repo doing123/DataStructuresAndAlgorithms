@@ -18,32 +18,27 @@
  * @return {TreeNode}
  */
 var buildTree = function (inorder, postorder) {
-  let len = postorder.length;
-  if (len == 0) return null;
-  let index = len - 1; // inorder 的索引，从后往前遍历
-  let stack = [];
-  let root = new TreeNode(postorder[index]);
-  stack.push(root);
+  let len = inorder.length;
+  return build(0, len - 1, 0, len - 1);
 
-  // 从后往前遍历 postorder
-  for (let i = len - 2; i >= 0; i--) {
-    let top = stack[stack.length - 1];
-    if (top.val != inorder[index]) {
-      let node = new TreeNode(postorder[i]);
-      top.right = node;
-      stack.push(node);
-    } else {
-      let node = null; // 保留上一次出栈的 节点
-      while (stack.length && top.val == inorder[index]) {
-        node = stack.pop();
-        top = stack[stack.length - 1]; // 更新栈顶指针
-        index--;
-      }
-      node.left = new TreeNode(postorder[i]);
-      stack.push(node.left);
-    }
+  function build (postLeft, postRight, inLeft, inRight) {
+    if (postLeft > postRight) return null;
+    // 后序遍历的最后一个值即为 根节点
+    let val = postorder[postRight];
+    let root = new TreeNode(val);
+    let index = inorder.findIndex((item) => item === val); // 根节点在中序遍历的位置，分割左右子树
+
+    // 左子树的个数
+    let leftSize = index - inLeft;
+    root.left = build(
+      postLeft,
+      postLeft + leftSize - 1,
+      inLeft,
+      index - 1
+    );
+    root.right = build(postLeft + leftSize, postRight - 1, index + 1, inRight);
+
+    return root;
   }
-
-  return root;
 };
 // @lc code=end
