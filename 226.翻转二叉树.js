@@ -17,18 +17,18 @@
  * @return {TreeNode}
  */
 var invertTree = function (root) {
-  // 1.前序遍历
+  // 1.后序遍历
   // base case
   if (!root) return null;
-
-  // 前序遍历
-  let tmp = root.left;
-  root.left = root.right;
-  root.right = tmp;
 
   // 递归翻转子树
   invertTree(root.left);
   invertTree(root.right);
+
+  // 后序遍历
+  let tmp = root.left;
+  root.left = root.right;
+  root.right = tmp;
 
   return root;
 };
