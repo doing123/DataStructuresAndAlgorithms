@@ -19,21 +19,18 @@
  * @return {TreeNode}
  */
 var deleteNode = function (root, key) {
+  // 2.优化 等于 key 的处理
   if (!root) return null;
   if (root.val === key) {
     // 执行删除，分三种情况
-    // 1.叶子节点
-    if (!root.left && !root.right) return null;
+    // 1.叶子节点，3.只有一侧子树
+    if (!root.right) return root.left;
+    if (!root.left) return root.right;
     // 2.左右子树都存在，查找 右子树 的最小子节点值替换，并删除这个最小子节点
-    if (root.left && root.right) {
-      const minNode = getMin(root.right);
-      root.val = minNode.val;
-      root.right = deleteNode(root.right, minNode.val);
-      return root;
-    }
-
-    // 3.只存在一侧的子树
-    return root.left || root.right;
+    const minNode = getMin(root.right);
+    root.val = minNode.val;
+    root.right = deleteNode(root.right, minNode.val);
+    return root;
   } else if (root.val < key) {
     root.right = deleteNode(root.right, key);
   } else {
