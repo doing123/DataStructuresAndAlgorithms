@@ -19,10 +19,6 @@
 var countNodes = function (root) {
   // 3.二叉树遍历
   if (!root) return 0;
-  if (root.left && root.right)
-    return 1 + countNodes(root.left) + countNodes(root.right);
-  if (root.left) return 1 + countNodes(root.left);
-  if (root.right) return 1 + countNodes(root.right);
-  return 1;
+  return 1 + countNodes(root.left) + countNodes(root.right);
 };
 // @lc code=end
