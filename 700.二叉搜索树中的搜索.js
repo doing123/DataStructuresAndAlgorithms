@@ -19,9 +19,14 @@
  * @return {TreeNode}
  */
 var searchBST = function (root, val) {
-  // 1.前序遍历
+  // 2.利用 BST 的特性 二分查找
   if (!root) return null;
-  if (root.val === val) return root;
-  return searchBST(root.left, val) || searchBST(root.right, val);
+  if (root.val === val) {
+    return root;
+  } else if (root.val < val) {
+    return searchBST(root.right, val);
+  } else {
+    return searchBST(root.left, val);
+  }
 };
 // @lc code=end
