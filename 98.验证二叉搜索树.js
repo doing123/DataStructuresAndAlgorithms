@@ -17,19 +17,16 @@
  * @return {boolean}
  */
 var isValidBST = function (root) {
-  // 3.中序遍历，prev 引用前一个节点，利用 prev.val< node.val作判断
-  let prev
-  return inOrder(root)
+  // 1.递归：以 root 为根的子树节点必须满足 max.val > root.val > min.val
+  return helper(root, null, null);
 
-  function inOrder (node) {
-    if (!node) return true
-    let bool = inOrder(node.left)
-    if (!bool) return false
-    if (prev) {
-      if (prev.val >= node.val) return false
-    }
-    prev = node // 更新 prev 指针
-    return inOrder(node.right)
+  function helper (root, min, max) {
+    if (!root) return true;
+    if (min && min.val >= root.val) return false;
+    if (max && max.val <= root.val) return false;
+
+    // 限定左子树的最大值是 root.val，右子树的最小值是 root.val
+    return helper(root.left, min, root) && helper(root.right, root, max);
   }
-}
+};
 // @lc code=end
