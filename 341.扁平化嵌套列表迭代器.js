@@ -36,16 +36,18 @@
  * @param {NestedInteger[]} nestedList
  */
 var NestedIterator = function (nestedList) {
-  const traverse = (nestedList) => {
-    return nestedList.reduce((prev, item) => {
-      if (item.isInteger()) {
-        return prev.concat(item.getInteger());
+  const generator = function * (arr) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].isInteger()) {
+        yield arr[i].getInteger();
       } else {
-        return prev.concat(...traverse(item.getList()));
+        yield * generator(arr[i].getList());
       }
-    }, []);
+    }
   };
-  this.list = traverse(nestedList);
+  this.iterator = generator(nestedList);
+  // 调用迭代器的 next 方法，返回 {value: val, done: true/false}，value 为返回的值，done 表示是否遍历完
+  this.nextVal = this.iterator.next();
 };
 
 /**
@@ -53,7 +55,7 @@ var NestedIterator = function (nestedList) {
  * @returns {boolean}
  */
 NestedIterator.prototype.hasNext = function () {
-  return this.list.length;
+  return !this.nextVal.done;
 };
 
 /**
@@ -61,7 +63,9 @@ NestedIterator.prototype.hasNext = function () {
  * @returns {integer}
  */
 NestedIterator.prototype.next = function () {
-  return this.list.shift();
+  const value = this.nextVal.value;
+  this.nextVal = this.iterator.next();
+  return value;
 };
 
 /**
