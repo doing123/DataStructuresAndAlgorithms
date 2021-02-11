@@ -10,44 +10,101 @@
  * @return {void} Do not return anything, modify board in-place instead.
  */
 var solve = function (board) {
-  // 1.遍历四个边，用 DFS 算法把那些与边界相连的 O 换成一个特殊字符，如 #；
+  // 2.并查集
   let row = board.length;
   if (!row) return;
   let col = board[0].length;
+  // 留一个额外的位置 dummy 作为不需要替换的 O 的公共父节点
+  let uf = new UF(row * col + 1);
+  let dummy = row * col;
 
-  // 首尾行边界开始，深度优先遍历 0
+  // 将首尾列的 O 与 dummy 连通
+  for (let i = 0; i < row; i++) {
+    if (board[i][0] === 'O') {
+      uf.union(i * col, dummy);
+    }
+    if (board[i][col - 1] === 'O') {
+      uf.union(i * col + col - 1, dummy);
+    }
+  }
+
+  // 将首尾行的 O 与 dummy 连通
   for (let i = 0; i < col; i++) {
-    dfs(board, 0, i, row, col);
-    dfs(board, row - 1, i, row, col);
+    if (board[0][i] === 'O') {
+      uf.union(i, dummy);
+    }
+    if (board[row - 1][i] === 'O') {
+      uf.union((row - 1) * col + i, dummy);
+    }
   }
 
-  // 首尾列边界开始，深度优先遍历 0
-  for (let i = 0; i < row; i++) {
-    dfs(board, i, 0, row, col);
-    dfs(board, i, col - 1, row, col);
-  }
-
-  // 然后再遍历整个棋盘，把剩下的 O 换成 X ，把 # 恢复成 O。
-  for (let i = 0; i < row; i++) {
-    for (let j = 0; j < col; j++) {
+  // 方向数组 d 是上下左右搜索的常用手法
+  let direction = [
+    [0, 1],
+    [1, 0],
+    [0, -1],
+    [-1, 0]
+  ];
+  for (let i = 1; i < row - 1; i++) {
+    for (let j = 1; j < col - 1; j++) {
       if (board[i][j] === 'O') {
-        board[i][j] = 'X';
+        // 将此 O 与上下左右的 O 连通
+        for (let k = 0; k < 4; k++) {
+          let x = i + direction[k][0];
+          let y = j + direction[k][1];
+          if (board[x][y] === 'O') {
+            uf.union(x * col + y, i * col + j);
+          }
+        }
       }
-      if (board[i][j] === '#') {
-        board[i][j] = 'O';
+    }
+  }
+
+  // 所有不和 dummy 连通的 O，都要被替换
+  for (let i = 1; i < row - 1; i++) {
+    for (let j = 1; j < col - 1; j++) {
+      if (!uf.connected(dummy, i * col + j)) {
+        board[i][j] = 'X';
       }
     }
   }
 };
 
-function dfs (board, i, j, row, col) {
-  if (i < 0 || i >= row || j < 0 || j >= col || board[i][j] === 'X') return;
-  if (board[i][j] === 'O') {
-    board[i][j] = '#';
-    dfs(board, i - 1, j, row, col);
-    dfs(board, i + 1, j, row, col);
-    dfs(board, i, j - 1, row, col);
-    dfs(board, i, j + 1, row, col);
+class UF {
+  constructor (n) {
+    this.count = n;
+    this.parent = Array.from({ length: n }, (item, index) => index); // 根节点指向自身
+    this.size = new Array(n);
+  }
+
+  // 将 p 和 q 连通
+  union (p, q) {
+    let rootP = this.find(p);
+    let rootQ = this.find(q);
+
+    if (rootP === rootQ) return;
+    this.parent[rootP] = rootQ;
+
+    this.count--;
+  }
+
+  // 判断 p 和 q 是否互相连通
+  connected (p, q) {
+    let rootP = this.find(p);
+    let rootQ = this.find(q);
+    return rootP === rootQ;
+  }
+
+  // 返回节点 x 的根节点
+  find (x) {
+    while (this.parent[x] !== x) {
+      x = this.parent[x];
+    }
+    return x;
+  }
+
+  count () {
+    return this.count;
   }
 }
 // @lc code=end
