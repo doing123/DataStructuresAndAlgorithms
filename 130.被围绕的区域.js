@@ -10,7 +10,7 @@
  * @return {void} Do not return anything, modify board in-place instead.
  */
 var solve = function (board) {
-  // 2.并查集
+  // 2.并查集 优化
   let row = board.length;
   if (!row) return;
   let col = board[0].length;
@@ -83,7 +83,15 @@ class UF {
     let rootQ = this.find(q);
 
     if (rootP === rootQ) return;
-    this.parent[rootP] = rootQ;
+
+    // 小树接到大树下面，较平衡
+    if (this.size[rootP] > this.size[rootQ]) {
+      this.parent[rootQ] = rootP;
+      this.size[rootP] += this.size[rootQ];
+    } else {
+      this.parent[rootP] = rootQ;
+      this.size[rootQ] += this.size[rootP];
+    }
 
     this.count--;
   }
@@ -92,12 +100,15 @@ class UF {
   connected (p, q) {
     let rootP = this.find(p);
     let rootQ = this.find(q);
+    // 处于同一棵树上的节点，相互连通
     return rootP === rootQ;
   }
 
   // 返回节点 x 的根节点
   find (x) {
     while (this.parent[x] !== x) {
+      // 进行路径压缩，最大 3 级
+      this.parent[x] = this.parent[this.parent[x]];
       x = this.parent[x];
     }
     return x;
