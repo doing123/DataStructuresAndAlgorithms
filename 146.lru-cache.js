@@ -26,6 +26,7 @@ LRUCache.prototype.get = function (key) {
     if (prev) prev.next = next
     if (next) next.prev = prev || next.prev // 或：考虑当前key在head时的临界点
 
+    // 如果该 key 对应的节点是双向链表最后一个
     if (this._tail === this._hashTable[key]) {
       this._tail = prev || this._hashTable[key]
     }
