@@ -9,6 +9,7 @@
  * @param {number} capacity
  */
 var LRUCache = function (capacity) {
+  // 双向链表(删除快速) + hash 表(读取快)
   // 最近最少使用的放在链表的尾部，超出长度删除
   this.capacity = capacity;
   this.head = null; // 链表的头部；
