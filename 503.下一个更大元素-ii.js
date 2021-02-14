@@ -10,30 +10,19 @@
  * @return {number[]}
  */
 var nextGreaterElements = function (nums) {
-  let result = [];
-  for (let i = 0, len = nums.length; i < len; i++) {
-    const val = nums[i];
-    let flag = true;
-    for (let j = i + 1; j < len; j++) {
-      if (nums[j] > val) {
-        flag = false;
-        result.push(nums[j]);
-        break;
-      }
+  // 2.数组长度加倍，利用单调栈算法模板
+  let len = nums.length;
+  let result = new Array(len * 2);
+  const arr = [...nums, ...nums];
+  const stack = []; // 保存元素
+  for (let i = len * 2 - 1; i >= 0; i--) {
+    while (stack.length && stack[stack.length - 1] <= nums[i]) {
+      stack.pop();
     }
-    if (!flag) continue;
-
-    for (let j = 0; j < i; j++) {
-      if (nums[j] > val) {
-        flag = false;
-        result.push(nums[j]);
-        break;
-      }
-    }
-
-    if (flag) result.push(-1);
+    result[i] = stack.length ? stack[stack.length - 1] : -1;
+    stack.push(arr[i]);
   }
 
-  return result;
+  return result.slice(0, len);
 };
 // @lc code=end
