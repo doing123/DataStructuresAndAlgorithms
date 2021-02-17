@@ -11,17 +11,19 @@
  * @return {number}
  */
 var minEatingSpeed = function (piles, H) {
-  // 1.暴力求解：超时
-  // 在 H 小时内吃掉所有香蕉的最小速度 K 的范围是：1-（piles数组的最大值）
-  const max = Math.max(...piles);
-  for (let speed = 1; speed < max; speed++) {
-    // 以 speed 是否能在 H 小时内吃完香蕉，线性搜索，从 1 开始找到第一个可以吃完所有香蕉的值
-    if (canFinish(piles, speed, H)) {
-      return speed;
+  // 2.二分查找
+  let left = 1;
+  let right = Math.max(...piles) + 1;
+  while (left < right) {
+    let mid = left + Math.floor((right - left) / 2);
+    if (canFinish(piles, mid, H)) {
+      right = mid;
+    } else {
+      left = mid + 1;
     }
   }
 
-  return max;
+  return left;
 };
 
 function canFinish (piles, speed, H) {
